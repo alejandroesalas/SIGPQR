@@ -11,4 +11,18 @@ class Request extends Model
         'title','description','student_id','status','request_type_id',
         'program_id','date'
     ];
+
+    public function student(){
+        $this->belongsTo(Student::class,'student_id');
+    }
+    public function program(){
+        $this->belongsTo(Program::class,'program_id');
+    }
+    public function requestType(){
+        $this->belongsTo(RequestType::class,'request_type_id');
+    }
+    public function responses(){
+        $this->hasMany(Response::class);
+    }
+
 }

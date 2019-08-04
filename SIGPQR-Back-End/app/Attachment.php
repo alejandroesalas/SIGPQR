@@ -11,4 +11,8 @@ class Attachment extends Model
     protected $fillable = [
         'response_id','route','name'
     ];
+
+    public function response(){
+        return$this->belongsTo(Response::class,'response_id');
+    }
 }

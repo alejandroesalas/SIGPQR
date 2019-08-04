@@ -10,4 +10,7 @@ class RequestType extends Model
     protected $fillable = [
         'type','description'
     ];
+    public function requests(){
+        $this->hasMany(Request::class);
+    }
 }
