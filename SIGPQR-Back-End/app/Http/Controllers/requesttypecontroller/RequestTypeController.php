@@ -19,15 +19,6 @@ class RequestTypeController extends ApiController
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -37,7 +28,18 @@ class RequestTypeController extends ApiController
      */
     public function store(Request $request)
     {
-        //
+        $rules =['name'=>'required'];
+        $json = $request->input('json', null);
+        if (!isEmpty($json)){
+            $params_array = array_map('trim', json_decode($json, true));
+            if (!isEmpty($params_array)){
+
+            }else{
+                return $this->errorResponse('Datos Vacios!',400);
+            }
+        }else{
+            return $this->errorResponse('La estrucutra del json no es valida',400);
+        }
     }
 
     /**
@@ -48,30 +50,7 @@ class RequestTypeController extends ApiController
      */
     public function show(RequestType $requestType)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\RequestType  $requestType
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(RequestType $requestType)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\RequestType  $requestType
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, RequestType $requestType)
-    {
-        //
+        return $this->showOne($requestType);
     }
 
     /**
@@ -82,6 +61,7 @@ class RequestTypeController extends ApiController
      */
     public function destroy(RequestType $requestType)
     {
-        //
+        $requestType->delete();
+        return $this->showOne($requestType);
     }
 }

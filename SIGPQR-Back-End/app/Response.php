@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Response extends Model
 {
-    use SoftDeletes;
+    //use SoftDeletes;
     protected $table = 'responses';
     protected $fillable = [
         'request_id','title','description','student_id','coordinator_id','status_response','type'

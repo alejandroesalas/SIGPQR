@@ -19,15 +19,6 @@ class UserController extends ApiController
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -37,7 +28,18 @@ class UserController extends ApiController
      */
     public function store(Request $request)
     {
-        //
+        $rules =['name'=>'required'];
+        $json = $request->input('json', null);
+        if (!Empty($json)){
+            $params_array = array_map('trim', json_decode($json, true));
+            if (!Empty($params_array)){
+                $validation = $this->checkValidation($params_array,$rules);
+            }else{
+                return $this->errorResponse('Datos Vacios!',400);
+            }
+        }else{
+            return $this->errorResponse('La estrucutra del json no es valida',415);
+        }
     }
 
     /**
@@ -50,18 +52,6 @@ class UserController extends ApiController
     {
         //
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(User $user)
-    {
-        //
-    }
-
     /**
      * Update the specified resource in storage.
      *

@@ -12,7 +12,7 @@ trait ApiResponser
     private function succesResponse($data,$code){
         return response()->json($data,$code);
     }
-    protected function errorResponse($message,$code,$errors = null){
+    protected function errorResponse($message,$code=404,$errors = null){
         $data = array(
             'status'=>'error',
             'code'=> $code,
@@ -30,6 +30,7 @@ trait ApiResponser
         return $this->succesResponse($data,$code);
     }
     protected function showOne(Model $instance,$code = 200){
+
         $data = array(
             'status'=>'success',
             'code'=> $code,
