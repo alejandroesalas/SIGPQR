@@ -1,26 +1,31 @@
 <?php
 
-namespace App\Http\Controllers\facultycontroller;
+namespace App\Http\Controllers;
 
-use App\Faculty;
+use App\Coordinator;
 use App\Http\Controllers\ApiController;
+use App\Program;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-
-class FacultyController extends ApiController
+use App\Http\Controllers\Controller;
+class ProgramController extends ApiController
 {
     private $rules =array(
-        'name'=>'required'
+        'name'=>'required',
+        'id_faculty'=>'required|integer',
+        'id_coordinator'=>'required|integer'
+    );
+    private $updateRules =array(
+        'name'=>'required',
     );
     /**
      * Display a listing of the resource.
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $faculty = Faculty::all();
-        return $this->showAll($faculty);
+        $programs = Program::all();
+        return $this->showAll($programs);
     }
 
 
@@ -28,7 +33,7 @@ class FacultyController extends ApiController
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
@@ -40,8 +45,14 @@ class FacultyController extends ApiController
                 if ($validate->fails()){
                     return $this->errorResponse("datos no validos",$validate->errors());
                 }else{
-                    $faculty = Faculty::create($params_array);
-                    return $this->showOne($faculty);
+                    //Validar que la persona que se asigne como coordinador tenga ese perfil
+                    $coordinator = Coordinator::find($params_array['id_coordinator']);
+                    if($coordinator->profile->name == 'coordinador' ){
+                        $program = Program::create($params_array);
+                        return $this->showOne($program);
+                    }else{
+                        return $this->errorResponse('El usuario especificado no es un coordinador',422);
+                    }
                 }
             }else{
                 return $this->errorResponse('Datos Vacios!',422);
@@ -54,37 +65,38 @@ class FacultyController extends ApiController
     /**
      * Display the specified resource.
      *
-     * @param  \App\Faculty  $faculty
-     * @return Response
+     * @param  \App\Program  $program
+     * @return \Illuminate\Http\Response
      */
-    public function show(Faculty $faculty)
+    public function show(Program $program)
     {
-        return $this->showOne($faculty);
+        return $this->showOne($program);
     }
+
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Faculty  $faculty
-     * @return Response
+     * @param  \App\Program  $program
+     * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Faculty $faculty)
+    public function update(Request $request, Program $program)
     {
         $json = $request->input('json', null);
         if (!Empty($json)){
             $params_array = array_map('trim', json_decode($json, true));
             if (!Empty($params_array)){
-                $validate = $this->checkValidation($params_array,$this->rules);
+                $validate = $this->checkValidation($params_array,$this->updateRules);
                 if ($validate->fails()){
                     return $this->errorResponse("datos no validos",$validate->errors());
                 }else{
-                    $faculty->name = $params_array['title'];
-                    if($faculty->isDirty()){
+                    $program->name = $params_array['name'];
+                    if($program->isDirty()){
                         return $this->errorResponse('se debe especificar al menos un valor',422);
                     }
-                    $faculty->save();
-                    return $this->showOne($faculty);
+                    $program->save();
+                    return $this->showOne($program);
                 }
             }else{
                 return $this->errorResponse('Datos Vacios!',422);
@@ -97,12 +109,11 @@ class FacultyController extends ApiController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Faculty  $faculty
-     * @return Response
+     * @param  \App\Program  $program
+     * @return \Illuminate\Http\Response
      */
-    public function destroy(Faculty $faculty)
+    public function destroy(Program $program)
     {
-        $faculty->delete();
-        return $this->showOne($faculty);
+        //
     }
 }
