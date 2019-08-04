@@ -50,7 +50,24 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
+    public function setNameAttribute($valor){
+        $this->attributes['name'] = Str::lower($valor);
+    }
+    public function getNameAttribute($valor){
+        return ucwords($valor);
+    }
+    public function setEmailAttribute($valor){
+        $this->attributes['email'] = Str::lower($valor);
+    }
+    public function getEmailAttribute($valor){
+        return ucwords($valor);
+    }
+    public function setLastNameAttribute($valor){
+        $this->attributes['lastname'] = Str::lower($valor);
+    }
+    public function getLastNameAttribute($valor){
+        return ucwords($valor);
+    }
     public function isVerified(){
         return $this->verified == User::VERIFIED_USER;
     }

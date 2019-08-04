@@ -2,12 +2,9 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Coordinator extends User
 {
-    use SoftDeletes;
     public function programs()
     {
         return $this->hasMany(Program::class);
