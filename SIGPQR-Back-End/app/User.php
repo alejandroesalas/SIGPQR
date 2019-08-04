@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -10,7 +11,7 @@ use Illuminate\Support\Str;
 class User extends Authenticatable
 {
     use Notifiable;
-
+    use SoftDeletes;
     const VERIFIED_USER = '1';
     const  NOT_VERIFIED_USER = '0';
     const  ADMiN_USER = 'true';
@@ -18,6 +19,7 @@ class User extends Authenticatable
     const  ADMIN_PROFILE = 'administrador';
     const  STUDENT_PROFILE = 'estudiante';
     const  COOR_PROFILE = 'coordinador';
+
         protected $table = 'users';
     /**
      * The attributes that are mass assignable.
