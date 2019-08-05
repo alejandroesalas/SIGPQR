@@ -6,6 +6,7 @@ use App\Http\Controllers\ApiController;
 use App\Profile;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use SebastianBergmann\Environment\Console;
 
 class ProfileController extends ApiController
 {
@@ -105,5 +106,11 @@ class ProfileController extends ApiController
     {
         $profile->delete();
         return $this->showOne($profile);
+    }
+
+    public function usersByProfile($id){
+        $profile = Profile::findOrFail($id);
+        return $this->showAll($profile->users);
+       // return $this->showAll($profile->users());
     }
 }

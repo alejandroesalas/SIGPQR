@@ -10,11 +10,11 @@ class Program extends Model
     use SoftDeletes;
     protected $table = 'programs';
     protected $fillable = [
-        'name','id_faculty','id_coordinator'
+        'name','faculty_id','id_coordinator'
     ];
 
     public function faculty(){
-        return $this->belongsTo(Faculty::class,'id_faculty');
+        return $this->belongsTo(Faculty::class,'faculty_id');
     }
     public function coordinator(){
         return $this->belongsTo(Coordinator::class,'id_coordinator');

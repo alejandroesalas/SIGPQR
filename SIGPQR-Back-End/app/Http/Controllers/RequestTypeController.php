@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\requesttypecontroller;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\ApiController;
 use App\RequestType;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class RequestTypeController extends ApiController
 {
@@ -16,7 +15,7 @@ class RequestTypeController extends ApiController
      */
     public function index()
     {
-        //
+        return $this->showAll(RequestType::all());
     }
 
 

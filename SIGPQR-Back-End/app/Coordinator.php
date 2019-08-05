@@ -14,4 +14,8 @@ class Coordinator extends User
     public function responses(){
         return $this->hasMany(Response::class);
     }*/
+    public function profile()
+    {
+        return parent::profile();
+    }
 }

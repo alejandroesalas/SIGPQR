@@ -7,6 +7,8 @@ use App\Http\Controllers\ApiController;
 use App\Program;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Response;
+
 class ProgramController extends ApiController
 {
     private $rules =array(
@@ -20,7 +22,7 @@ class ProgramController extends ApiController
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -28,12 +30,11 @@ class ProgramController extends ApiController
         return $this->showAll($programs);
     }
 
-
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function store(Request $request)
     {
@@ -47,7 +48,7 @@ class ProgramController extends ApiController
                 }else{
                     //Validar que la persona que se asigne como coordinador tenga ese perfil
                     $coordinator = Coordinator::find($params_array['id_coordinator']);
-                    if($coordinator->profile->name == 'coordinador' ){
+                    if($coordinator->profile()->name == 'coordinador' ){
                         $program = Program::create($params_array);
                         return $this->showOne($program);
                     }else{
@@ -65,8 +66,8 @@ class ProgramController extends ApiController
     /**
      * Display the specified resource.
      *
-     * @param  \App\Program  $program
-     * @return \Illuminate\Http\Response
+     * @param Program $program
+     * @return Response
      */
     public function show(Program $program)
     {
@@ -78,8 +79,8 @@ class ProgramController extends ApiController
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Program  $program
-     * @return \Illuminate\Http\Response
+     * @param Program $program
+     * @return Response
      */
     public function update(Request $request, Program $program)
     {
@@ -109,11 +110,28 @@ class ProgramController extends ApiController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Program  $program
-     * @return \Illuminate\Http\Response
+     * @param Program $program
+     * @return Response
      */
     public function destroy(Program $program)
     {
         //
+    }
+
+    public function faculty($id){
+        $program = Program::findOrFail($id);
+        return $this->showOne($program->faculty);
+    }
+    public function coordinator($id){
+        $program = Program::findOrFail($id);
+        return $this->showOne($program->coordinator);
+    }
+    public function getStudents($id){
+        $program = Program::findOrFail($id);
+        return $this->showAll($program->students);
+    }
+    public function getRequests($id){
+        $program = Program::findOrFail($id);
+        return $this->showAll($program->requests);
     }
 }

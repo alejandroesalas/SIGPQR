@@ -17,11 +17,22 @@ use Illuminate\Http\Request;
     return $request->user();
 });*/
 //ruta del controlador de facultades
-Route::resource('faculties','FacultyController');
+Route::apiResource('faculties','FacultyController');
+Route::get('faculties/{id}/programs','FacultyController@facultyprograms');
+Route::get('faculties/{id}/students','FacultyController@facultyUsers');
+Route::get('faculties/{id}/programs/count','FacultyController@programscount');
 //ruta del controlador de programas
-Route::resource('programs','ProgramController');
+Route::apiResource('programs','ProgramController');
+Route::get('programs/{id}/faculties','ProgramController@faculty');
+Route::get('programs/{id}/coordinators','ProgramController@coordinator');
+Route::get('programs/{id}/students','ProgramController@getStudents');
+Route::get('programs/{id}/requests','ProgramController@getRequests');
 //ruta del controlador de perfiles
-Route::resource('profiles','ProfileController');
+Route::apiResource('profiles','ProfileController');
+//mostrar usuarios de un perfil especifico
+Route::get('profiles/{id}/users','ProfileController@usersByProfile');
+Route::apiResource('requestsType','RequestTypeController');
+//Ruta para las requestsType(tipos de solicitudes)
 
 /*Route::post('/api/users/upload','PostController@upload');
 Route::get('/api/post/avatar/{filename}','PostController@getImage');

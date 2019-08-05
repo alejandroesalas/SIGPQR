@@ -11,4 +11,8 @@ class Student extends User
     public function requests(){
         return $this->hasMany(Request::class);
     }
+    public function profile()
+    {
+        return parent::profile();
+    }
 }

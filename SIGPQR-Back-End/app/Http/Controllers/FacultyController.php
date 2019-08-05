@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Faculty;
-use App\Http\Controllers\ApiController;
+use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -27,7 +28,7 @@ class FacultyController extends ApiController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @return Response
      */
     public function store(Request $request)
@@ -54,7 +55,7 @@ class FacultyController extends ApiController
     /**
      * Display the specified resource.
      *
-     * @param  \App\Faculty  $faculty
+     * @param Faculty $faculty
      * @return Response
      */
     public function show(Faculty $faculty)
@@ -63,10 +64,9 @@ class FacultyController extends ApiController
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Faculty  $faculty
+     * Update the specified resource in storage.*
+     * @param Request $request
+     * @param Faculty $faculty
      * @return Response
      */
     public function update(Request $request, Faculty $faculty)
@@ -97,12 +97,38 @@ class FacultyController extends ApiController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Faculty  $faculty
+     * @param Faculty $faculty
      * @return Response
+     * @throws Exception
      */
     public function destroy(Faculty $faculty)
     {
         $faculty->delete();
         return $this->showOne($faculty);
+    }
+
+    /**
+     * Devuelve los programas existentes en una facultad.
+     * @param $id
+     * @return JsonResponse
+     */
+    public function facultyprograms($id){
+        $faculties = Faculty::findOrFail($id);
+        return $this->showAll($faculties->programs);
+    }
+
+    /**
+     * @param $id
+     * @return JsonResponse
+     * Devuele los estudiantes pertenecientes a una facultad.
+     */
+    public function facultyUsers($id){
+        $faculties = Faculty::findOrFail($id);
+        $students = $faculties->programs()->with(['students'=>function($query){
+            $query->where('profile_id','=',3);
+        }])
+            ->get()
+        ->pluck('students');
+        return $this->showAll($students);
     }
 }

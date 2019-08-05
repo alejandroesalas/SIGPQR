@@ -38,5 +38,14 @@ trait ApiResponser
         );
         return $this->succesResponse($data,$code);
     }
+    protected function showOther($value,$code = 200){
+
+        $data = array(
+            'status'=>'success',
+            'code'=> $code,
+            '$data'=>$value
+        );
+        return $this->succesResponse($data,$code);
+    }
 
 }
