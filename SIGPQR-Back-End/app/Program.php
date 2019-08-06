@@ -9,6 +9,7 @@ class Program extends Model
 {
     use SoftDeletes;
     protected $table = 'programs';
+    protected $dates = ['deleted_at'];
     protected $fillable = [
         'name','id_faculty','id_coordinator'
     ];
