@@ -4,6 +4,11 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/SIGPQR-Back-End/tests" isTestSource="true" packagePrefix="Tests\" />
       <sourceFolder url="file://$MODULE_DIR$/SIGPQR-Back-End/app" isTestSource="false" packagePrefix="App\" />
+      <excludeFolder url="file://$MODULE_DIR$/SIGPQR-Back-End/vendor/lcobucci/jwt" />
+      <excludeFolder url="file://$MODULE_DIR$/SIGPQR-Back-End/vendor/namshi/jose" />
+      <excludeFolder url="file://$MODULE_DIR$/SIGPQR-Back-End/vendor/symfony/polyfill-php56" />
+      <excludeFolder url="file://$MODULE_DIR$/SIGPQR-Back-End/vendor/symfony/polyfill-util" />
+      <excludeFolder url="file://$MODULE_DIR$/SIGPQR-Back-End/vendor/tymon/jwt-auth" />
       <excludeFolder url="file://$MODULE_DIR$/SIGPQR-Back-End/vendor/guzzlehttp/guzzle" />
       <excludeFolder url="file://$MODULE_DIR$/SIGPQR-Back-End/vendor/guzzlehttp/promises" />
       <excludeFolder url="file://$MODULE_DIR$/SIGPQR-Back-End/vendor/guzzlehttp/psr7" />
