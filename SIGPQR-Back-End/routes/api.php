@@ -39,7 +39,7 @@ Route::resource('students', 'StudentController', ['except' => ['create', 'edit']
 //ruta del controlador de Coordinadores
 Route::resource('coordinators', 'CoordinatorController', ['except' => ['create', 'edit']]);
 
-//
+//Verificacion del correo del usuario
 Route::name('verify')->get('users/verify/{token}','UserController@verify');
 
 

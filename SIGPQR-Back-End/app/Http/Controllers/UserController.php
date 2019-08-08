@@ -56,7 +56,7 @@ class UserController extends ApiController
                     $params_array['status'] = User::ACTIVE_STATE;
                     $params_array['admin'] = User::REGULAR_USER;
                     $params_array['verified']= User::VERIFIED_USER;
-                    $params_array['verification_token'] =User::createVerificationToken();
+                   // $params_array['verification_token'] =User::createVerificationToken();
                     $user = User::create($params_array);
                     return $this->showOne($user);
                 }
@@ -102,7 +102,7 @@ class UserController extends ApiController
     }
     public function verify($token){
         $user = User::where('verification_token',$token)->firstOrFail();
-        $user->verified == User::VERIFIED_USER;
+        $user->verified = User::VERIFIED_USER;
         $user->verification_token = null;
         $user->save();
         return $this->showMessage('Correo validado con exito.');

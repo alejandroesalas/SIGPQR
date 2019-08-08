@@ -15,8 +15,8 @@ class  User extends Authenticatable
     use SoftDeletes;
     const CC_TYPE = 'CC';
     const TI_TYPE = 'TI';
-    const ACTIVE_STATE = 'true';
-    const FALSE_STATE = 'false';
+    const ACTIVE_STATE = 'activo';
+    const FALSE_STATE = 'desactivado';
     const VERIFIED_USER = '1';
     const NOT_VERIFIED_USER = '0';
     const ADMIN_USER = 'true';
