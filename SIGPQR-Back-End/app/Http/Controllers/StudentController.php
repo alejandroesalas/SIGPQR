@@ -43,8 +43,7 @@ class StudentController extends ApiController
             'id_type' => 'required|in:'. User::CC_TYPE . ',' . User::TI_TYPE,
             'id_num' => 'required|unique:users',
             'password' => 'required|min:3',
-            'verified' => 'in:'. User::VERIFIED_USER . ',' . User::NOT_VERIFIED_USER,
-            'program_id' => 'required',
+            'program_id' => 'required|integer',
         ];
         $json = $request->input('json', null);
         if (!Empty($json)){
@@ -58,6 +57,8 @@ class StudentController extends ApiController
                     $params_array['admin'] = 'false';
                     $params_array['profile_id'] = User::STUDENT_PROFILE;
                     $params_array['status'] = User::ACTIVE_STATE;
+                    $params_array['admin'] = User::REGULAR_USER;
+                    $params_array['verified']= User::NOT_VERIFIED_USER;
                     $user = User::create($params_array);
                     return $this->showOne($user);
                 }

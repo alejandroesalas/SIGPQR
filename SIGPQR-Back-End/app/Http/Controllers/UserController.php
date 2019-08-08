@@ -39,11 +39,9 @@ class UserController extends ApiController
             'lastname'=>'required',
             'email' => 'email|unique:users',
             'password' => 'min:3|confirmed',
-            'admin' => 'in:'. User::ADMIN_USER . ',' . User::REGULAR_USER,
             'id_type' => 'required|in:'. User::CC_TYPE . ',' . User::TI_TYPE,
             'id_num' => 'required|unique:users',
             'password' => 'required|min:3',
-            'verified' => 'in:'. User::VERIFIED_USER . ',' . User::NOT_VERIFIED_USER,
         ];
         $json = $request->input('json', null);
         if (!Empty($json)){
@@ -51,11 +49,13 @@ class UserController extends ApiController
             if (!Empty($params_array)){
                 $validation = $this->checkValidation($params_array,$rules);
                 if ($validation->fails()){
-                    return $this->errorResponse("datos no validos", 400, $validation->errors());
+                    return $this->errorResponse("datos no validos",404, $validation->errors());
                 }else{
                     $params_array['password'] = bcrypt($params_array['password']);
                     $params_array['profile_id'] = User::TEACHER_PROFILE;
                     $params_array['status'] = User::ACTIVE_STATE;
+                    $params_array['admin'] = User::REGULAR_USER;
+                    $params_array['verified']= User::NOT_VERIFIED_USER;
                     $user = User::create($params_array);
                     return $this->showOne($user);
                 }
