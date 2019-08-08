@@ -56,6 +56,7 @@ class UserController extends ApiController
                     $params_array['status'] = User::ACTIVE_STATE;
                     $params_array['admin'] = User::REGULAR_USER;
                     $params_array['verified']= User::VERIFIED_USER;
+                    $params_array['verification_token'] =User::createVerificationToken();
                     $user = User::create($params_array);
                     return $this->showOne($user);
                 }
