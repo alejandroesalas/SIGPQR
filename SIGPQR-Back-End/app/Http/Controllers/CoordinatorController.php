@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\ApiController;
+use App\User;
 use Illuminate\Http\Request;
 use App\Profile;
 use App\Coordinator;
@@ -54,8 +55,8 @@ class CoordinatorController extends ApiController
                     }
                     $coordinator::where('id', $coordinator->id)
                         ->update([
-                            'program_id' => 1,
-                            'profile_id' => 2,
+                            'program_id' =>  $coordinator->program_id,
+                            'profile_id' => User::COORDINATOR_PROFILE,
                         ]);
                     return $this->showOne($coordinator);
                 }
