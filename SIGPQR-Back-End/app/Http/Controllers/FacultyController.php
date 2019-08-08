@@ -39,7 +39,7 @@ class FacultyController extends ApiController
             if (!Empty($params_array)){
                 $validate = $this->checkValidation($params_array,$this->rules);
                 if ($validate->fails()){
-                    return $this->errorResponse("datos no validos",$validate->errors());
+                    return $this->errorResponse("datos no validos", 400, $validate->errors());
                 }else{
                     $faculty = Faculty::create($params_array);
                     return $this->showOne($faculty);
@@ -77,7 +77,7 @@ class FacultyController extends ApiController
             if (!Empty($params_array)){
                 $validate = $this->checkValidation($params_array,$this->rules);
                 if ($validate->fails()){
-                    return $this->errorResponse("datos no validos",$validate->errors());
+                    return $this->errorResponse("datos no validos", 400, $validate->errors());
                 }else{
                     $faculty->name = $params_array['title'];
                     if($faculty->isDirty()){

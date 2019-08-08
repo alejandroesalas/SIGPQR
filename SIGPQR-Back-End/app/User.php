@@ -13,11 +13,21 @@ class  User extends Authenticatable
 {
     use Notifiable;
     use SoftDeletes;
+    const CC_TYPE = 'CC';
+    const TI_TYPE = 'TI';
+    const ACTIVE_STATE = 'true';
+    const FALSE_STATE = 'false';
     const VERIFIED_USER = '1';
-    const  NOT_VERIFIED_USER = '0';
-    const  ADMiN_USER = 'true';
-    const  REGULAR_USER = 'false';
-        protected $table = 'users';
+    const NOT_VERIFIED_USER = '0';
+    const ADMIN_USER = 'true';
+    const REGULAR_USER = 'false';
+    const ADMIN_PROFILE = 1;
+    const COORDINATOR_PROFILE = 2;
+    const STUDENT_PROFILE = 3;
+    const TEACHER_PROFILE = 4;
+
+    protected $table = 'users';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -56,9 +66,6 @@ class  User extends Authenticatable
     public function setEmailAttribute($valor){
         $this->attributes['email'] = Str::lower($valor);
     }
-    public function getEmailAttribute($valor){
-        return ucwords($valor);
-    }
     public function setLastNameAttribute($valor){
         $this->attributes['lastname'] = Str::lower($valor);
     }
@@ -69,7 +76,7 @@ class  User extends Authenticatable
         return $this->verified == User::VERIFIED_USER;
     }
     public function isAdmin(){
-        return $this->admin == User::ADMiN_USER;
+        return $this->admin == User::ADMIN_USER;
     }
     public static function createVerificationToken(){
         return Str::random(40);

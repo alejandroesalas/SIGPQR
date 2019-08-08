@@ -2,9 +2,7 @@
 
 
 namespace App\Traits;
-
-
-use Illuminate\Validation\Validator;
+use Illuminate\Support\Facades\Validator;
 
 trait ValitadorTrait
 {

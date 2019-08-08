@@ -2,22 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\ApiController;
-use App\User;
+use App\Student;
 use Illuminate\Http\Request;
+use App\User;
+use App\Http\Controllers\ApiController;
 use App\Profile;
 
-class UserController extends ApiController
+class StudentController extends ApiController
 {
     /**
      * Display a listing of the resource.
      *
-     * @return void
+     * @return \Illuminate\Http\Response
      */
     public function index(Profile $profile)
     {
         $students  = $profile
-            ->where('name','=','docente')
+            ->where('name','=','estudiante')
             ->with('users')
             ->get()
             ->pluck('users')
@@ -38,12 +39,12 @@ class UserController extends ApiController
             'name'=>'required',
             'lastname'=>'required',
             'email' => 'email|unique:users',
-            'password' => 'min:3|confirmed',
-            'admin' => 'in:'. User::ADMIN_USER . ',' . User::REGULAR_USER,
+            'password' => 'min:6|confirmed',
             'id_type' => 'required|in:'. User::CC_TYPE . ',' . User::TI_TYPE,
             'id_num' => 'required|unique:users',
             'password' => 'required|min:3',
             'verified' => 'in:'. User::VERIFIED_USER . ',' . User::NOT_VERIFIED_USER,
+            'program_id' => 'required',
         ];
         $json = $request->input('json', null);
         if (!Empty($json)){
@@ -54,7 +55,8 @@ class UserController extends ApiController
                     return $this->errorResponse("datos no validos", 400, $validation->errors());
                 }else{
                     $params_array['password'] = bcrypt($params_array['password']);
-                    $params_array['profile_id'] = User::TEACHER_PROFILE;
+                    $params_array['admin'] = 'false';
+                    $params_array['profile_id'] = User::STUDENT_PROFILE;
                     $params_array['status'] = User::ACTIVE_STATE;
                     $user = User::create($params_array);
                     return $this->showOne($user);
@@ -70,21 +72,22 @@ class UserController extends ApiController
     /**
      * Display the specified resource.
      *
-     * @param  \App\User  $user
+     * @param  \App\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(Student $student)
     {
         //
     }
+
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\User  $user
+     * @param  \App\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, Student $student)
     {
         //
     }
@@ -92,19 +95,11 @@ class UserController extends ApiController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\User  $user
+     * @param  \App\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(Student $student)
     {
         //
-    }
-    public function verify($token){
-        $user = User::where('verification_token',$token)->firstOrFail();
-        $user->verified == User::VERIFIED_USER;
-        $user->verification_token = null;
-        $user->save();
-        return $this->showMessage('Correo validado con exito.');
-
     }
 }
