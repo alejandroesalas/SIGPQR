@@ -34,9 +34,15 @@ Route::apiResource('profiles','ProfileController');
 Route::get('profiles/{id}/users','ProfileController@usersByProfile');
 Route::apiResource('requestsType','RequestTypeController');
 //Ruta para las requestsType(tipos de solicitudes)
+//ruta del controlador de Estudiantes
+Route::resource('students', 'StudentController', ['except' => ['create', 'edit']]);
+//ruta del controlador de Coordinadores
+Route::resource('coordinators', 'CoordinatorController', ['except' => ['create', 'edit']]);
 
 //
 Route::name('verify')->get('users/verify/{token}','UserController@verify');
+
+
 /*Route::post('/api/users/upload','PostController@upload');
 Route::get('/api/post/avatar/{filename}','PostController@getImage');
 Route::get('/api/post/category/{id}','PostController@getPostsByCategory');
