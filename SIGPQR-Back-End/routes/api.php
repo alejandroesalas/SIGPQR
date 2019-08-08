@@ -16,6 +16,16 @@ use Illuminate\Http\Request;
 /*Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });*/
+//ruta del controlador de auth para login
+Route::group([
+    'prefix' => 'auth',
+], function () {
+    Route::post('login', 'AuthController@login');
+    Route::post('logout', 'AuthController@logout');
+    Route::post('refresh', 'AuthController@refresh');
+    Route::post('me', 'AuthController@me');
+});
+
 //ruta del controlador de facultades
 Route::resource('faculties','FacultyController', ['except' => ['create', 'edit']]);
 //ruta del controlador de programas
