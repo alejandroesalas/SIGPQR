@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +35,8 @@ Route::get('profiles/{id}/users','ProfileController@usersByProfile');
 Route::apiResource('requestsType','RequestTypeController');
 //Ruta para las requestsType(tipos de solicitudes)
 
+//
+Route::name('verify')->get('users/verify/{token}','UserController@verify');
 /*Route::post('/api/users/upload','PostController@upload');
 Route::get('/api/post/avatar/{filename}','PostController@getImage');
 Route::get('/api/post/category/{id}','PostController@getPostsByCategory');
