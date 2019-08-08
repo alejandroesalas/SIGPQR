@@ -17,7 +17,7 @@ class CreateProgramsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->unsignedBigInteger('faculty_id');
-            $table->unsignedBigInteger('coordinator_id');
+            $table->unsignedBigInteger('coordinator_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('faculty_id')->references('id')->on('faculties');

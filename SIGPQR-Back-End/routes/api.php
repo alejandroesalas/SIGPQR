@@ -17,11 +17,17 @@ use Illuminate\Http\Request;
     return $request->user();
 });*/
 //ruta del controlador de facultades
-Route::resource('faculties','FacultyController');
+Route::resource('faculties','FacultyController', ['except' => ['create', 'edit']]);
 //ruta del controlador de programas
-Route::resource('programs','ProgramController');
+Route::resource('programs','ProgramController', ['except' => ['create', 'edit']]);
 //ruta del controlador de perfiles
-Route::resource('profiles','ProfileController');
+Route::resource('profiles','ProfileController', ['except' => ['create', 'edit']]);
+//ruta del controlador de usuarios
+Route::resource('users', 'UserController', ['except' => ['create', 'edit']]);
+//ruta del controlador de Estudiantes
+Route::resource('students', 'StudentController', ['except' => ['create', 'edit']]);
+//ruta del controlador de Coordinadores
+Route::resource('coordinators', 'CoordinatorController', ['except' => ['create', 'edit']]);
 
 /*Route::post('/api/users/upload','PostController@upload');
 Route::get('/api/post/avatar/{filename}','PostController@getImage');

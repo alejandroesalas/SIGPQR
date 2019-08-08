@@ -9,12 +9,12 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 class ProgramController extends ApiController
 {
-    private $rules =array(
+    private $rules = array(
         'name'=>'required',
-        'id_faculty'=>'required|integer',
-        'id_coordinator'=>'required|integer'
+        'faculty_id'=>'required|integer',
+        'coordinator_id'=>'required|integer'
     );
-    private $updateRules =array(
+    private $updateRules = array(
         'name'=>'required',
     );
     /**
@@ -27,7 +27,6 @@ class ProgramController extends ApiController
         $programs = Program::all();
         return $this->showAll($programs);
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -43,11 +42,11 @@ class ProgramController extends ApiController
             if (!Empty($params_array)){
                 $validate = $this->checkValidation($params_array,$this->rules);
                 if ($validate->fails()){
-                    return $this->errorResponse("datos no validos",$validate->errors());
+                    return $this->errorResponse("datos no validos", 400, $validate->errors());
                 }else{
                     //Validar que la persona que se asigne como coordinador tenga ese perfil
-                    $coordinator = Coordinator::find($params_array['id_coordinator']);
-                    if($coordinator->profile->name == 'coordinador' ){
+                    $coordinator = Coordinator::findOrFail($params_array['coordinator_id']);
+                    if($coordinator->profile->name == 'coordinador'){
                         $program = Program::create($params_array);
                         return $this->showOne($program);
                     }else{
@@ -55,10 +54,10 @@ class ProgramController extends ApiController
                     }
                 }
             }else{
-                return $this->errorResponse('Datos Vacios!',422);
+                return $this->errorResponse('Datos Vacios!', 422);
             }
         }else{
-            return $this->errorResponse('La estrucutra del json no es valida',422);
+            return $this->errorResponse('La estrucutra del json no es valida', 422);
         }
     }
 
@@ -89,7 +88,7 @@ class ProgramController extends ApiController
             if (!Empty($params_array)){
                 $validate = $this->checkValidation($params_array,$this->updateRules);
                 if ($validate->fails()){
-                    return $this->errorResponse("datos no validos",$validate->errors());
+                    return $this->errorResponse("datos no validos", 400, $validate->errors());
                 }else{
                     $program->name = $params_array['name'];
                     if($program->isDirty()){
@@ -99,7 +98,7 @@ class ProgramController extends ApiController
                     return $this->showOne($program);
                 }
             }else{
-                return $this->errorResponse('Datos Vacios!',422);
+                return $this->errorResponse('Datos Vacios!', 422);
             }
         }else{
             return $this->errorResponse('La estrucutra del json no es valida',422);

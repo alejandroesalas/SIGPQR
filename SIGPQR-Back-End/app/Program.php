@@ -11,14 +11,14 @@ class Program extends Model
     protected $table = 'programs';
     protected $dates = ['deleted_at'];
     protected $fillable = [
-        'name','id_faculty','id_coordinator'
+        'name','faculty_id','coordinator_id'
     ];
 
     public function faculty(){
-        return $this->belongsTo(Faculty::class,'id_faculty');
+        return $this->belongsTo(Faculty::class,'faculty_id');
     }
     public function coordinator(){
-        return $this->belongsTo(Coordinator::class,'id_coordinator');
+        return $this->belongsTo(Coordinator::class,'coordinator_id');
     }
     public function students(){
         return $this->hasMany(Student::class);
