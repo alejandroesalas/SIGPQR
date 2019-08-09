@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class ResponseController extends ApiController
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+        //$this->middleware('auth',['except'=>['auth/login']]);
+    }
     private $rules =array(
         'request_id'=>'required|integer',
         'title'=>'required|max:200',

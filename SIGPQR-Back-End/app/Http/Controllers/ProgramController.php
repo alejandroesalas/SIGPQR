@@ -9,6 +9,12 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 class ProgramController extends ApiController
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api', ['except' => ['index']]);
+        //$this->middleware('auth',['except'=>['auth/login']]);
+    }
+
     private $rules =array(
         'name'=>'required',
         'id_faculty'=>'required|integer',

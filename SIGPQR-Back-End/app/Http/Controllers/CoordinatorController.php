@@ -10,9 +10,15 @@ use App\Coordinator;
 
 class CoordinatorController extends ApiController
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+        //$this->middleware('auth',['except'=>['auth/login']]);
+    }
     /**
      * Display a listing of the resource.
      *
+     * @param Profile $profile
      * @return void
      */
     public function index(Profile $profile)
