@@ -12,6 +12,7 @@ class UserController extends ApiController
     /**
      * Display a listing of the resource.
      *
+     * @param Profile $profile
      * @return void
      */
     public function index(Profile $profile)

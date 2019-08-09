@@ -31,7 +31,7 @@ Route::group([
 Route::apiResource('faculties','Faculty\FacultyController');
 Route::get('faculties/{id}/programs','Faculty\FacultyController@facultyprograms');
 Route::get('faculties/{id}/students','Faculty\FacultyController@facultyUsers');
-Route::get('faculties/{id}/programs/count','Faculty\FacultyController@programscount');
+//Route::get('faculties/{id}/programs/count','Faculty\FacultyController@programscount');
 //ruta del controlador de programas
 Route::apiResource('programs','Program\ProgramController');
 Route::get('programs/{id}/faculties','Program\ProgramController@faculty');
