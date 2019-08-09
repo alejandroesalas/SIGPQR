@@ -13,6 +13,6 @@ class RequestType extends Model
         'type','description'
     ];
     public function requests(){
-        $this->hasMany(Request::class);
+        return $this->hasMany(Request::class);
     }
 }
