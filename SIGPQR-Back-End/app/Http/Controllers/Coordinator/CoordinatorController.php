@@ -7,12 +7,13 @@ use App\User;
 use Illuminate\Http\Request;
 use App\Profile;
 use App\Coordinator;
+use App\Program;
 
 class CoordinatorController extends ApiController
 {
     public function __construct()
     {
-        $this->middleware('auth:api');
+        //$this->middleware('auth:api');
         //$this->middleware('auth',['except'=>['auth/login']]);
     }
     /**
@@ -23,7 +24,7 @@ class CoordinatorController extends ApiController
      */
     public function index(Profile $profile)
     {
-        $students  = $profile
+        $students = $profile
             ->where('name','=','coordinador')
             ->with('users')
             ->get()
@@ -54,15 +55,24 @@ class CoordinatorController extends ApiController
                 if ($validate->fails()){
                     return $this->errorResponse("datos no validos", 400, $validate->errors());
                 }else{
-                    $coordinator->program_id = $params_array['program_id'];
+
                     $coordinator->profile_id = User::COORDINATOR_PROFILE;
                     if(!$coordinator->isDirty()){
                         return $this->errorResponse('se debe especificar al menos un valor', 422);
                     }
+                    $isTeacher = $coordinator->where('id', $coordinator->id)
+                        ->where('profile_id', User::TEACHER_PROFILE)
+                        ->count();
+                    if($isTeacher == 0) {
+                        return $this->errorResponse("Este usuario no es docente", 404);
+                    }
                     $coordinator::where('id', $coordinator->id)
                         ->update([
-                            'program_id' =>  $coordinator->program_id,
                             'profile_id' => User::COORDINATOR_PROFILE,
+                        ]);
+                    Program::where('id', $params_array['program_id'])
+                        ->update([
+                            'coordinator_id' => $coordinator->id
                         ]);
                     return $this->showOne($coordinator);
                 }
