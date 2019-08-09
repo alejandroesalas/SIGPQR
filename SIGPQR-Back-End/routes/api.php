@@ -28,29 +28,29 @@ Route::group([
 });
 
 //ruta del controlador de facultades
-Route::apiResource('faculties','FacultyController');
-Route::get('faculties/{id}/programs','FacultyController@facultyprograms');
-Route::get('faculties/{id}/students','FacultyController@facultyUsers');
-Route::get('faculties/{id}/programs/count','FacultyController@programscount');
+Route::apiResource('faculties','Faculty\FacultyController');
+Route::get('faculties/{id}/programs','Faculty\FacultyController@facultyprograms');
+Route::get('faculties/{id}/students','Faculty\FacultyController@facultyUsers');
+Route::get('faculties/{id}/programs/count','Faculty\FacultyController@programscount');
 //ruta del controlador de programas
-Route::apiResource('programs','ProgramController');
-Route::get('programs/{id}/faculties','ProgramController@faculty');
-Route::get('programs/{id}/coordinators','ProgramController@coordinator');
-Route::get('programs/{id}/students','ProgramController@getStudents');
-Route::get('programs/{id}/requests','ProgramController@getRequests');
+Route::apiResource('programs','Program\ProgramController');
+Route::get('programs/{id}/faculties','Program\ProgramController@faculty');
+Route::get('programs/{id}/coordinators','Program\ProgramController@coordinator');
+Route::get('programs/{id}/students','Program\ProgramController@getStudents');
+Route::get('programs/{id}/requests','Program\ProgramController@getRequests');
 //ruta del controlador de perfiles
-Route::apiResource('profiles','ProfileController');
+Route::apiResource('profiles','Profile\ProfileController');
 //mostrar usuarios de un perfil especifico
-Route::get('profiles/{id}/users','ProfileController@usersByProfile');
-Route::apiResource('requestsType','RequestTypeController');
+Route::get('profiles/{id}/users','Profile\ProfileController@usersByProfile');
+Route::apiResource('requestsType','RequestType\RequestTypeController');
 //Ruta para las requestsType(tipos de solicitudes)
 //ruta del controlador de Estudiantes
-Route::resource('students', 'StudentController', ['except' => ['create', 'edit']]);
+Route::resource('students', 'Student\StudentController', ['except' => ['create', 'edit']]);
 //ruta del controlador de Coordinadores
-Route::resource('coordinators', 'CoordinatorController', ['except' => ['create', 'edit']]);
+Route::resource('coordinators', 'Coordinator\CoordinatorController', ['except' => ['create', 'edit']]);
 
 //Verificacion del correo del usuario
-Route::name('verify')->get('users/verify/{token}','UserController@verify');
+Route::name('verify')->get('users/verify/{token}','User\UserController@verify');
 
 
 /*Route::post('/api/users/upload','PostController@upload');

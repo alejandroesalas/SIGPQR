@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\responsecontroller;
+namespace App\Http\Controllers\Response;
 
 use App\Http\Controllers\ApiController;
 use App\Response;

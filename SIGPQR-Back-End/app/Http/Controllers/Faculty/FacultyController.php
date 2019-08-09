@@ -1,22 +1,23 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Faculty;
 
-use App\Http\Controllers\ApiController;
-use App\Profile;
+use App\Faculty;
+use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use SebastianBergmann\Environment\Console;
+use App\Http\Controllers\ApiController;
 
-class ProfileController extends ApiController
+class FacultyController extends ApiController
 {
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['usersByProfile','index']]);
+        $this->middleware('auth:api', ['except' => ['index']]);
         //$this->middleware('auth',['except'=>['auth/login']]);
     }
     private $rules =array(
-        'name'=>'required','description'=>'max:200'
+        'name'=>'required'
     );
     /**
      * Display a listing of the resource.
@@ -25,8 +26,8 @@ class ProfileController extends ApiController
      */
     public function index()
     {
-        $profiles = Profile::all();
-        return $this->showAll($profiles);
+        $faculty = Faculty::all();
+        return $this->showAll($faculty);
     }
 
 
@@ -44,10 +45,10 @@ class ProfileController extends ApiController
             if (!Empty($params_array)){
                 $validate = $this->checkValidation($params_array,$this->rules);
                 if ($validate->fails()){
-                    return $this->errorResponse("datos no validos",$validate->errors());
+                    return $this->errorResponse("datos no validos", 400, $validate->errors());
                 }else{
-                    $profile = Profile::create($params_array);
-                    return $this->showOne($profile);
+                    $faculty = Faculty::create($params_array);
+                    return $this->showOne($faculty);
                 }
             }else{
                 return $this->errorResponse('Datos Vacios!',422);
@@ -60,22 +61,21 @@ class ProfileController extends ApiController
     /**
      * Display the specified resource.
      *
-     * @param Profile $profile
+     * @param Faculty $faculty
      * @return Response
      */
-    public function show(Profile $profile)
+    public function show(Faculty $faculty)
     {
-        return $this->showOne($profile);
+        return $this->showOne($faculty);
     }
 
     /**
-     * Update the specified resource in storage.
-     *
+     * Update the specified resource in storage.*
      * @param Request $request
-     * @param Profile $profile
+     * @param Faculty $faculty
      * @return Response
      */
-    public function update(Request $request, Profile $profile)
+    public function update(Request $request, Faculty $faculty)
     {
         $json = $request->input('json', null);
         if (!Empty($json)){
@@ -83,15 +83,14 @@ class ProfileController extends ApiController
             if (!Empty($params_array)){
                 $validate = $this->checkValidation($params_array,$this->rules);
                 if ($validate->fails()){
-                    return $this->errorResponse("datos no validos",$validate->errors());
+                    return $this->errorResponse("datos no validos", 400, $validate->errors());
                 }else{
-                    $profile->name = $params_array['title'];
-                    $profile->description = $params_array['description'];
-                    if($profile->isDirty()){
+                    $faculty->name = $params_array['title'];
+                    if($faculty->isDirty()){
                         return $this->errorResponse('se debe especificar al menos un valor',422);
                     }
-                    $profile->save();
-                    return $this->showOne($profile);
+                    $faculty->save();
+                    return $this->showOne($faculty);
                 }
             }else{
                 return $this->errorResponse('Datos Vacios!',422);
@@ -104,18 +103,38 @@ class ProfileController extends ApiController
     /**
      * Remove the specified resource from storage.
      *
-     * @param Profile $profile
+     * @param Faculty $faculty
      * @return Response
+     * @throws Exception
      */
-    public function destroy(Profile $profile)
+    public function destroy(Faculty $faculty)
     {
-        $profile->delete();
-        return $this->showOne($profile);
+        $faculty->delete();
+        return $this->showOne($faculty);
     }
 
-    public function usersByProfile($id){
-        $profile = Profile::findOrFail($id);
-        return $this->showAll($profile->users);
-       // return $this->showAll($profile->users());
+    /**
+     * Devuelve los programas existentes en una facultad.
+     * @param $id
+     * @return JsonResponse
+     */
+    public function facultyprograms($id){
+        $faculties = Faculty::findOrFail($id);
+        return $this->showAll($faculties->programs);
+    }
+
+    /**
+     * @param $id
+     * @return JsonResponse
+     * Devuele los estudiantes pertenecientes a una facultad.
+     */
+    public function facultyUsers($id){
+        $faculties = Faculty::findOrFail($id);
+        $students = $faculties->programs()->with(['students'=>function($query){
+            $query->where('profile_id','=',3);
+        }])
+            ->get()
+        ->pluck('students');
+        return $this->showAll($students);
     }
 }

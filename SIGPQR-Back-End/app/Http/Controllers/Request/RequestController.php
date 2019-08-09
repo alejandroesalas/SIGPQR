@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\requestcontroller;
+namespace App\Http\Controllers\Request;
 
 use App\Http\Controllers\ApiController;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class RequestController extends ApiController
 {

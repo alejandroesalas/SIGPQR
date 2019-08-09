@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Program;
 
 use App\Coordinator;
 use App\Http\Controllers\ApiController;
 use App\Program;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+
 class ProgramController extends ApiController
 {
     public function __construct()

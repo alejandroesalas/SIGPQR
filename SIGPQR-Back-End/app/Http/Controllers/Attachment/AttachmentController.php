@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\attachmentcontroller;
+namespace App\Http\Controllers\Attachment;
 
 use App\Http\Controllers\ApiController;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class AttachmentController extends ApiController
 {
