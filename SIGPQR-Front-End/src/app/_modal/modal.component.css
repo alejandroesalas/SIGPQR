@@ -15,8 +15,8 @@ jw-modal {
   /* z-index must be higher than .jw-modal-background */
   z-index: 1050;
   outline: 0;
-  max-height: 45%;
-  width: 45%;
+  max-height: 50%;
+  width: 50%;
 
   /* enables scrolling for tall modals */
   overflow: hidden;

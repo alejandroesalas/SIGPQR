@@ -1,98 +1,141 @@
 <header>
 
   <div class="container">
-
     <div class="row">
 
       <div class="col-md-4 col-sm-3"></div>
 
       <div class="col-md-6 col-sm-8 ">
-        <!-- FORMULARIO DE LOGUEO-->
         <form class="form" method="" action="" style="margin-top: 0px;">
-
-          <div class="card card-wizard active"><!--Inicio card-wizzar-->
-
+          <div class="card card-wizard active">
             <div class="card-header text-center">
-              <h3 class="card-title">Construye tu perfil</h3>
+              <h3 class="card-title">
+                Construye tu perfil
+              </h3>
               <h5 class="card-description">Esta información nos permitirá saber más acerca de ti</h5>
             </div>
 
-            <div class="card-body"><!--Inicio card-body-->
+            <div class="card-body">
 
-              <!--
               <ul class="nav nav-pills nav-pills-icons nav-pills-success" role="tablist">
 
                 <li class="nav-item" style="width: 33.3333%;">
                   <a class="nav-link active" href="#dashboard-1" role="tab" data-toggle="tab">
-
                     Validar correo
                   </a>
                 </li>
                 <li class="nav-item" style="width: 33.3333%;">
-                  <a class="nav-link " href="#schedule-1" role="tab" data-toggle="tab">
-
-                    Validar código
-                  </a>
-                </li>
-                <li class="nav-item" style="width: 33.3333%;">
                   <a class="nav-link" href="#tasks-1" role="tab" data-toggle="tab">
-
                     Validar registro
                   </a>
                 </li>
               </ul>
-              -->
-              <!--Inicio Tab-conten-space-->
               <div class="tab-content tab-space">
+                <div class="tab-pane active" id="dashboard-1">
 
+                  <form action="">
+                    <div class="row justify-content-center" >
+                      <div class="col-md-8">
+                        <div class="input-field">
 
-              </div> <!--Fin Tab-conten-space-->
+                          <i class="material-icons prefix">face</i>
+                          <input id="first_name" type="text" class="validate">
+                          <label for="first_name" class="">Nombres</label>
+                        </div>
+                        <div class="input-field">
+                          <i class="material-icons prefix">face</i>
+                          <input id="second_name" type="text" class="validate">
+                          <label for="second_name" class="">Apellidos</label>
+                        </div>
+                        <div class="input-field">
+                          <i class="material-icons prefix">contact_mail</i>
+                          <input id="email" type="email">
+                          <label for="email" class="">Email</label>
+                          <span class="helper-text" data-error="wrong" data-success="right">Será enviado a este correo un código</span>
+                        </div>
 
+                        <div class="input-field">
+                          <i class="material-icons prefix">vpn_key</i>
 
-            </div><!--Fin card-body-->
+                          <input id="fPaswoord" type="password" class="validate">
+                          <label for="first_name" class="">Contraseña</label>
+                        </div>
+                        <div class="input-field">
+                          <i class="material-icons prefix"></i>
+                          <input type="password"  id="Spaswoord" required="true" name="password" aria-required="true" >
+                          <span class="helper-text" data-error="wrong" data-success="right">Confirmar contraseña</span>
+                        </div>
+                      </div>
 
-          </div><!--fin card-wizzar-->
+                    </div>
 
+                    <div class="center">
+                      <a href="index.php" class="btn btn-danger modal-trigger">Cancelar</a>
+                      <a id="btnRegistro" class="btn btn-next btn-success modal-trigger">Siguiente</a>
+                    </div>
+
+                  </form>
+                </div>
+
+                <div class="tab-pane" id="tasks-1">
+                  <h5 class="card-description center"></h5>
+                  <form action="">
+                    <div class="row justify-content-center" >
+                      <div class="col-md-4">
+                        <div class="picture-container">
+                          <div class="picture">
+                            <img src="../../../assets/imagenes/default-avatar.png" class="picture-src" style="max-width:144px;max-height:150px">
+                            <input type="file">
+                          </div>
+                          <h6 class="description center">Imagen usuario</h6>
+                        </div>
+                      </div>
+
+                      <div class="col-md-8">
+
+                        <div class="input-field">
+                          <select>
+                            <option value="" disabled selected>Seleccionar...</option>
+                            <option value="1">C.C</option>
+                            <option value="2">Tarjeta de identidad</option>
+                            <option value="3">C. Extranjera</option>
+                          </select>
+                          <label>Seleccione tipo de documento</label>
+                        </div>
+
+                        <div class="input-field">
+
+                          <input id="id_num" type="text" class="validate">
+                          <label for="id_num" class="">N° de Identificación</label>
+                        </div>
+                        <div class="input-field">
+                          <select id="program_1">
+                            <option value="" disabled selected>Seleccionar...</option>
+                            <option value="1">Arquitectura</option>
+                            <option value="2">Ingeniería Industrial</option>
+                            <option value="3">Ingeniería de Sistemas</option>
+                          </select>
+                          <label for="program_1">Seleccione programa educativo</label>
+                        </div>
+                      </div>
+
+                    </div>
+                    <div class="center">
+                      <a href="vistaUsuario.php" class="btn btn-next btn-success modal-trigger">Registrar</a>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+          </div>
         </form>
-        <!-- fin FORMULARIO DE LOGUEO-->
       </div>
 
+
       <div class="col-md-2 col-sm-1"></div>
-
-
     </div>
-
   </div>
 
 </header>
-
-<section  class="green darken-4 white-text " style="margin-top: -20px;">
-
-  <div class="container">
-
-    <!--  <a href="#" class="brand-logo center "><img src="Imagenes/logo-cecar-white.png" alt="" class="responsive-img valign profile-image" style="max-width:144px;max-height:120px">
-    </a>-->
-    <div class="row" align="center">
-
-
-      <div class="col-md-3">
-        <a href="#" class="brand-logo center "><img src="Imagenes/logo-cecar-white.png" alt="" class="responsive-img valign profile-image" style="max-width:144px;max-height:110px; padding-top: 10px">
-        </a>
-      </div>
-
-
-      <div class="col-md-3">
-        <div>
-          <h2 style="padding-top: 10px;">SIGPQR</h2>
-          <figure class="subtitle">
-            Corporación universitaria del carbie - CECAR
-          </figure>
-
-        </div>
-      </div>
-
-
-    </div>
-
-  </div>
-</section>
+<logo-section></logo-section>

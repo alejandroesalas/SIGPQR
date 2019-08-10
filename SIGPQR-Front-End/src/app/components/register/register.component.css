@@ -1,0 +1,11 @@
+header{
+  background: url(../../../assets/imagenes/slide2.jpg) center;
+  background-size: cover;
+  min-height: 500px;
+}
+
+@media screen and (max-width: 670px) {
+  header{
+    min-height: 500px;
+  }
+}

@@ -11,6 +11,7 @@ import { ErrorComponent } from './components/error/error.component';
 import { VerifyComponent } from './components/verify/verify.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import {ModalModule} from "./_modal/modal.module";
+import { LogoSectionComponent } from './components/logo-section/logo-section.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import {ModalModule} from "./_modal/modal.module";
     ErrorComponent,
     VerifyComponent,
     ForgotPasswordComponent,
+    LogoSectionComponent,
   ],
   imports: [
     BrowserModule,
