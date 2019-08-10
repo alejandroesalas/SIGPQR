@@ -25,7 +25,9 @@
             ],
             "styles": [
               "src/styles.css",
-              "node_modules/font-awesome/css/font-awesome.css"
+              "node_modules/font-awesome/css/font-awesome.css",
+              "node_modules/materialize-css/dist/css/materialize.css",
+              "node_modules/material-dashboard/assets/css/material-dashboard-pro.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
@@ -33,7 +35,8 @@
               "node_modules/materialize-css/dist/js/materialize.js",
               "node_modules/popper.js/dist/umd/popper.min.js",
               "node_modules/bootstrap-material-design/dist/js/bootstrap-material-design.js",
-              "node_modules/material-dashboard/assets/js/material-dashboard.min.js"
+              "node_modules/material-dashboard/assets/js/material-dashboard-pro.js",
+              "node_modules/jquery/dist/loadselect.js"
             ]
           },
           "configurations": {

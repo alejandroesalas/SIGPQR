@@ -1,3 +1,4 @@
+
 <header>
 
   <div class="container">
@@ -21,15 +22,19 @@
 
                 <li class="nav-item" style="width: 33.3333%;">
                   <a class="nav-link active" href="#dashboard-1" role="tab" data-toggle="tab">
+
                     Validar correo
                   </a>
                 </li>
                 <li class="nav-item" style="width: 33.3333%;">
                   <a class="nav-link" href="#tasks-1" role="tab" data-toggle="tab">
+
                     Validar registro
                   </a>
                 </li>
               </ul>
+
+
               <div class="tab-content tab-space">
                 <div class="tab-pane active" id="dashboard-1">
 
@@ -62,7 +67,7 @@
                         </div>
                         <div class="input-field">
                           <i class="material-icons prefix"></i>
-                          <input type="password"  id="Spaswoord" required="true" name="password" aria-required="true" >
+                          <input type="password"  id="S paswoord" required="true" name="password" aria-required="true" >
                           <span class="helper-text" data-error="wrong" data-success="right">Confirmar contraseña</span>
                         </div>
                       </div>
@@ -75,11 +80,15 @@
                     </div>
 
                   </form>
+
+
+
                 </div>
 
                 <div class="tab-pane" id="tasks-1">
                   <h5 class="card-description center"></h5>
-                  <form action="">
+
+                  <form class="col-md-12">
                     <div class="row justify-content-center" >
                       <div class="col-md-4">
                         <div class="picture-container">
@@ -94,35 +103,36 @@
                       <div class="col-md-8">
 
                         <div class="input-field">
-                          <select>
-                            <option value="" disabled selected>Seleccionar...</option>
+                          <select id="id_type">
+                            <option value="" selected>Seleccionar...</option>
                             <option value="1">C.C</option>
                             <option value="2">Tarjeta de identidad</option>
                             <option value="3">C. Extranjera</option>
                           </select>
-                          <label>Seleccione tipo de documento</label>
+                          <label for="id_type">Seleccione tipo de documento</label>
                         </div>
-
                         <div class="input-field">
-
                           <input id="id_num" type="text" class="validate">
                           <label for="id_num" class="">N° de Identificación</label>
                         </div>
                         <div class="input-field">
-                          <select id="program_1">
+                          <select>
                             <option value="" disabled selected>Seleccionar...</option>
                             <option value="1">Arquitectura</option>
                             <option value="2">Ingeniería Industrial</option>
                             <option value="3">Ingeniería de Sistemas</option>
                           </select>
-                          <label for="program_1">Seleccione programa educativo</label>
+                          <label>Seleccione programa educativo</label>
                         </div>
+
                       </div>
 
                     </div>
                     <div class="center">
                       <a href="vistaUsuario.php" class="btn btn-next btn-success modal-trigger">Registrar</a>
                     </div>
+
+
                   </form>
                 </div>
               </div>
@@ -139,3 +149,4 @@
 
 </header>
 <logo-section></logo-section>
+
