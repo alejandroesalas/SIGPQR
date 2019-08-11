@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Coordinator;
 use App\Coordinator;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Response;
 
 class CoordinatorResponseController extends Controller
 {
@@ -13,9 +14,13 @@ class CoordinatorResponseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Response $response, Coordinator $coordinator)
     {
 
+        $coordinatorResponse = $response
+            ->where('coordinator_id', $coordinator->id)
+            ->get();
+        return $this->showAll($coordinatorResponse);
     }
 
 
@@ -37,17 +42,6 @@ class CoordinatorResponseController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Coordinator $coordinator)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Coordinator  $coordinator
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Coordinator $coordinator)
     {
         //
     }

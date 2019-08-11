@@ -10,7 +10,7 @@ class RequestTypeController extends ApiController
 {
     public function __construct()
     {
-        $this->middleware('auth:api');
+        //$this->middleware('auth:api');
         //$this->middleware('auth',['except'=>['auth/login']]);
     }
     /**
@@ -32,12 +32,21 @@ class RequestTypeController extends ApiController
      */
     public function store(Request $request)
     {
-        $rules =['name'=>'required'];
+        $rules = [
+            'type' => 'required',
+            'description' => 'required',
+        ];
         $json = $request->input('json', null);
-        if (!isEmpty($json)){
+        if (!Empty($json)){
             $params_array = array_map('trim', json_decode($json, true));
-            if (!isEmpty($params_array)){
-
+            if (!Empty($params_array)){
+                $validation = $this->checkValidation($params_array, $rules);
+                if ($validation->fails()){
+                    return $this->errorResponse("datos no validos", 404, $validation->errors());
+                }else{
+                    $requestType = RequestType::create($params_array);
+                    return $this->showOne($requestType);
+                }
             }else{
                 return $this->errorResponse('Datos Vacios!',400);
             }

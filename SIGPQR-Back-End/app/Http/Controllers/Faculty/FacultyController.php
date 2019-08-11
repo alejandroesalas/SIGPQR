@@ -30,6 +30,11 @@ class FacultyController extends ApiController
         return $this->showAll($faculty);
     }
 
+    public function countFaculties()
+    {
+        $countFaculties = Faculty::count();
+        return $this->showOther($countFaculties);
+    }
 
     /**
      * Store a newly created resource in storage.

@@ -15,16 +15,16 @@ class Request extends Model
     ];
 
     public function student(){
-        $this->belongsTo(Student::class,'student_id');
+        return $this->belongsTo(Student::class,'student_id');
     }
     public function program(){
-        $this->belongsTo(Program::class,'program_id');
+        return $this->belongsTo(Program::class,'program_id');
     }
     public function requestType(){
-        $this->belongsTo(RequestType::class,'request_type_id');
+        return $this->belongsTo(RequestType::class,'request_type_id');
     }
     public function responses(){
-        $this->hasMany(Response::class);
+        return $this->hasMany(Response::class);
     }
 
 }

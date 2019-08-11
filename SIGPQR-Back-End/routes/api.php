@@ -31,24 +31,30 @@ Route::group([
 Route::apiResource('faculties','Faculty\FacultyController');
 Route::get('faculties/{id}/programs','Faculty\FacultyController@facultyprograms');
 Route::get('faculties/{id}/students','Faculty\FacultyController@facultyUsers');
-//Route::get('faculties/{id}/programs/count','Faculty\FacultyController@programscount');
+Route::get('count-faculties','Faculty\FacultyController@countFaculties');
 //ruta del controlador de programas
 Route::apiResource('programs','Program\ProgramController');
 Route::get('programs/{id}/faculties','Program\ProgramController@faculty');
 Route::get('programs/{id}/coordinators','Program\ProgramController@coordinator');
 Route::get('programs/{id}/students','Program\ProgramController@getStudents');
-Route::get('programs/{id}/requests','Program\ProgramController@getRequests');
+//Route::get('programs/{id}/programs','Program\ProgramController@getRequests');
+Route::resource('programs.requests','Program\ProgramRequestController', ['only' => ['index']]);
+Route::get('count-programs','Program\ProgramController@countPrograms');
 //ruta del controlador de perfiles
 Route::apiResource('profiles','Profile\ProfileController');
 //mostrar usuarios de un perfil especifico
 Route::get('profiles/{id}/users','Profile\ProfileController@usersByProfile');
-Route::apiResource('requestsType','RequestType\RequestTypeController');
 //Ruta para las requestsType(tipos de solicitudes)
+Route::resource('requests-types','RequestType\RequestTypeController');
 //ruta del controlador de Estudiantes
 Route::resource('students', 'Student\StudentController', ['except' => ['create', 'edit']]);
+Route::get('count-students','Student\StudentController@countStudents');
+Route::resource('students.requests','Student\StudentRequestController', ['except' => ['create', 'edit']]);
 //ruta del controlador de Coordinadores
 Route::resource('coordinators', 'Coordinator\CoordinatorController', ['except' => ['create', 'edit']]);
-
+Route::resource('coordinators.responses', 'Coordinator\CoordinatorResponseController', ['except' => ['create', 'edit']]);
+Route::get('count-coordinators','Coordinator\CoordinatorController@countCoordinators');
+Route::get('count-teachers','User\UserController@countTeachers');
 //Verificacion del correo del usuario
 Route::name('verify')->get('users/verify/{token}','User\UserController@verify');
 
