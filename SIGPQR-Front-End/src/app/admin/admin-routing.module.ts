@@ -3,10 +3,11 @@ import {RouterModule,Routes} from "@angular/router";
 //componentes del modulo
 import {AdminHomeComponent} from "./components/admin-home/admin-home.component";
 import {DisabledUsersComponent} from "./components/disabled-users/disabled-users.component";
+import {AdminComponent} from "./admin.component";
 
 
 const adminRoutes: Routes = [
-  {path:'admin',component:AdminHomeComponent,
+  {path:'admin',component:AdminComponent,
     children:[
       {path:'',component:AdminHomeComponent},
       {path:'home',component:AdminHomeComponent},

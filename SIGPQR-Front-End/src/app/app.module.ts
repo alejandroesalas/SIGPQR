@@ -13,8 +13,6 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
 import {ModalModule} from "./_modal/modal.module";
 import { LogoSectionComponent } from './components/logo-section/logo-section.component';
 import {StudentModule} from "./student/student.module";
-import { CoordinatorHomeComponent } from './coordinator/components/coordinator-home/coordinator-home.component';
-import { CoordinatorRequestsComponent } from './coordinator/components/coordinator-requests/coordinator-requests.component';
 import {CoordinatorModule} from "./coordinator/coordinator.module";
 import {AdminModule} from "./admin/admin.module";
 import { ProgramComponent } from './program/program.component';
@@ -29,8 +27,6 @@ import { ProgramComponent } from './program/program.component';
     VerifyComponent,
     ForgotPasswordComponent,
     LogoSectionComponent,
-    CoordinatorHomeComponent,
-    CoordinatorRequestsComponent,
     ProgramComponent,
   ],
   imports: [
@@ -45,6 +41,9 @@ import { ProgramComponent } from './program/program.component';
     AdminModule
   ],
   providers: [appRoutingProviders],
+  exports: [
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

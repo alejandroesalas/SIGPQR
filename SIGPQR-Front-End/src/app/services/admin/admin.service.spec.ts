@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ScriptLoaderService } from './script-loader.service';
+import { AdminService } from './admin.service';
 
-describe('ScriptLoaderService', () => {
+describe('AdminService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: ScriptLoaderService = TestBed.get(ScriptLoaderService);
+    const service: AdminService = TestBed.get(AdminService);
     expect(service).toBeTruthy();
   });
 });

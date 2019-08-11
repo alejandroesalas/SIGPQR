@@ -4,10 +4,11 @@ import {RouterModule,Routes} from "@angular/router";
 import { CoordinatorHomeComponent } from "./components/coordinator-home/coordinator-home.component";
 import { CoordinatorRequestsComponent } from "./components/coordinator-requests/coordinator-requests.component";
 import {CoordinatorProfileComponent} from "./components/coordinator-profile/coordinator-profile.component";
+import {CoordinatorComponent} from "./coordinator.component";
 
 
 const coordinatorRoutes: Routes = [
-  {path:'student',component:CoordinatorHomeComponent,
+  {path:'coordinador',component:CoordinatorComponent,
     children:[
       {path:'',component:CoordinatorHomeComponent},
       {path:'home',component:CoordinatorHomeComponent},

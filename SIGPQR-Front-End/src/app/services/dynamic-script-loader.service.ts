@@ -6,7 +6,8 @@ interface Scripts {
 }
 export const ScriptStore: Scripts[] = [
   { name: 'displayselect', src: '../assets/js/loadselect.js' },
-  { name: 'dashboard-pro', src: '../assets/js/material-dashboard-pro.js' }
+  { name: 'dashboard-pro', src: '../assets/js/material-dashboard-pro.js' },
+  {name:'navvar',src:'../assets/js/loadsidenav.js'}
 ];
 
 declare var document: any;

@@ -4,31 +4,35 @@ import {CommonModule} from "@angular/common";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import {CoordinatorRoutingModule} from "./coordinator-routing.module";
-
+import {CoordinatorComponent} from "./coordinator.component";
+import { EstructuraComponent } from './components/estructura/estructura.component';
 import { CoordinatorProfileComponent } from './components/coordinator-profile/coordinator-profile.component';
 import {CoordinatorHomeComponent} from "./components/coordinator-home/coordinator-home.component";
 import {CoordinatorRequestsComponent} from "./components/coordinator-requests/coordinator-requests.component";
+import {DynamicScriptLoaderService} from "../services/dynamic-script-loader.service";
 
 @NgModule({
   declarations:[
     CoordinatorHomeComponent,
     CoordinatorRequestsComponent,
-    CoordinatorProfileComponent
+    CoordinatorProfileComponent,
+    CoordinatorComponent,
+    EstructuraComponent,
   ],
-  imports:[
+  imports: [
     BrowserModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    CoordinatorRoutingModule
+    CoordinatorRoutingModule,
   ],
   exports:[
     CoordinatorHomeComponent,
     CoordinatorRequestsComponent,
     CoordinatorProfileComponent
   ],
-  providers:[]
+  providers:[DynamicScriptLoaderService]
 })
 export class CoordinatorModule {
 

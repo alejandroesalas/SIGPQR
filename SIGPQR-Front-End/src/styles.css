@@ -1,1 +1,17 @@
-/* You can add global styles to this file, and also import other style files */
+.sidenav .user-details {
+  padding: 0 16px;
+  height: 65px;
+  line-height: 64px;
+  font-size: 30px;
+  box-sizing: content-box;
+
+}
+
+.sidenav .user-view {
+  padding: 0 16px;
+  height: 85px;
+  line-height: 64px;
+  font-size: 12px;
+  box-sizing: content-box;
+
+}
