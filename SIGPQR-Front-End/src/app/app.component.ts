@@ -15,12 +15,12 @@ constructor(private dynamicScriptLoader: DynamicScriptLoaderService){
   ngOnInit() {
     //this.loadScript('../assets/js/loadselect.js');
     //this.loadScript('../assets/js/material-dashboard-pro.js');
-    this.loadScripts();
+    //this.loadScripts();
 
   }
   private loadScripts() {
     // You can load multiple scripts by just providing the key as argument into load method of the service
-    this.dynamicScriptLoader.load('dashboard').then(data => {
+    this.dynamicScriptLoader.load('dashboard-pro').then(data => {
       // Script Loaded Successfully
     }).catch(error => console.log(error));
   }

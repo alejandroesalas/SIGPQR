@@ -19,6 +19,7 @@ export class DynamicScriptLoaderService {
 
   constructor() {
     ScriptStore.forEach((script: any) => {
+      //console.log('ScriptStore',script);
       this.scripts[script.name] = {
         loaded: false,
         src: script.src
@@ -33,6 +34,7 @@ export class DynamicScriptLoaderService {
   }
 
   loadScript(name: string) {
+    console.log('scriptname',name);
     return new Promise((resolve, reject) => {
       if (!this.scripts[name].loaded) {
         //load script
