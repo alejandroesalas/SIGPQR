@@ -12,7 +12,9 @@ import { VerifyComponent } from './components/verify/verify.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import {ModalModule} from "./_modal/modal.module";
 import { LogoSectionComponent } from './components/logo-section/logo-section.component';
-import { HomeStudentComponent } from './student/components/home-student/home-student.component';
+import {StudentModule} from "./student/student.module";
+import { CoordinatorHomeComponent } from './coordinator/components/coordinator-home/coordinator-home.component';
+import { CoordinatorRequestsComponent } from './coordinator/components/coordinator-requests/coordinator-requests.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import { HomeStudentComponent } from './student/components/home-student/home-stu
     VerifyComponent,
     ForgotPasswordComponent,
     LogoSectionComponent,
-    HomeStudentComponent,
+    CoordinatorHomeComponent,
+    CoordinatorRequestsComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,7 +35,8 @@ import { HomeStudentComponent } from './student/components/home-student/home-stu
     ReactiveFormsModule,
     ModalModule,
     routing,
-    HttpClientModule
+    HttpClientModule,
+    StudentModule
   ],
   providers: [appRoutingProviders],
   bootstrap: [AppComponent]
