@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {DynamicScriptLoaderService} from "../../../services/dynamic-script-loader.service";
 
 @Component({
   selector: 'admin-section',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminSectionComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dynamicScriptLoader: DynamicScriptLoaderService) { }
 
   ngOnInit() {
   }
