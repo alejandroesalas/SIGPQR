@@ -27,6 +27,14 @@ class UserController extends ApiController
         return $this->showAll($students);
     }
 
+    public function countTeachers(User $user)
+    {
+        $countTeachers = $user
+            ->where('profile_id', User::TEACHER_PROFILE)
+            ->count();
+        return $this->showOther($countTeachers);
+    }
+
     /**
      * Store a newly created resource in storage.
      *

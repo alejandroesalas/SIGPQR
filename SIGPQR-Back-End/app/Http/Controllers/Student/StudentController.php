@@ -27,6 +27,14 @@ class StudentController extends ApiController
         return $this->showAll($students);
     }
 
+    public function countStudents(Student $student)
+    {
+        $countStudents = $student
+            ->where('profile_id', User::STUDENT_PROFILE)
+            ->count();
+        return $this->showOther($countStudents);
+    }
+
     /**
      * Store a newly created resource in storage.
      *

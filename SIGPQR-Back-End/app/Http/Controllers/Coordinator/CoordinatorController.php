@@ -34,6 +34,14 @@ class CoordinatorController extends ApiController
         return $this->showAll($students);
     }
 
+    public function countCoordinators(Coordinator $coordinator)
+    {
+        $countCoordinators = $coordinator
+            ->where('profile_id', User::COORDINATOR_PROFILE)
+            ->count();
+        return $this->showOther($countCoordinators);
+    }
+
     /**
      * Update the specified resource in storage.
      *

@@ -25,8 +25,6 @@ class StudentRequestController extends ApiController
         return $this->showAll($studentRequest);
     }
 
-
-
     /**
      * Crea una nueva solicitud asociada al estudiante
      *

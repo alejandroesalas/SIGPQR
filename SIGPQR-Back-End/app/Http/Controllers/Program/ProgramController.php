@@ -34,6 +34,11 @@ class ProgramController extends ApiController
         return $this->showAll($programs);
     }
 
+    public function countPrograms()
+    {
+        $countPrograms = Program::count();
+        return $this->showOther($countPrograms);
+    }
 
     /**
      * Store a newly created resource in storage.
