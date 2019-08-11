@@ -15,6 +15,7 @@ import { LogoSectionComponent } from './components/logo-section/logo-section.com
 import {StudentModule} from "./student/student.module";
 import { CoordinatorHomeComponent } from './coordinator/components/coordinator-home/coordinator-home.component';
 import { CoordinatorRequestsComponent } from './coordinator/components/coordinator-requests/coordinator-requests.component';
+import {CoordinatorModule} from "./coordinator/coordinator.module";
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { CoordinatorRequestsComponent } from './coordinator/components/coordinat
     ModalModule,
     routing,
     HttpClientModule,
-    StudentModule
+    StudentModule,
+    CoordinatorModule
   ],
   providers: [appRoutingProviders],
   bootstrap: [AppComponent]
