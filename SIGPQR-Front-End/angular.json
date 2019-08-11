@@ -34,9 +34,7 @@
               "node_modules/hammerjs/hammer.js",
               "node_modules/materialize-css/dist/js/materialize.js",
               "node_modules/popper.js/dist/umd/popper.min.js",
-              "node_modules/bootstrap-material-design/dist/js/bootstrap-material-design.js",
-              "node_modules/material-dashboard/assets/js/material-dashboard-pro.js",
-              "node_modules/jquery/dist/loadselect.js"
+              "node_modules/bootstrap-material-design/dist/js/bootstrap-material-design.js"
             ]
           },
           "configurations": {

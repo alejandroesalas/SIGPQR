@@ -12,6 +12,7 @@ import { VerifyComponent } from './components/verify/verify.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import {ModalModule} from "./_modal/modal.module";
 import { LogoSectionComponent } from './components/logo-section/logo-section.component';
+import { HomeStudentComponent } from './student/components/home-student/home-student.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { LogoSectionComponent } from './components/logo-section/logo-section.com
     VerifyComponent,
     ForgotPasswordComponent,
     LogoSectionComponent,
+    HomeStudentComponent,
   ],
   imports: [
     BrowserModule,
