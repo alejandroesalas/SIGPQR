@@ -102,6 +102,23 @@ class StudentController extends ApiController
         //
     }
 
+    public function onlyTrashed(Student $student)
+    {
+        $students = $student->where('profile_id', User::STUDENT_PROFILE)
+            ->onlyTrashed()
+            ->get();
+        return $this->showAll($students);
+    }
+
+    public function countStudentsEliminated(Student $student)
+    {
+        $countStudentsEliminated = $student
+            ->where('profile_id', User::STUDENT_PROFILE)
+            ->onlyTrashed()
+            ->count();
+        return $this->showOther($countStudentsEliminated);
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -110,6 +127,22 @@ class StudentController extends ApiController
      */
     public function destroy(Student $student)
     {
-        //
+        $isStudent = $student->where('id', $student->id)
+            ->where('profile_id', User::STUDENT_PROFILE)
+            ->count();
+        if($isStudent == 0){
+            return $this->errorResponse("El usuario ingresado no es estudiante", 422);
+        }
+        $student->delete();
+        return $this->showOne($student);
+    }
+
+    public function restore($id)
+    {
+        $user = Student::onlyTrashed()->where('id', $id)
+            ->where('profile_id', User::STUDENT_PROFILE)
+            ->first();
+            $user->restore();
+        return $this->showOne($user);
     }
 }
