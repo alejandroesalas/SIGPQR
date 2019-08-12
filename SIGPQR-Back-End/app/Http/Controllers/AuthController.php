@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ApiController;
 
@@ -22,10 +23,27 @@ class AuthController extends ApiController
     public function login()
     {
         $credentials = request(['email', 'password']);
+        $count = $this->verifiedUser($credentials);
+        if($count == 0){
+            return response()->json(['error' => 'Correo y/o contraseña invalidos'], 401);
+        }
         if (!$token = auth()->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+            return response()->json(['error' => 'Correo y/o contraseña invalidos'], 401);
         }
         return $this->respondWithToken($token);
+    }
+    /**
+     * Get credentials array.
+     *
+     * @param array $credentials
+     *
+     * @return int
+     */
+    protected function verifiedUser($credentials)
+    {
+        return User::where('email', $credentials['email'])
+            ->where('verified', '1')
+            ->count();
     }
 
     /**
