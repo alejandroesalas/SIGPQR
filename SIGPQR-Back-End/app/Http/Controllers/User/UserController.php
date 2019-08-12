@@ -99,6 +99,23 @@ class UserController extends ApiController
         //
     }
 
+    public function onlyTrashed(User $user)
+    {
+        $users = $user->where('profile_id', User::TEACHER_PROFILE)
+            ->onlyTrashed()
+            ->get();
+        return $this->showAll($users);
+    }
+
+    public function countTeachersEliminated(User $user)
+    {
+        $countUsersEliminated = $user
+            ->where('profile_id', User::TEACHER_PROFILE)
+            ->onlyTrashed()
+            ->count();
+        return $this->showOther($countUsersEliminated);
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -107,8 +124,25 @@ class UserController extends ApiController
      */
     public function destroy(User $user)
     {
-        //
+        $isUser = $user->where('id', $user->id)
+            ->where('profile_id', User::TEACHER_PROFILE)
+            ->count();
+        if($isUser == 0){
+            return $this->errorResponse("El usuario ingresado no es docente", 422);
+        }
+        $user->delete();
+        return $this->showOne($user);
     }
+
+    public function restore($id)
+    {
+        $user = User::onlyTrashed()->where('id', $id)
+            ->where('profile_id', User::TEACHER_PROFILE)
+            ->first();
+            $user->restore();
+        return $this->showOne($user);
+    }
+
     public function verify($token){
         $user = User::where('verification_token',$token)->firstOrFail();
         $user->verified = User::VERIFIED_USER;

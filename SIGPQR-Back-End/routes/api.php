@@ -50,11 +50,21 @@ Route::resource('requests-types','RequestType\RequestTypeController');
 Route::resource('students', 'Student\StudentController', ['except' => ['create', 'edit']]);
 Route::get('count-students','Student\StudentController@countStudents');
 Route::resource('students.requests','Student\StudentRequestController', ['except' => ['create', 'edit']]);
+//soft deleting students
+Route::get('only-students-trashed','Student\StudentController@onlyTrashed');
+Route::post('restore-student/{id}','Student\StudentController@restore');
+Route::get('count-students-eliminated','Student\StudentController@countStudentsEliminated');
 //ruta del controlador de Coordinadores
 Route::resource('coordinators', 'Coordinator\CoordinatorController', ['except' => ['create', 'edit']]);
 Route::resource('coordinators.responses', 'Coordinator\CoordinatorResponseController', ['except' => ['create', 'edit']]);
 Route::get('count-coordinators','Coordinator\CoordinatorController@countCoordinators');
 Route::get('count-teachers','User\UserController@countTeachers');
+//ruta del controlador de usuarios
+Route::resource('users', 'User\UserController', ['except' => ['create', 'edit']]);
+//soft deleting teachers
+Route::get('only-teachers-trashed','User\UserController@onlyTrashed');
+Route::post('restore-teacher/{id}','User\UserController@restore');
+Route::get('count-teachers-eliminated','User\UserController@countTeachersEliminated');
 //Verificacion del correo del usuario
 Route::name('verify')->get('users/verify/{token}','User\UserController@verify');
 
