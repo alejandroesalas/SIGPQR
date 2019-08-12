@@ -5,10 +5,14 @@ import { CoordinatorHomeComponent } from "./components/coordinator-home/coordina
 import { CoordinatorRequestsComponent } from "./components/coordinator-requests/coordinator-requests.component";
 import {CoordinatorProfileComponent} from "./components/coordinator-profile/coordinator-profile.component";
 import {CoordinatorComponent} from "./coordinator.component";
+import {AuthGuard} from "../guards/auth.guard";
+import {Profile} from "../models/Profile";
 
 
 const coordinatorRoutes: Routes = [
   {path:'coordinador',component:CoordinatorComponent,
+    canActivate:[AuthGuard],
+    data:{rol:[Profile.coordinator]},
     children:[
       {path:'',component:CoordinatorHomeComponent},
       {path:'home',component:CoordinatorHomeComponent},

@@ -4,10 +4,14 @@ import {RouterModule,Routes} from "@angular/router";
 import {AdminHomeComponent} from "./components/admin-home/admin-home.component";
 import {DisabledUsersComponent} from "./components/disabled-users/disabled-users.component";
 import {AdminComponent} from "./admin.component";
+import {AuthGuard} from "../guards/auth.guard";
+import {Profile} from "../models/Profile";
 
 
 const adminRoutes: Routes = [
   {path:'admin',component:AdminComponent,
+    canActivate:[AuthGuard],
+    data:{rol:[Profile.admin]},
     children:[
       {path:'',component:AdminHomeComponent},
       {path:'home',component:AdminHomeComponent},

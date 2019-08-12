@@ -23,15 +23,15 @@
                 <div class="input-field">
                   <i class="material-icons prefix">contact_mail</i>
                   <input id="correo" name="email" type="text" class="validate" required
-                         #email="ngModel" [(ngModel)]="email" required
+                          [(ngModel)]="email"
                          pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$">
                   <label for="correo">Email</label>
                 </div>
 
                 <div class="input-field">
                   <i class="material-icons prefix">lock_outline</i>
-                  <input id="password" type="password" class="validate" required minlength="4"
-                         #password="ngModel" [(ngModel)]="password">
+                  <input id="password" name="password" type="password" class="validate" required minlength="4"
+                          [(ngModel)]="password">
                   <label for="password">Contraseña</label>
                 </div>
 
@@ -65,7 +65,7 @@
                 <div class="input-field col s12">
                   <i class="material-icons prefix">contact_mail</i>
                   <input id="emailOlvido" name="email" type="text" class="validate" required
-                         #email="ngModel" [(ngModel)]="email"
+                         [(ngModel)]="email"
                          pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$">
                   <label for="emailOlvido">Confirmar email</label>
                 </div>
