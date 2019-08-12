@@ -22,13 +22,16 @@
 
                 <div class="input-field">
                   <i class="material-icons prefix">contact_mail</i>
-                  <input id="correo" type="text" class="validate">
+                  <input id="correo" name="email" type="text" class="validate" required
+                         #email="ngModel" [(ngModel)]="email" required
+                         pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$">
                   <label for="correo">Email</label>
                 </div>
 
                 <div class="input-field">
                   <i class="material-icons prefix">lock_outline</i>
-                  <input id="password" type="password" class="validate">
+                  <input id="password" type="password" class="validate" required minlength="4"
+                         #password="ngModel" [(ngModel)]="password">
                   <label for="password">Contraseña</label>
                 </div>
 
@@ -57,16 +60,18 @@
           <!--Inicio CUERPO MODAL 1-->
           <div class="modal-body">
             <!--Inicio FORM-->
-            <form>
+            <form #forgotPasswordForm="ngForm">
               <div class="row">
                 <div class="input-field col s12">
                   <i class="material-icons prefix">contact_mail</i>
-                  <input id="emailOlvido" type="text" class="validate">
+                  <input id="emailOlvido" name="email" type="text" class="validate" required
+                         #email="ngModel" [(ngModel)]="email"
+                         pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$">
                   <label for="emailOlvido">Confirmar email</label>
                 </div>
               </div>
               <a (click)="closeModal('forgotPassWordModal')" class="btn btn-danger left">Cancelar <i class="fa fa-refresh"></i></a>
-              <a  class="btn btn-success right" id="btnConfirmarEmail">Confirmar<i class="fa fa-arrow-circle-right"></i>
+              <a (click)="onForgotPassword(forgotPasswordForm)" class="btn btn-success right" id="btnConfirmarEmail">Confirmar<i class="fa fa-arrow-circle-right"></i>
               </a>
             </form>
         </div>
