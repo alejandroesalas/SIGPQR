@@ -12,7 +12,7 @@ import {Profile} from "../models/Profile";
 const studentRoutes: Routes = [
   {path:'student',component:StudentComponent,
     canActivate:[AuthGuard],
-    data:{rol:[Profile.student]},
+    data:{rol:Profile.student},
       children:[
         {path:'',component:HomeStudentComponent},
         {path:'home',component:HomeStudentComponent},

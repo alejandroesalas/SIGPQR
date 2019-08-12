@@ -10,6 +10,8 @@ import { CoordinatorProfileComponent } from './components/coordinator-profile/co
 import {CoordinatorHomeComponent} from "./components/coordinator-home/coordinator-home.component";
 import {CoordinatorRequestsComponent} from "./components/coordinator-requests/coordinator-requests.component";
 import {DynamicScriptLoaderService} from "../services/dynamic-script-loader.service";
+import {AuthService} from "../services/authService/auth.service";
+import {AuthGuard} from "../guards/auth.guard";
 
 @NgModule({
   declarations:[
@@ -32,7 +34,8 @@ import {DynamicScriptLoaderService} from "../services/dynamic-script-loader.serv
     CoordinatorRequestsComponent,
     CoordinatorProfileComponent
   ],
-  providers:[DynamicScriptLoaderService]
+  providers:[DynamicScriptLoaderService,
+    AuthService,AuthGuard]
 })
 export class CoordinatorModule {
 

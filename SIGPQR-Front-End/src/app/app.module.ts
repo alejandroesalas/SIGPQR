@@ -16,6 +16,7 @@ import {StudentModule} from "./student/student.module";
 import {CoordinatorModule} from "./coordinator/coordinator.module";
 import {AdminModule} from "./admin/admin.module";
 import { ProgramComponent } from './program/program.component';
+import {AuthService} from "./services/authService/auth.service";
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { ProgramComponent } from './program/program.component';
     CoordinatorModule,
     AdminModule
   ],
-  providers: [appRoutingProviders],
+  providers: [appRoutingProviders,
+  AuthService],
   exports: [
 
   ],

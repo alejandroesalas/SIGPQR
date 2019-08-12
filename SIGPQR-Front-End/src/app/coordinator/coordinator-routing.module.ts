@@ -11,14 +11,15 @@ import {Profile} from "../models/Profile";
 
 const coordinatorRoutes: Routes = [
   {path:'coordinador',component:CoordinatorComponent,
-    canActivate:[AuthGuard],
-    data:{rol:[Profile.coordinator]},
+
     children:[
       {path:'',component:CoordinatorHomeComponent},
       {path:'home',component:CoordinatorHomeComponent},
       {path:'requests',component:CoordinatorRequestsComponent},
       {path:'profile',component:CoordinatorProfileComponent}
-    ]
+    ],
+    canActivate:[AuthGuard],
+    data:{rol:Profile.coordinator},
   },
 ];
 @NgModule({

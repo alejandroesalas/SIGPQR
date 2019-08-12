@@ -11,7 +11,7 @@ import {Profile} from "../models/Profile";
 const adminRoutes: Routes = [
   {path:'admin',component:AdminComponent,
     canActivate:[AuthGuard],
-    data:{rol:[Profile.admin]},
+    data:{rol:Profile.admin},
     children:[
       {path:'',component:AdminHomeComponent},
       {path:'home',component:AdminHomeComponent},

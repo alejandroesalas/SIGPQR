@@ -26,7 +26,6 @@ import { AdminSectionComponent } from './components/admin-section/admin-section.
     AdminRoutingModule
   ],
   exports:[
-
   ],
   providers:[]
 })

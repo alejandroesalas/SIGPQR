@@ -10,6 +10,8 @@ import { StudenRequestsComponent } from './components/studen-requests/studen-req
 import {StudentProfileComponent} from "./components/student-profile/student-profile.component";
 import { StudenSectionComponent } from './components/studen-section/studen-section.component';
 import { StudentComponent } from './student.component';
+import {AuthService} from "../services/authService/auth.service";
+import {AuthGuard} from "../guards/auth.guard";
 
 @NgModule({
   declarations:[
@@ -33,7 +35,7 @@ import { StudentComponent } from './student.component';
     StudenRequestsComponent,
     StudentProfileComponent
   ],
-  providers:[]
+  providers:[AuthService,AuthGuard]
 })
 export class StudentModule {
 

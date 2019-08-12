@@ -10,30 +10,34 @@ import {map} from "rxjs/operators";
 })
 export class AuthService {
 
-  private currentUserSubject: BehaviorSubject<User>;
-  public currentUser: Observable<User>;
+  private currentUserSubject: BehaviorSubject<any>;
+  public currentUser: Observable<any>;
 
   constructor(private http: HttpClient) {
-    this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
+    this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
-  public get currentUserValue(): User {
+  public get currentUserValue() {
     return this.currentUserSubject.value;
   }
 
-  login(email, password) {
+  login(email, password):Observable<any> {
+    let theUser:User;
     let httpParams = new HttpParams()
       .set('email',email)
       .set('password',password);
     let headers = new HttpHeaders().set('content-type',global.contentType);
     return this.http.post<any>(global.url+`auth/login`, httpParams,{headers:headers})
-      .pipe(map(user => {
+      .pipe(map(data => {
+        //console.log('user.user',user.user);
+        theUser = data.user;
+        theUser.token = data.access_token;
         // store user details and jwt token in local storage to keep user logged in between page refreshes
-        console.log('login',user);
-        localStorage.setItem('currentUser', JSON.stringify(user));
-        this.currentUserSubject.next(user);
-        return user;
+        //console.log('login',theUser);
+        localStorage.setItem('currentUser', JSON.stringify(theUser));
+        this.currentUserSubject.next(theUser);
+        return theUser;
       }));
   }
 

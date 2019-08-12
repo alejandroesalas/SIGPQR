@@ -17,30 +17,29 @@ export class LoginComponent implements OnInit {
       private route: ActivatedRoute,
       private router: Router,
       private authService:AuthService) {
-    // redirect to home if already logged in
-    if (this.authService.currentUserValue) {
-      this.router.navigate(['/']);
+    // redirect to specific home if already logged in
+    const currentUser = this.authService.currentUserValue;
+    if (currentUser) {
+      this.redirectTo(currentUser.profile_id);
     }
   }
 
   ngOnInit() {
     // get return url from route parameters or default to '/'
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '';
   }
 
   onSubmit(form){
     this.authService.login(this.email,this.password)
       .pipe(first())
       .subscribe(
-        respose=>{
-          console.log(respose);
-          this.router.navigate([this.returnUrl]);
+        user=>{
+          this.redirectTo(user.profile_id)
         },error => {
           //Desplegar SweetAlert por si hay algun error.
           console.log('error',error);
         }
       );
-
   }
   onForgotPassword(form){
 
@@ -52,4 +51,22 @@ export class LoginComponent implements OnInit {
   closeModal(id: string) {
     this.modalService.close(id);
   }
+
+  private redirectTo(profile_id:number){
+    switch (profile_id) {
+      case 1:
+        this.router.navigate(['/admin']);
+        break;
+      case 2:
+        this.router.navigate(['/coordinador']);
+        break;
+      case 3:
+        this.router.navigate(['/student']);
+        break;
+      default:
+        this.router.navigate(['login']);
+        break;
+    }
+  }
+
 }
