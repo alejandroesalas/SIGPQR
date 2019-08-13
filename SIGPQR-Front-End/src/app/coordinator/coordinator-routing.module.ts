@@ -18,7 +18,7 @@ const coordinatorRoutes: Routes = [
       {path:'requests',component:CoordinatorRequestsComponent},
       {path:'profile',component:CoordinatorProfileComponent}
     ],
-    canActivate:[AuthGuard],
+    //canActivate:[AuthGuard],
     data:{rol:Profile.coordinator},
   },
 ];

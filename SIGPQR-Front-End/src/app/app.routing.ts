@@ -8,7 +8,6 @@ import {VerifyComponent} from "./components/verify/verify.component";
 const appRoutes: Routes = [
   {path:'',component:LoginComponent},
   {path: 'login',component: LoginComponent},
-  {path:'logout/:sure',component:LoginComponent},
   {path:'registro',component:RegisterComponent},
   {path:'verify/:token',component:VerifyComponent},
   {path:'**',component:ErrorComponent}

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthService} from "../../../services/authService/auth.service";
+import {global} from "../../../global";
 
 @Component({
   selector: 'app-studen-section',
@@ -6,8 +8,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./studen-section.component.css']
 })
 export class StudenSectionComponent implements OnInit {
-
-  constructor() { }
+  public  currentUser;
+  public url:string;
+  constructor(private authService:AuthService) {
+    this.url = global.url;
+    this.currentUser = authService.currentUserValue;
+  }
 
   ngOnInit() {
   }

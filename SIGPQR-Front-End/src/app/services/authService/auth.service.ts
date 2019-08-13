@@ -4,6 +4,7 @@ import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {User} from "../../models/User";
 import {global} from "../../global";
 import {map} from "rxjs/operators";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,8 @@ export class AuthService {
   private currentUserSubject: BehaviorSubject<any>;
   public currentUser: Observable<any>;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private router: Router,) {
     this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
   }
@@ -40,10 +42,26 @@ export class AuthService {
         return theUser;
       }));
   }
-
   logout() {
     // remove user from local storage and set current user to null
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
   }
+  private redirectTo(profile_id:number){
+    switch (profile_id) {
+      case 1:
+        this.router.navigate(['/admin']);
+        break;
+      case 2:
+        this.router.navigate(['/coordinador']);
+        break;
+      case 3:
+        this.router.navigate(['/student']);
+        break;
+      default:
+        this.router.navigate(['login']);
+        break;
+    }
+  }
+
 }

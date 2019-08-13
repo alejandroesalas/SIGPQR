@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {global} from "../../../global";
+import {AuthService} from "../../../services/authService/auth.service";
 
 @Component({
   selector: 'app-estructura',
@@ -6,8 +8,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./estructura.component.css']
 })
 export class EstructuraComponent implements OnInit {
-
-  constructor() { }
+  public  currentUser;
+  public url:string;
+  constructor(private authService:AuthService) {
+    this.url = global.url;
+    this.currentUser = authService.currentUserValue;
+  }
 
   ngOnInit() {
   }

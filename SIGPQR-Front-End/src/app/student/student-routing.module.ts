@@ -10,6 +10,7 @@ import {Profile} from "../models/Profile";
 
 
 const studentRoutes: Routes = [
+  {path:'logout/:sure',component:StudentComponent},
   {path:'student',component:StudentComponent,
     canActivate:[AuthGuard],
     data:{rol:Profile.student},
@@ -19,7 +20,7 @@ const studentRoutes: Routes = [
         {path:'requests',component:StudenRequestsComponent},
         {path:'profile',component:StudentProfileComponent}
       ]
-  },
+  }
 ];
 @NgModule({
   imports:[

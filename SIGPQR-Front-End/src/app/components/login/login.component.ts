@@ -24,9 +24,11 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  ngOnInit() {
+  ngOnInit()
+  {
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '';
+    //this.logout();
   }
 
   onSubmit(form){
@@ -51,17 +53,26 @@ export class LoginComponent implements OnInit {
   closeModal(id: string) {
     this.modalService.close(id);
   }
-
+  logout(){
+    this.route.params.subscribe(value => {
+      let logout = +value['sure'];
+      console.log(logout);
+      if (logout == 1){
+        this.authService.logout();
+        this.router.navigate(['login']);
+      }
+    })
+  }
   private redirectTo(profile_id:number){
     switch (profile_id) {
       case 1:
-        this.router.navigate(['/admin']);
+        this.router.navigate(['admin']);
         break;
       case 2:
-        this.router.navigate(['/coordinador']);
+        this.router.navigate(['coordinador']);
         break;
       case 3:
-        this.router.navigate(['/student']);
+        this.router.navigate(['student']);
         break;
       default:
         this.router.navigate(['login']);

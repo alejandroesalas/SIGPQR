@@ -1,0 +1,35 @@
+.modal { width: 75% !important ; max-height: 75% !important ; overflow-y: hidden !important ;}  /* increase the width, height and prevent vertical scroll! However, i don't recommend this, its better to turn on vertical scrolling. */
+
+.sidenav .user-details {
+  padding: 0 16px;
+  height: 65px;
+  line-height: 64px;
+  font-size: 30px;
+  box-sizing: content-box;
+
+}
+
+.sidenav .user-view {
+  padding: 0 16px;
+  height: 85px;
+  line-height: 64px;
+  font-size: 12px;
+  box-sizing: content-box;
+
+}
+
+.modal {
+  max-height: 90%;
+}
+
+.modal-form-row {
+  margin-bottom: 0px;
+}
+
+.card-stats .card-body {
+  text-align: left;
+}
+.morecontent { display: none; }
+.morelink { display: block; cursor: pointer; color:#2196f3; }
+.morelink:hover { text-decoration:underline; }
+.hidden { display:none; }

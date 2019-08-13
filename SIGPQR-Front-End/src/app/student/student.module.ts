@@ -20,7 +20,6 @@ import {AuthGuard} from "../guards/auth.guard";
     StudenRequestsComponent,
     StudentProfileComponent,
     StudenSectionComponent
-
   ],
   imports:[
     BrowserModule,
@@ -33,7 +32,7 @@ import {AuthGuard} from "../guards/auth.guard";
   exports:[
     HomeStudentComponent,
     StudenRequestsComponent,
-    StudentProfileComponent
+    StudentProfileComponent,
   ],
   providers:[AuthService,AuthGuard]
 })
