@@ -3,6 +3,7 @@ import {ModalServiceService} from "../../services/modal-service.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AuthService} from "../../services/authService/auth.service";
 import {first} from "rxjs/operators";
+import {DynamicScriptLoaderService} from "../../services/dynamic-script-loader.service";
 
 @Component({
   selector: 'app-login',
@@ -13,10 +14,12 @@ export class LoginComponent implements OnInit {
   public email:string;
   public  password: string;
   returnUrl: string;
-  constructor(private modalService: ModalServiceService,
+  constructor(
+      private modalService: ModalServiceService,
+      private dynamicScriptLoader:DynamicScriptLoaderService,
+      private authService:AuthService,
       private route: ActivatedRoute,
-      private router: Router,
-      private authService:AuthService) {
+      private router: Router) {
     // redirect to specific home if already logged in
     const currentUser = this.authService.currentUserValue;
     if (currentUser) {
@@ -29,8 +32,14 @@ export class LoginComponent implements OnInit {
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '';
     //this.logout();
+    this.loadScripts()
   }
-
+  private loadScripts() {
+    // You can load multiple scripts by just providing the key as argument into load method of the service
+    this.dynamicScriptLoader.load('general').then(data => {
+      // Script Loaded Successfully
+    }).catch(error => console.log(error));
+  }
   onSubmit(form){
     this.authService.login(this.email,this.password)
       .pipe(first())

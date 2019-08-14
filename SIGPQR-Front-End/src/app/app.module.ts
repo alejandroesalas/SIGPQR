@@ -17,13 +17,14 @@ import {CoordinatorModule} from "./coordinator/coordinator.module";
 import {AdminModule} from "./admin/admin.module";
 import { ProgramComponent } from './program/program.component';
 import {AuthService} from "./services/authService/auth.service";
+import {ModalServiceService} from "./services/modal-service.service";
 
 @NgModule({
   declarations: [
     AppComponent,
+    FooterComponent,
     LoginComponent,
     RegisterComponent,
-    FooterComponent,
     ErrorComponent,
     VerifyComponent,
     ForgotPasswordComponent,
@@ -32,9 +33,9 @@ import {AuthService} from "./services/authService/auth.service";
   ],
   imports: [
     BrowserModule,
+    ModalModule,
     FormsModule,
     ReactiveFormsModule,
-    ModalModule,
     routing,
     HttpClientModule,
     StudentModule,
@@ -42,7 +43,7 @@ import {AuthService} from "./services/authService/auth.service";
     AdminModule
   ],
   providers: [appRoutingProviders,
-  AuthService],
+  AuthService,ModalServiceService],
   exports: [
 
   ],

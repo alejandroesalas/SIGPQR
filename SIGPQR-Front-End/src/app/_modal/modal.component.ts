@@ -32,9 +32,12 @@ export class ModalComponent implements OnInit,OnDestroy {
 
     // add self (this modal instance) to the modal service so it's accessible from controllers
     this.modalService.add(this);
+    console.log('OnInit',this.element);
   }
 
   ngOnDestroy(): void {
+    this.modalService.remove(this.id);
+    document.body.removeChild(this.element);
   }
 // open modal
   open(): void {
