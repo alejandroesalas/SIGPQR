@@ -11,14 +11,14 @@ class ProgramController extends ApiController
 {
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['index']]);
+        //$this->middleware('auth:api', ['except' => ['index']]);
         //$this->middleware('auth',['except'=>['auth/login']]);
     }
 
     private $rules =array(
         'name'=>'required',
-        'id_faculty'=>'required|integer',
-        'id_coordinator'=>'required|integer'
+        'faculty_id'=>'required|integer',
+        'coordinator_id'=>'required|integer'
     );
     private $updateRules =array(
         'name'=>'required',
@@ -103,8 +103,9 @@ class ProgramController extends ApiController
                     return $this->errorResponse("datos no validos",$validate->errors());
                 }else{
                     $program->name = $params_array['name'];
+                    $program->saveOrFail();
                     if($program->isDirty()){
-                        return $this->errorResponse('se debe especificar al menos un valor',422);
+                        return $this->errorResponse('se debe especificar al menos un valor','',422);
                     }
                     $program->save();
                     return $this->showOne($program);
