@@ -8,6 +8,8 @@ import { AdminHomeComponent } from './components/admin-home/admin-home.component
 import { DisabledUsersComponent } from './components/disabled-users/disabled-users.component';
 import {AdminRoutingModule} from "./admin-routing.module";
 import { AdminSectionComponent } from './components/admin-section/admin-section.component';
+import {AuthService} from "../services/authService/auth.service";
+import {_adminGuard} from "../guards/_admin.guard";
 
 
 @NgModule({
@@ -27,7 +29,7 @@ import { AdminSectionComponent } from './components/admin-section/admin-section.
   ],
   exports:[
   ],
-  providers:[]
+  providers:[AuthService,_adminGuard]
 })
 export class AdminModule {
 

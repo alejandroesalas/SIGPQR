@@ -8,15 +8,15 @@
           <div class="card card-profile">
             <div class="card-avatar">
               <a href="#pablo">
-                <img class="img" src="Imagenes/default-avatar.png">
+                <img class="img" src="../../../../assets/imagenes/default-avatar.png">
               </a>
             </div>
             <div class="card-body">
               <h6 class="card-category text-gray">Coordinador</h6>
               <h6><small>Ingeniería de Sistemas</small></h6>
-              <h6>1102865630</h6>
-              <h4 class="card-title"><?php  echo $_SESSION["nombres"]?></h4>
-              <h4 class="card-title"><?php  echo $_SESSION["apellidos"]?></h4>
+              <h6 *ngIf="currentUser">{{currentUser.id_num}}</h6>
+              <h4 class="card-title" *ngIf="currentUser">{{currentUser.name}}</h4>
+              <h4 class="card-title"*ngIf="currentUser">{{currentUser.lastname}}</h4>
 
               <p class="card-description" align="justify">
 
@@ -24,7 +24,7 @@
               </p>
 
               <small>Corporación Universitaria del Caribe - CECAR</small>
-              <a href="vistaUsuarioCoordinador.php" class="btn btn-success btn-round">SIGPQR</a>
+              <a [routerLink]="['/coordinador']" class="btn btn-success btn-round">SIGPQR</a>
             </div>
           </div>
         </div>

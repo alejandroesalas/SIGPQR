@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthService} from "../../../services/authService/auth.service";
+import {global} from "../../../global";
 
 @Component({
   selector: 'app-coordinator-profile',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CoordinatorProfileComponent implements OnInit {
 
-  constructor() { }
+  public  currentUser;
+  public url:string;
+  constructor(private authService:AuthService) {
+    this.url = global.url;
+    this.currentUser = authService.currentUserValue;
+  }
+
 
   ngOnInit() {
   }
+
 
 }

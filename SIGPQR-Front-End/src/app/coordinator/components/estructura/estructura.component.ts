@@ -17,5 +17,11 @@ export class EstructuraComponent implements OnInit {
 
   ngOnInit() {
   }
+  public isAdmin(){
+    if (this.currentUser && this.currentUser.admin == 'true'){
+      return true;
+    }
+
+  }
 
 }

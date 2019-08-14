@@ -8,7 +8,7 @@
           <a href="" class=" white-text"><b>Contacto</b></a>
         </li>
         <li>
-          <a href="php/conexion/logout.php" id="login" class="white-text"><b>Login</b></a>
+          <a [routerLink]="['/logout/1']" id="login" class="white-text"><b>Cerrar Sesión</b></a>
         </li>
       </ul>
 
@@ -29,20 +29,19 @@
     <li class="user-view green darken-4">
       <div class="row container ">
         <div class="col s4 m4 l4">
-          <img src="Imagenes/avatar-7.png"
+          <img  src="../../../../assets/imagenes/avatar-7.png"
                class="img-circle" alt="User Image"
-               stayle="max-width:144px;max-height:80px">
+               style="max-width:144px;max-height:80px">
         </div>
-        <div class="col s8 m8 l8">
+        <div class="col s4 m4 l4">
           <a class="white-text"> Administrador</a>
-          <a class="white-text">  <i class="fa fa-circle text-success"></i> Online</a>
+          <a class="white-text"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
-
       </div>
     </li>
 
     <!-- Inicio CONTAINER-->
-    <div class="container">
+    <div class=" row container mt-3">
       <li class="">
         <a href="vistaAdmin.php" class="   waves-effect waves-teal white-text">
           <i class="material-icons white-text">home</i>Inicio
@@ -84,6 +83,7 @@
       </li>
 
     </div>
+
     <!-- Fin CONTAINER-->
   </ul>
 </header>

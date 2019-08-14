@@ -10,15 +10,15 @@ import {Profile} from "../models/Profile";
 
 
 const coordinatorRoutes: Routes = [
+  {path:'logout/:sure',component:CoordinatorComponent},
   {path:'coordinador',component:CoordinatorComponent,
-
     children:[
       {path:'',component:CoordinatorHomeComponent},
       {path:'home',component:CoordinatorHomeComponent},
-      {path:'requests',component:CoordinatorRequestsComponent},
+      {path:'requests/:typeReq',component:CoordinatorRequestsComponent},
       {path:'profile',component:CoordinatorProfileComponent}
     ],
-    //canActivate:[AuthGuard],
+    canActivate:[AuthGuard],
     data:{rol:Profile.coordinator},
   },
 ];

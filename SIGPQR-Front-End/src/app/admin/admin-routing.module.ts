@@ -6,17 +6,20 @@ import {DisabledUsersComponent} from "./components/disabled-users/disabled-users
 import {AdminComponent} from "./admin.component";
 import {AuthGuard} from "../guards/auth.guard";
 import {Profile} from "../models/Profile";
+import {_adminGuard} from "../guards/_admin.guard";
+import {CoordinatorComponent} from "../coordinator/coordinator.component";
 
 
 const adminRoutes: Routes = [
+  {path:'logout/:sure',component:AdminComponent},
   {path:'admin',component:AdminComponent,
-    canActivate:[AuthGuard],
-    data:{rol:Profile.admin},
     children:[
       {path:'',component:AdminHomeComponent},
       {path:'home',component:AdminHomeComponent},
       {path:'users',component:DisabledUsersComponent}
-    ]
+    ],
+    canActivate:[_adminGuard],
+    data:{rol:Profile.admin},
   },
 ];
 @NgModule({
