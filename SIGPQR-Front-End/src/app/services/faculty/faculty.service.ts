@@ -10,10 +10,10 @@ import {map} from "rxjs/operators";
   providedIn: 'root'
 })
 export class FacultyService {
-   private  currentUser;
+   public  currentUser;
   constructor(private http: HttpClient,
               authService:AuthService) {
-    authService.currentUserValue;
+     this.currentUser = authService.currentUserValue;
   }
 
     public getAll():Observable<any>|boolean{
