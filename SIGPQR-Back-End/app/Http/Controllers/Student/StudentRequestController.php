@@ -46,13 +46,13 @@ class StudentRequestController extends ApiController
             if (!Empty($params_array)){
                 $validation = $this->checkValidation($params_array, $rules);
                 if ($validation->fails()){
-                    return $this->errorResponse("datos no validos", 404, $validation->errors());
+                    return $this->errorResponse("datos no validos", $validation->errors(), 404);
                 }else{
                     $isStudent = $student->where('id', $student->id)
                         ->where('profile_id', User::STUDENT_PROFILE)
                         ->count();
                     if($isStudent == 0) {
-                        return $this->errorResponse("Este usuario no es estudiante", 404);
+                        return $this->errorResponse("Este usuario no es estudiante", null,404);
                     }
                     $params_array['status'] = 'true';
                     $params_array['student_id'] = $student->id;
