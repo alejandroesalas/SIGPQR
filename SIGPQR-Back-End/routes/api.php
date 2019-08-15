@@ -45,7 +45,7 @@ Route::apiResource('profiles','Profile\ProfileController');
 //mostrar usuarios de un perfil especifico
 Route::get('profiles/{id}/users','Profile\ProfileController@usersByProfile');
 //Ruta para las requestsType(tipos de solicitudes)
-Route::resource('requests-types','RequestType\RequestTypeController');
+Route::resource('request-types','RequestType\RequestTypeController');
 //ruta del controlador de Estudiantes
 Route::resource('students', 'Student\StudentController', ['except' => ['create', 'edit']]);
 Route::get('count-students','Student\StudentController@countStudents');
@@ -67,6 +67,7 @@ Route::post('restore-teacher/{id}','User\UserController@restore');
 Route::get('count-teachers-eliminated','User\UserController@countTeachersEliminated');
 //Verificacion del correo del usuario
 Route::name('verify')->get('users/verify/{token}','User\UserController@verify');
+Route::resource('request-types.requests','RequestType\RequestTypeRequestController', ['only' => ['index']]);
 
 
 /*Route::post('/api/users/upload','PostController@upload');
