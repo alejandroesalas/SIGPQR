@@ -31,14 +31,18 @@ export class DynamicScriptLoaderService {
 
   load(...scripts: string[]) {
     const promises: any[] = [];
-    scripts.forEach((script) => promises.push(this.loadScript(script)));
+    scripts.forEach((script) => promises.push(this.loadScript(script,'head')));
+    return Promise.all(promises);
+  }
+  loadOnBody(...scripts: string[]){
+    const promises: any[] = [];
+    scripts.forEach((script) => promises.push(this.loadScript(script,'body')));
     return Promise.all(promises);
   }
 
-  loadScript(name: string) {
-    console.log('scriptname',name);
+  loadScript(name: string,section:string) {
     return new Promise((resolve, reject) => {
-      //if (!this.scripts[name].loaded) {
+      if (!this.scripts[name].loaded) {
         //load script
         let script = document.createElement('script');
         script.type = 'text/javascript';
@@ -58,11 +62,11 @@ export class DynamicScriptLoaderService {
           };
         }
         script.onerror = (error: any) => resolve({script: name, loaded: false, status: 'Loaded'});
-        document.getElementsByTagName('head')[0].appendChild(script);
-     /* } else {
+        document.getElementsByTagName(section)[0].appendChild(script);
+      } else {
         console.log('scriptname','Already Loaded');
         resolve({script: name, loaded: true, status: 'Already Loaded'});
-      }*/
+      }
     });
   }
 

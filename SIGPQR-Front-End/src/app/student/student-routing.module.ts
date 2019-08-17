@@ -16,7 +16,6 @@ const studentRoutes: Routes = [
     data:{rol:Profile.student},
       children:[
         {path:'',component:HomeStudentComponent},
-        {path:'home',component:HomeStudentComponent},
         {path:'requests',component:StudenRequestsComponent},
         {path:'profile',component:StudentProfileComponent}
       ]

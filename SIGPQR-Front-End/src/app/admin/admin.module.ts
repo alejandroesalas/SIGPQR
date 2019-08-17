@@ -14,6 +14,8 @@ import {StudentService} from "../services/student/student.service";
 import {ProgramService} from "../services/program/program.service";
 import {FacultyService} from "../services/faculty/faculty.service";
 import {CoordinatorService} from "../services/coodinator/coordinator.service";
+import { FacultiesComponent } from './components/faculties/faculties.component';
+import { FacultiesEditComponent } from './components/faculties-edit/faculties-edit.component';
 
 
 @NgModule({
@@ -21,10 +23,11 @@ import {CoordinatorService} from "../services/coodinator/coordinator.service";
     AdminComponent,
     AdminSectionComponent,
     AdminHomeComponent,
-    DisabledUsersComponent
+    DisabledUsersComponent,
+    FacultiesComponent,
+    FacultiesEditComponent
   ],
   imports:[
-    BrowserModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,

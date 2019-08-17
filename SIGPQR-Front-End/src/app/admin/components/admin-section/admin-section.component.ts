@@ -24,5 +24,8 @@ export class AdminSectionComponent implements OnInit,OnDestroy {
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
+  logout(){
+    this.authService.logout();
+  }
 
 }

@@ -22,7 +22,6 @@ import {AuthGuard} from "../guards/auth.guard";
     StudenSectionComponent
   ],
   imports:[
-    BrowserModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,

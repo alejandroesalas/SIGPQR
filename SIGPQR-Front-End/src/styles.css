@@ -1,3 +1,5 @@
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
 .sidenav .user-details {
   padding: 0 16px;
   height: 65px;
@@ -14,4 +16,9 @@
   font-size: 12px;
   box-sizing: content-box;
 
+}
+.modal-dialog .modal-content {
+  box-shadow: 0 27px 24px 0 rgba(0,0,0,.2), 0 40px 77px 0 rgba(0,0,0,.22);
+  border-radius: 6px;
+  border: none;
 }

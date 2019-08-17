@@ -17,9 +17,7 @@ export class StudentComponent implements OnInit, OnDestroy {
               private authService:AuthService,
               private router: Router,) { }
 
-  ngOnInit() {this.dynamicScriptLoader.load('general').then(data => {
-    // Script Loaded Successfully
-  }).catch(error => console.log(error));
+  ngOnInit() {
     this.logout();
   }
 

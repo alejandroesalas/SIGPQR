@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {global} from "../../../global";
 import {AuthService} from "../../../services/authService/auth.service";
 
+declare var document: any;
 @Component({
   selector: 'app-estructura',
   templateUrl: './estructura.component.html',
@@ -16,6 +17,10 @@ export class EstructuraComponent implements OnInit {
   }
 
   ngOnInit() {
+
+  }
+  logout(){
+    this.authService.logout();
   }
   public isAdmin(){
     if (this.currentUser && this.currentUser.admin == 'true'){

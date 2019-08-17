@@ -18,18 +18,16 @@ export class ProgramService {
     this.currentUser = authService.currentUserValue;
   }
 
-  public getAll():Observable<any>|boolean{
-    if (this.currentUser){
-      let headers = new HttpHeaders().set('content-type',global.contentType)
-        .set('Authorization',this.currentUser.token);
-      return this.http.get<any>(global.url+'programs',{headers:headers}).
-      pipe(map(programs => {
-        console.log(programs);
-        return programs;
+  public getAll():Observable<Array<Program>>{
+      let headers = new HttpHeaders().set('content-type', global.contentType);
+      return this.http.get<any>(global.url + 'programs', {headers: headers}).pipe(map(data => {
+        if (data.status == 'success'){
+          console.log('programas',data.data);
+          return data.data
+        }else{
+          return data;
+        }
       }));
-    }else {
-      return false;
-    }
   }
   public getProgram(id:number):Observable<Program>|boolean{
     if (this.currentUser){

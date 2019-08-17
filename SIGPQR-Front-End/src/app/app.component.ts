@@ -19,7 +19,7 @@ constructor(private dynamicScriptLoader: DynamicScriptLoaderService){
   }
   private loadScripts() {
     // You can load multiple scripts by just providing the key as argument into load method of the service
-    this.dynamicScriptLoader.load('general').then(data => {
+    this.dynamicScriptLoader.loadOnBody('general').then(data => {
       // Script Loaded Successfully
     }).catch(error => console.log(error));
   }

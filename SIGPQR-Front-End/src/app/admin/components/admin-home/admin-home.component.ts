@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {DynamicScriptLoaderService} from "../../../services/dynamic-script-loader.service";
+import {ActivatedRoute, Router} from "@angular/router";
+import {AuthService} from "../../../services/authService/auth.service";
 
 @Component({
   selector: 'app-admin-home',
@@ -7,7 +10,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminHomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dynamicScriptLoader: DynamicScriptLoaderService,
+              private route: ActivatedRoute,
+              private authService:AuthService,
+              private router: Router) { }
 
   ngOnInit() {
   }

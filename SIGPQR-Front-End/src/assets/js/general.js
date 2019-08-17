@@ -9,11 +9,17 @@ $(document).ready(function(){
   $('select').formSelect();
   $('.collapsible').collapsible();
 });*/
-
-$(document).ready(function(){
-  $('.sidenav').sidenav();
-  $('.modal').modal();
-  $('select').formSelect();
+function loadCollapsiblle(){
   $('.collapsible').collapsible();
+}
+function loadSidenav() {
+  $('.sidenav').sidenav();
+}
+/*
+$(document).ready(function(){
+  $('.collapsible').collapsible();
+  $('.sidenav').sidenav();
+  $('select').formSelect();
   $('.tooltipped').tooltip();
-});
+  $('.modal').modal();
+});*/

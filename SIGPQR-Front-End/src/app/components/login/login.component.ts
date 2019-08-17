@@ -31,12 +31,11 @@ export class LoginComponent implements OnInit {
   {
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '';
-    //this.logout();
-    this.loadScripts()
+    //this.loadScripts()
   }
   private loadScripts() {
     // You can load multiple scripts by just providing the key as argument into load method of the service
-    this.dynamicScriptLoader.load('general').then(data => {
+    this.dynamicScriptLoader.loadOnBody('general').then(data => {
       // Script Loaded Successfully
     }).catch(error => console.log(error));
   }
@@ -68,7 +67,7 @@ export class LoginComponent implements OnInit {
       console.log(logout);
       if (logout == 1){
         this.authService.logout();
-        this.router.navigate(['login']);
+        //this.router.navigate(['login']);
       }
     })
   }

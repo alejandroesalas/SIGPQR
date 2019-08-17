@@ -10,14 +10,16 @@ import { FooterComponent } from './components/footer/footer.component';
 import { ErrorComponent } from './components/error/error.component';
 import { VerifyComponent } from './components/verify/verify.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
-import {ModalModule} from "./_modal/modal.module";
+import {ModalModule} from "./_modal";
 import { LogoSectionComponent } from './components/logo-section/logo-section.component';
-import {StudentModule} from "./student/student.module";
-import {CoordinatorModule} from "./coordinator/coordinator.module";
-import {AdminModule} from "./admin/admin.module";
 import { ProgramComponent } from './program/program.component';
 import {AuthService} from "./services/authService/auth.service";
 import {ModalServiceService} from "./services/modal-service.service";
+import {CoordinatorModule} from "./coordinator/coordinator.module";
+import {StudentModule} from "./student/student.module";
+import {AdminModule} from "./admin/admin.module";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {MatInputModule, MatSelectModule} from "@angular/material";
 
 @NgModule({
   declarations: [
@@ -34,13 +36,16 @@ import {ModalServiceService} from "./services/modal-service.service";
   imports: [
     BrowserModule,
     ModalModule,
+    BrowserAnimationsModule,
+    MatSelectModule,
+    MatInputModule,
     FormsModule,
     ReactiveFormsModule,
-    routing,
     HttpClientModule,
-    StudentModule,
     CoordinatorModule,
-    AdminModule
+    StudentModule,
+    AdminModule,
+    routing
   ],
   providers: [appRoutingProviders,
   AuthService,ModalServiceService],

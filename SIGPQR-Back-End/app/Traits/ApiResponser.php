@@ -25,7 +25,7 @@ trait ApiResponser
         $data = array(
             'status'=>'success',
             'code'=> $code,
-            '$data'=>$collection
+            'data'=>$collection
         );
         return $this->succesResponse($data,$code);
     }

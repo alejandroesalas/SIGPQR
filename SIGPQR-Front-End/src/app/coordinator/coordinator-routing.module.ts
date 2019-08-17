@@ -14,7 +14,6 @@ const coordinatorRoutes: Routes = [
   {path:'coordinador',component:CoordinatorComponent,
     children:[
       {path:'',component:CoordinatorHomeComponent},
-      {path:'home',component:CoordinatorHomeComponent},
       {path:'requests/:typeReq',component:CoordinatorRequestsComponent},
       {path:'profile',component:CoordinatorProfileComponent}
     ],
@@ -28,6 +27,6 @@ const coordinatorRoutes: Routes = [
   ],
   exports:[
     RouterModule
-  ]
+  ],
 })
 export class CoordinatorRoutingModule { }

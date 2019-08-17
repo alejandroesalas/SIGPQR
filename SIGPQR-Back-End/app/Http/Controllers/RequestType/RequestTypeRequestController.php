@@ -7,13 +7,15 @@ use App\RequestType;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Program;
+use Illuminate\Http\Response;
 
 class RequestTypeRequestController extends ApiController
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param RequestType $requestType
+     * @return Response
      */
     public function index(RequestType $requestType)
     {

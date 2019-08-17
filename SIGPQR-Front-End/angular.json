@@ -24,14 +24,20 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/materialize-css/dist/css/ghpages-materialize.css",
+              "node_modules/material-dashboard/assets/css/material-dashboard-pro.css",
+              "node_modules/bootstrap-select/dist/css/bootstrap-select.min.css",
               "src/styles.css"
             ],
             "scripts": [
-              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/jquery/dist/jquery.js",
               "node_modules/hammerjs/hammer.js",
-              "node_modules/popper.js/dist/umd/popper.min.js",
               "node_modules/materialize-css/dist/js/materialize.js",
-              "node_modules/bootstrap-material-design/dist/js/bootstrap-material-design.js"
+              "src/assets/js/general.js",
+              "node_modules/popper.js/dist/umd/popper.min.js",
+              "node_modules/bootstrap-material-design/dist/js/bootstrap-material-design.min.js",
+              "node_modules/material-dashboard/assets/js/plugins/perfect-scrollbar.jquery.min.js",
+              "node_modules/bootstrap-select/dist/js/bootstrap-select.min.js"
             ]
           },
           "configurations": {

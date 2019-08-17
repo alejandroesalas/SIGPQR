@@ -17,9 +17,10 @@ export class AdminComponent implements OnInit,OnDestroy {
               private router: Router) { }
 
   ngOnInit() {
-    this.dynamicScriptLoader.load('general').then(data => {
+   /* this.dynamicScriptLoader.load('general').then(data => {
       // Script Loaded Successfully
-    }).catch(error => console.log(error));
+    }).catch(error => console.log(error));*/
+   this.logout()
   }
   logout(){
     this.subscription = this.route.params.subscribe(value => {

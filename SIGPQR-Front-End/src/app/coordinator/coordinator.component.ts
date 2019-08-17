@@ -3,6 +3,7 @@ import {DynamicScriptLoaderService} from "../services/dynamic-script-loader.serv
 import {ActivatedRoute, Router} from "@angular/router";
 import {AuthService} from "../services/authService/auth.service";
 import {Subscription} from "rxjs";
+declare const loadCollapsiblle: any;
 
 @Component({
   selector: 'app-coordinator',
@@ -14,16 +15,19 @@ export class CoordinatorComponent implements OnInit,OnDestroy {
   constructor(private dynamicScriptLoader: DynamicScriptLoaderService,
   private route: ActivatedRoute,
   private authService:AuthService,
-  private router: Router) { }
+  private router: Router) {
+    loadCollapsiblle();
+  }
 
   ngOnInit() {
-    this.dynamicScriptLoader.load('general').then(data => {
+    loadCollapsiblle();
+    /**this.dynamicScriptLoader.loadOnBody('general').then(data => {
       // Script Loaded Successfully
-    }).catch(error => console.log(error));
+    }).catch(error => console.log(error));*/
     this.logout();
   }
   logout(){
-    this.subscription = this.route.params.subscribe(value => {
+    this.route.params.subscribe(value => {
       let logout = +value['sure'];
       console.log(logout);
       if (logout == 1){

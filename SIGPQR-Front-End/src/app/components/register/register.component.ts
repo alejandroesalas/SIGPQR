@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {DynamicScriptLoaderService} from "../../services/dynamic-script-loader.service";
+import {ProgramService} from "../../services/program/program.service";
+import {Program} from "../../models/Program";
 
 @Component({
   selector: 'app-register',
@@ -7,16 +9,21 @@ import {DynamicScriptLoaderService} from "../../services/dynamic-script-loader.s
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+   public programas:Program[];
+  constructor(private dynamicScriptLoader: DynamicScriptLoaderService,
+              private programService:ProgramService) {
 
-  constructor(private dynamicScriptLoader: DynamicScriptLoaderService) { }
-
-  ngOnInit() {
-    this.loadScripts();
   }
-  private loadScripts() {
-    // You can load multiple scripts by just providing the key as argument into load method of the service
-    this.dynamicScriptLoader.load('general').then(data => {
-      // Script Loaded Successfully
-    }).catch(error => console.log(error));
+  ngOnInit() {
+    this.loadPrograms();
+  }
+  private loadPrograms(){
+    this.programService.getAll().subscribe(value => {
+      this.programas = value;
+      //console.log('indice 1',this.programas[1]);
+       //console.log('respuesta',value);
+    },error => {
+      console.log('errores',error);
+    });
   }
 }

@@ -17,5 +17,8 @@ export class StudenSectionComponent implements OnInit {
 
   ngOnInit() {
   }
+  logout(){
+    this.authService.logout();
+  }
 
 }

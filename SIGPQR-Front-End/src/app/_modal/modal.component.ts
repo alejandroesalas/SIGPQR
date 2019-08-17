@@ -35,8 +35,14 @@ export class ModalComponent implements OnInit,OnDestroy {
   }
 
   ngOnDestroy(): void {
+    if (!this.id) {
+      return;
+    }
     this.modalService.remove(this.id);
-    document.body.removeChild(this.element);
+    if (document.body.getElementsByTagName('jw-modal')){
+        document.body.removeChild(this.element);
+    }
+    //document.body.removeChild(this.element);
   }
 // open modal
   open(): void {
