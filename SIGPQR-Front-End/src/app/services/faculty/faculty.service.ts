@@ -74,6 +74,20 @@ export class FacultyService {
     }
   }
 
+  public updateFaculty(faculty:Faculty):Observable<any>|boolean{
+    if (this.currentUser){
+      let headers = new HttpHeaders().set('content-type',global.contentType)
+        .set('Authorization',this.currentUser.token);
+      let params = 'json='+JSON.stringify(faculty);
+      return this.http.post<any>(global.url+'faculties',params,{headers:headers}).
+      pipe(map(data => {
+        console.log(data);
+        return data;
+      }));
+    }else {
+      return false;
+    }
+  }
   public getProgramsByFaculty(id:number):Observable<any>|boolean{
     if (this.currentUser){
       let headers = new HttpHeaders().set('content-type',global.contentType)

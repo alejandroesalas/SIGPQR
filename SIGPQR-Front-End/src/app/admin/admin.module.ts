@@ -17,6 +17,7 @@ import { FacultiesComponent } from './components/faculties/faculties.component';
 import { FacultiesEditComponent } from './components/faculties-edit/faculties-edit.component';
 import { UsersComponent } from './components/users/users.component';
 import { ProgramsComponent } from './components/programs/programs.component';
+import {ModalModule} from "../_modal";
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { ProgramsComponent } from './components/programs/programs.component';
     ReactiveFormsModule,
     HttpClientModule,
     AdminRoutingModule,
+    ModalModule,
   ],
   exports:[
   ],

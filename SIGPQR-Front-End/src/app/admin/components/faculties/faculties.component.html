@@ -34,63 +34,35 @@
               <tr *ngFor="let faculty of faculties">
                 <td><h3>{{faculty.name}}</h3></td>
                 <td class="td-actions right">
-                  <a class="btn btn-success btn-link left modal-trigger btn tooltipped" data-position="bottom"
-                     data-tooltip="Editar nombre facultad" rel="tooltip" href="#editarNombreFacultad">
+                  <a (click)="openModal(faculty,'act-faculty')"
+                     class="btn btn-success btn-link left modal-trigger btn tooltipped" data-position="bottom"
+                     data-tooltip="Editar nombre facultad" rel="tooltip">
                     <i class="fas fa-pencil-alt"></i>
                   </a>
-                  <!--Inicio MODAL 1-->
-                  <div class="modal modal-dialog" id="editarNombreFacultad" style="  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 1050;
-  display: none;
-  overflow: hidden;
-  outline: 0;
-  max-height: 35%;
-  width: 100%;
-">
-                    <!-- Inicio contenido MODAL 1-->
+                  <jw-modal id="act-faculty">
+                    <!--Inicio FORM-->
                     <div class="modal-content">
-
-                      <!--Inicio CUERPO MODAL 1-->
                       <div class="modal-body">
-
-                        <!--Inicio FORM-->
-                        <form>
-
-
+                        <form #actFaculty="ngForm">
                           <div class="row">
                             <div class="input-field col s10">
-                              <input id="first_name" type="text" class="validate">
-                              <label for="first_name">Nombre</label>
+                              <input [(ngModel)]="currentFaculty.name" name="name" id="facultyName" type="text" class="validate" [value]="faculty.name">
+                              <label for="facultyName">Nombre</label>
                             </div>
                             <div class="card-header card-header-success card-header-icon">
-
                               <div class="card-icon">
                                 <i class="fas fa-sitemap"></i>
                               </div>
                             </div>
                           </div>
-
-
-                          <button href="vistaFacultad.php" class="btn btn-danger left">Cancelar</button>
-
-
-                          <button type="submit" class="btn btn-success modal-trigger right" href="#modalFacultad">
+                          <button (click)="closeModal('act-faculty')" class="btn btn-danger left">Cancelar</button>
+                          <button type="submit" class="btn btn-success right">
                             Actualizar<i class="fa fa-refresh"></i>
                           </button>
-
-
                         </form>
-
-
                       </div>
-                      <!--Fin CONTENIDO MODAL 2-->
                     </div>
-                  </div>
-                  <!--Fin CUERPO MODAL 1-->
+                  </jw-modal>
                   <button type="button" rel="tooltip" class="btn btn-danger btn-link btn tooltipped"
                           data-position="bottom" data-tooltip="Deshabilitar facultad">
                     <i class="fas fa-times"></i>
