@@ -29,8 +29,8 @@ Route::group([
 
 //ruta del controlador de facultades
 Route::apiResource('faculties','Faculty\FacultyController');
-Route::get('faculties/{id}/programs','Faculty\FacultyController@facultyprograms');
-Route::get('faculties/{id}/students','Faculty\FacultyController@facultyUsers');
+Route::resource('faculties.programs','Faculty\FacultyProgramController', ['only' => ['index', 'update']]);
+//Route::get('faculties/{id}/students','Faculty\FacultyController@facultyUsers');
 Route::get('count-faculties','Faculty\FacultyController@countFaculties');
 //ruta del controlador de programas
 Route::apiResource('programs','Program\ProgramController');

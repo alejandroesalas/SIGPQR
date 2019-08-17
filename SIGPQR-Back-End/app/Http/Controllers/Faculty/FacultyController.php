@@ -26,7 +26,7 @@ class FacultyController extends ApiController
      */
     public function index()
     {
-        $faculty = Faculty::all();
+        $faculty = Faculty::all()->load('programs');
         return $this->showAll($faculty);
     }
 
