@@ -25,7 +25,7 @@ trait ApiResponser
         $data = array(
             'status'=>'success',
             'code'=> $code,
-            '$data'=>$collection
+            'data'=>$collection
         );
         return $this->succesResponse($data,$code);
     }
@@ -34,7 +34,7 @@ trait ApiResponser
         $data = array(
             'status'=>'success',
             'code'=> $code,
-            '$data'=>$instance
+            'data'=>$instance
         );
         return $this->succesResponse($data,$code);
     }
@@ -43,7 +43,7 @@ trait ApiResponser
         $data = array(
             'status'=>'success',
             'code'=> $code,
-            '$data'=>$value
+            'data'=>$value
         );
         return $this->succesResponse($data,$code);
     }
@@ -52,7 +52,7 @@ trait ApiResponser
         $data = array(
             'status'=>'success',
             'code'=> $code,
-            '$data'=>$message
+            'data'=>$message
         );
         return $this->succesResponse($data,$code);
     }
