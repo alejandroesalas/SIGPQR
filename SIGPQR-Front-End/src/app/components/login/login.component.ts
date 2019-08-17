@@ -31,7 +31,6 @@ export class LoginComponent implements OnInit {
   {
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '';
-    //this.loadScripts()
   }
   private loadScripts() {
     // You can load multiple scripts by just providing the key as argument into load method of the service

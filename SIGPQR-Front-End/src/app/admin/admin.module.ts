@@ -1,5 +1,4 @@
 import {NgModule} from "@angular/core";
-import {BrowserModule} from "@angular/platform-browser";
 import {CommonModule} from "@angular/common";
 import { AdminComponent } from './admin.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
@@ -16,6 +15,8 @@ import {FacultyService} from "../services/faculty/faculty.service";
 import {CoordinatorService} from "../services/coodinator/coordinator.service";
 import { FacultiesComponent } from './components/faculties/faculties.component';
 import { FacultiesEditComponent } from './components/faculties-edit/faculties-edit.component';
+import { UsersComponent } from './components/users/users.component';
+import { ProgramsComponent } from './components/programs/programs.component';
 
 
 @NgModule({
@@ -25,14 +26,16 @@ import { FacultiesEditComponent } from './components/faculties-edit/faculties-ed
     AdminHomeComponent,
     DisabledUsersComponent,
     FacultiesComponent,
-    FacultiesEditComponent
+    FacultiesEditComponent,
+    UsersComponent,
+    ProgramsComponent
   ],
-  imports:[
+  imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    AdminRoutingModule
+    AdminRoutingModule,
   ],
   exports:[
   ],

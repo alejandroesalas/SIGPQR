@@ -1,0 +1,190 @@
+<main>
+  <!--Inicio CONTAINER GENERAL-->
+  <div class="container">
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card card-stats">
+          <div class="card-header card-header-icon card-header-success">
+            <div class="card-icon">
+              <i class="fas fa-sitemap"></i>
+            </div>
+            <h5 class="card-title center ">Gestión de facultades</h5>
+          </div>
+
+          <div class="card-body">
+
+          </div>
+          <!-- Fin contenido MODAL 1-->
+        </div>
+        <!--Fin MODAL 1-->
+      </div>
+
+      <div class="col-lg-12 col-md-6 col-sm-12">
+
+        <div class="card card-stats">
+
+          <div class="card-body">
+            <table class="table table-striped">
+              <thead>
+              <tr>
+              </tr>
+              </thead>
+              <tbody class="">
+              <tr *ngFor="let faculty of faculties">
+                <td><h3>{{faculty.name}}</h3></td>
+                <td class="td-actions right">
+                  <a class="btn btn-success btn-link left modal-trigger btn tooltipped" data-position="bottom"
+                     data-tooltip="Editar nombre facultad" rel="tooltip" href="#editarNombreFacultad">
+                    <i class="fas fa-pencil-alt"></i>
+                  </a>
+                  <!--Inicio MODAL 1-->
+                  <div class="modal modal-dialog" id="editarNombreFacultad" style="  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1050;
+  display: none;
+  overflow: hidden;
+  outline: 0;
+  max-height: 35%;
+  width: 100%;
+">
+                    <!-- Inicio contenido MODAL 1-->
+                    <div class="modal-content">
+
+                      <!--Inicio CUERPO MODAL 1-->
+                      <div class="modal-body">
+
+                        <!--Inicio FORM-->
+                        <form>
+
+
+                          <div class="row">
+                            <div class="input-field col s10">
+                              <input id="first_name" type="text" class="validate">
+                              <label for="first_name">Nombre</label>
+                            </div>
+                            <div class="card-header card-header-success card-header-icon">
+
+                              <div class="card-icon">
+                                <i class="fas fa-sitemap"></i>
+                              </div>
+                            </div>
+                          </div>
+
+
+                          <button href="vistaFacultad.php" class="btn btn-danger left">Cancelar</button>
+
+
+                          <button type="submit" class="btn btn-success modal-trigger right" href="#modalFacultad">
+                            Actualizar<i class="fa fa-refresh"></i>
+                          </button>
+
+
+                        </form>
+
+
+                      </div>
+                      <!--Fin CONTENIDO MODAL 2-->
+                    </div>
+                  </div>
+                  <!--Fin CUERPO MODAL 1-->
+                  <button type="button" rel="tooltip" class="btn btn-danger btn-link btn tooltipped"
+                          data-position="bottom" data-tooltip="Deshabilitar facultad">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+
+
+        <div class="card card-stats">
+          <div class="card-header card-header-success card-header-icon">
+
+            <p class="card-category left">FACULTAD DE CIENCIAS BÁSICAS, INGENIERÍAS Y ARQUITECTURA</p>
+            <h3 class="card-title">
+
+
+            </h3>
+          </div>
+
+          <div class="card-body">
+
+            <table class="table table-striped">
+              <thead>
+
+              <tr>
+
+              </tr>
+
+              </thead>
+
+
+              <tbody class="">
+
+              <tr>
+                <td>ARQUITECTURA</td>
+                <td></td>
+                <td></td>
+
+                <td class="td-actions right">
+
+
+                </td>
+
+
+              </tr>
+
+              <tr>
+                <td>INGENIERÍA INDUSTRIAL</td>
+                <td></td>
+                <td></td>
+
+                <td class="td-actions right">
+
+
+                </td>
+
+
+              </tr>
+
+              <tr>
+                <td>INGENIERÍA DE SISTEMAS</td>
+                <td></td>
+                <td></td>
+
+                <td class="td-actions right">
+
+
+                </td>
+
+
+              </tr>
+
+
+              </tbody>
+            </table>
+
+
+            <div class="card-footer">
+              <div class="stats">
+                <i class="material-icons text-success">access_time</i> Sistema de gestión PQR
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!--Fin CONTAINER GENERAL-->
+</main>

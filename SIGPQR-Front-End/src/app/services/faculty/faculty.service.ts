@@ -16,14 +16,18 @@ export class FacultyService {
      this.currentUser = authService.currentUserValue;
   }
 
-    public getAll():Observable<any>|boolean{
+    public getAll():Observable<Array<Faculty>>|boolean{
       if (this.currentUser){
         let headers = new HttpHeaders().set('content-type',global.contentType)
           .set('Authorization',this.currentUser.token);
         return this.http.get<any>(global.url+'faculties',{headers:headers}).
-          pipe(map(faculties => {
-            console.log(faculties);
-            return faculties;
+          pipe(map(response => {
+          if (response.status == 'success'){
+            console.log(response.data);
+            return response.data;
+          }else{
+            return response;
+          }
            }));
       }else {
         return false;

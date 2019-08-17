@@ -12,7 +12,6 @@ import { VerifyComponent } from './components/verify/verify.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import {ModalModule} from "./_modal";
 import { LogoSectionComponent } from './components/logo-section/logo-section.component';
-import { ProgramComponent } from './program/program.component';
 import {AuthService} from "./services/authService/auth.service";
 import {ModalServiceService} from "./services/modal-service.service";
 import {CoordinatorModule} from "./coordinator/coordinator.module";
@@ -31,12 +30,11 @@ import {MatInputModule, MatSelectModule} from "@angular/material";
     VerifyComponent,
     ForgotPasswordComponent,
     LogoSectionComponent,
-    ProgramComponent,
   ],
   imports: [
     BrowserModule,
-    ModalModule,
     BrowserAnimationsModule,
+    ModalModule,
     MatSelectModule,
     MatInputModule,
     FormsModule,
@@ -54,4 +52,6 @@ import {MatInputModule, MatSelectModule} from "@angular/material";
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+
+}

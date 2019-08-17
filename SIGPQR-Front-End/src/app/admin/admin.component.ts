@@ -3,7 +3,7 @@ import {DynamicScriptLoaderService} from "../services/dynamic-script-loader.serv
 import {Subscription} from "rxjs";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AuthService} from "../services/authService/auth.service";
-
+declare const loadCollapsiblle: any;
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -14,12 +14,15 @@ export class AdminComponent implements OnInit,OnDestroy {
   constructor(private dynamicScriptLoader: DynamicScriptLoaderService,
               private route: ActivatedRoute,
               private authService:AuthService,
-              private router: Router) { }
+              private router: Router) {
+    loadCollapsiblle();
+  }
 
   ngOnInit() {
    /* this.dynamicScriptLoader.load('general').then(data => {
       // Script Loaded Successfully
     }).catch(error => console.log(error));*/
+    loadCollapsiblle();
    this.logout()
   }
   logout(){

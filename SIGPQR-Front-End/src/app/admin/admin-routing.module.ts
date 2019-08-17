@@ -4,18 +4,22 @@ import {RouterModule,Routes} from "@angular/router";
 import {AdminHomeComponent} from "./components/admin-home/admin-home.component";
 import {DisabledUsersComponent} from "./components/disabled-users/disabled-users.component";
 import {AdminComponent} from "./admin.component";
-import {AuthGuard} from "../guards/auth.guard";
 import {Profile} from "../models/Profile";
 import {_adminGuard} from "../guards/_admin.guard";
 import {FacultiesComponent} from "./components/faculties/faculties.component";
-
+import {UsersComponent} from "./components/users/users.component";
+import {ProgramsComponent} from "./components/programs/programs.component";
+import {global} from "../global";
 
 const adminRoutes: Routes = [
-  {path:'admin',component:AdminComponent,
+  {path:global.tagAdmin,component:AdminComponent,
     children:[
       {path:'',component:AdminHomeComponent},
-      {path:'users',component:DisabledUsersComponent},
-      {path:'faculties',component:FacultiesComponent}
+      {path:global.tagUser,component:UsersComponent,
+        children:[{path:'disabled',component:DisabledUsersComponent}]
+      },
+      {path:global.tagFaculty,component:FacultiesComponent},
+      {path:global.tagProgram,component:ProgramsComponent}
     ],
     canActivate:[_adminGuard],
     data:{rol:Profile.admin},
