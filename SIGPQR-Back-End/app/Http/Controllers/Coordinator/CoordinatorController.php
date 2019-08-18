@@ -46,7 +46,7 @@ class CoordinatorController extends ApiController
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\coordinator  $coordinator
+     * @param  \App\Coordinator  $coordinator
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Coordinator $coordinator)
@@ -63,25 +63,26 @@ class CoordinatorController extends ApiController
                 if ($validate->fails()){
                     return $this->errorResponse("datos no validos", 400, $validate->errors());
                 }else{
-
-                    $coordinator->profile_id = User::COORDINATOR_PROFILE;
                     if(!$coordinator->isDirty()){
                         return $this->errorResponse('se debe especificar al menos un valor', 422);
                     }
-                    $isTeacher = $coordinator->where('id', $coordinator->id)
-                        ->where('profile_id', User::TEACHER_PROFILE)
+                    $isCoordinator = $coordinator->where('id', $coordinator->id)
+                        ->where('profile_id', User::COORDINATOR_PROFILE)
                         ->count();
-                    if($isTeacher == 0) {
-                        return $this->errorResponse("Este usuario no es docente", 404);
+                    if($isCoordinator == 0) {
+                        return $this->errorResponse("Este usuario no es coordinador", 404);
                     }
-                    $coordinator::where('id', $coordinator->id)
-                        ->update([
-                            'profile_id' => User::COORDINATOR_PROFILE,
-                        ]);
-                    Program::where('id', $params_array['program_id'])
-                        ->update([
-                            'coordinator_id' => $coordinator->id
-                        ]);
+                    //updating coordinator to teacher
+                    DB::transaction(function () use ($coordinator, $params_array) {
+                        $idCoordinator = $coordinator->id;
+                        DB::table('users')->where('id', $idCoordinator)
+                            ->update([
+                                'profile_id' => User::TEACHER_PROFILE,
+                                'status' => User::FALSE_STATE
+                            ]);
+                        DB::table('programs')->where('id', $params_array['program_id'])
+                            ->update(['coordinator_id' => null]);
+                    });
                     return $this->showOne($coordinator);
                 }
             }else{

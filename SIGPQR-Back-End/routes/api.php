@@ -34,6 +34,10 @@ Route::resource('faculties.programs','Faculty\FacultyProgramController', ['only'
 Route::get('count-faculties','Faculty\FacultyController@countFaculties');
 //ruta del controlador de programas
 Route::apiResource('programs','Program\ProgramController');
+Route::get('only-programs-trashed','Program\ProgramController@onlyTrashed');
+Route::post('restore-program/{id}','Program\ProgramController@restore');
+Route::get('count-programs-eliminated','Program\ProgramController@countProgramsEliminated');
+Route::get('unassigned-programs','Program\ProgramController@showUnassignedPrograms');
 Route::get('programs/{id}/faculties','Program\ProgramController@faculty');
 Route::get('programs/{id}/coordinators','Program\ProgramController@coordinator');
 Route::get('programs/{id}/students','Program\ProgramController@getStudents');
