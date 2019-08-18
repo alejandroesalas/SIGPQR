@@ -43,7 +43,7 @@
                     <!--Inicio FORM-->
                     <div class="modal-content">
                       <div class="modal-body">
-                        <form #actFaculty="ngForm">
+                        <form #actFaculty="ngForm" (ngSubmit)="updateFaculty()">
                           <div class="row">
                             <div class="input-field col s10">
                               <input [(ngModel)]="currentFaculty.name" name="name" id="facultyName" type="text" class="validate" [value]="faculty.name">
@@ -76,74 +76,30 @@
         </div>
 
 
-        <div class="card card-stats">
+        <div *ngFor="let faculty of faculties" class="card card-stats">
           <div class="card-header card-header-success card-header-icon">
 
-            <p class="card-category left">FACULTAD DE CIENCIAS BÁSICAS, INGENIERÍAS Y ARQUITECTURA</p>
-            <h3 class="card-title">
-
-
+            <p class="card-category left"></p>
+            <h3 class="card-title left">
+              {{faculty.name}}
             </h3>
           </div>
-
           <div class="card-body">
-
             <table class="table table-striped">
               <thead>
-
               <tr>
-
               </tr>
-
               </thead>
-
-
               <tbody class="">
-
-              <tr>
-                <td>ARQUITECTURA</td>
+              <tr *ngFor="let program of faculty.programs">
+                <td>{{program.name}}</td>
                 <td></td>
                 <td></td>
-
                 <td class="td-actions right">
-
-
                 </td>
-
-
               </tr>
-
-              <tr>
-                <td>INGENIERÍA INDUSTRIAL</td>
-                <td></td>
-                <td></td>
-
-                <td class="td-actions right">
-
-
-                </td>
-
-
-              </tr>
-
-              <tr>
-                <td>INGENIERÍA DE SISTEMAS</td>
-                <td></td>
-                <td></td>
-
-                <td class="td-actions right">
-
-
-                </td>
-
-
-              </tr>
-
-
               </tbody>
             </table>
-
-
             <div class="card-footer">
               <div class="stats">
                 <i class="material-icons text-success">access_time</i> Sistema de gestión PQR

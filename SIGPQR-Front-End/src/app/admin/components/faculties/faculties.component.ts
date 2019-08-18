@@ -15,6 +15,7 @@ export class FacultiesComponent implements OnInit {
 
   public faculties: Array<Faculty>;
   public currentFaculty: Faculty;
+  public id_modal:string;
 
   constructor(private modalService: ModalServiceService
     , private dynamicScriptLoader: DynamicScriptLoaderService,
@@ -35,7 +36,7 @@ export class FacultiesComponent implements OnInit {
       subscription.subscribe(value => {
         this.faculties = value;
         //console.log('indice 1',this.programas[1]);
-        //console.log('respuesta',value);
+        //.log('respuesta',this.faculties);
       }, error => {
         console.log('errores', error);
       });
@@ -43,8 +44,15 @@ export class FacultiesComponent implements OnInit {
   }
 
   updateFaculty() {
-    if (this.currentFaculty){
-
+    if (this.currentFaculty && this.currentFaculty.name) {
+      let subscription: any = this.facultyService.updateFaculty(this.currentFaculty)
+      if (subscription){
+        subscription.subscribe(response=>{
+          this.loadFaculties();
+        },error=>{
+          console.log(error);
+        });
+      }
     }
   }
 
@@ -55,6 +63,7 @@ export class FacultiesComponent implements OnInit {
   openModal(selectedFaculty: Faculty, id: string) {
     this.currentFaculty = selectedFaculty;
     //console.log(selectedFaculty)
+    this.id_modal = id;
     this.modalService.open(id);
   }
 

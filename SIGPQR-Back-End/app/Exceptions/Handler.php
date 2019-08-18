@@ -63,10 +63,10 @@ class Handler extends ExceptionHandler
         }
         if($exception instanceof ModelNotFoundException){
             $modelo = strtolower(class_basename($exception->getModel()));
-            return $this->errorResponse("No existe ninguna instancia de {$modelo} con el id espeficifado", 404);
+            return $this->errorResponse("No existe ninguna instancia de {$modelo} con el id espeficifado", $exception->getMessage(),404);
         }
         if($exception instanceof AuthorizationException){
-            return $this->errorResponse('No posee permisos para ejecutar esta acción', 403);
+            return $this->errorResponse('No posee permisos para ejecutar esta acción', $exception->getMessage(),403);
         }
         if($exception instanceof NotFoundHttpException){
             return $this->errorResponse('No se encontró la URL especificada', 404);

@@ -90,9 +90,9 @@ class FacultyController extends ApiController
                 if ($validate->fails()){
                     return $this->errorResponse("datos no validos", 400, $validate->errors());
                 }else{
-                    $faculty->name = $params_array['title'];
-                    if($faculty->isDirty()){
-                        return $this->errorResponse('se debe especificar al menos un valor',422);
+                    $faculty->name = $params_array['name'];
+                    if(!$faculty->isDirty()){
+                        return $this->errorResponse('se debe especificar al menos un valor','',422);
                     }
                     $faculty->save();
                     return $this->showOne($faculty);

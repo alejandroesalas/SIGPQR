@@ -78,8 +78,13 @@ export class FacultyService {
     if (this.currentUser){
       let headers = new HttpHeaders().set('content-type',global.contentType)
         .set('Authorization',this.currentUser.token);
-      let params = 'json='+JSON.stringify(faculty);
-      return this.http.post<any>(global.url+'faculties',params,{headers:headers}).
+      let params = 'json='+JSON.stringify(faculty,(key, value) => {
+        if (key == 'programs') {
+          return undefined;
+        }
+        return value;
+        });
+      return this.http.put<any>(global.url+global.tagFaculty+'/'+faculty.id,params,{headers:headers}).
       pipe(map(data => {
         console.log(data);
         return data;
