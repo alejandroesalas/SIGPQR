@@ -3,6 +3,7 @@ import {ModalServiceService} from "../../../services/modal-service.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AuthService} from "../../../services/authService/auth.service";
 import {Profile} from "../../../models/Profile";
+import {UserService} from "../../../services/user/user.service";
 
 @Component({
   selector: 'app-users',
@@ -15,7 +16,8 @@ export class UsersComponent implements OnInit {
     public modal_id:string;
     public admin_profile = Profile.admin;
     public teacher_profile = Profile.teacher;
-  constructor(private modalService: ModalServiceService,
+  constructor(private userService:UserService,
+              private modalService: ModalServiceService,
               private route: ActivatedRoute,
               private authService: AuthService,
               private router: Router,
@@ -36,6 +38,17 @@ export class UsersComponent implements OnInit {
     this.modalService.close(id);
   }
   private loadUsers(){
+    let susbcription;
+    susbcription = this.userService.getAll();
+    if (susbcription){
+      susbcription.subscribe(value => {
+        this.docentes = value;
+      }, error => {
+        console.log('errores', error);
+      });
+    }else{
+
+    }
 
   }
    createNewUser(){

@@ -50,7 +50,6 @@ class StudentController extends ApiController
             'password' => 'min:6|confirmed',
             'id_type' => 'required|in:'. User::CC_TYPE . ',' . User::TI_TYPE,
             'id_num' => 'required|unique:users',
-            'password' => 'required|min:3',
             'program_id' => 'required|integer',
         ];
         $json = $request->input('json', null);
@@ -59,23 +58,22 @@ class StudentController extends ApiController
             if (!Empty($params_array)){
                 $validation = $this->checkValidation($params_array,$rules);
                 if ($validation->fails()){
-                    return $this->errorResponse("datos no validos", 400, $validation->errors());
+                    return $this->errorResponse("datos no validos", $validation->errors(),400);
                 }else{
                     $params_array['password'] = bcrypt($params_array['password']);
-                    $params_array['admin'] = 'false';
                     $params_array['profile_id'] = User::STUDENT_PROFILE;
                     $params_array['status'] = User::ACTIVE_STATE;
                     $params_array['admin'] = User::REGULAR_USER;
                     $params_array['verified']= User::NOT_VERIFIED_USER;
                     $params_array['verification_token'] =User::createVerificationToken();
-                    $user = User::create($params_array);
+                    $user = Student::create($params_array);
                     return $this->showOne($user);
                 }
             }else{
-                return $this->errorResponse('Datos Vacios!', 400);
+                return $this->errorResponse('Datos Vacios!', '',400);
             }
         }else{
-            return $this->errorResponse('La estrucutra del json no es valida',415);
+            return $this->errorResponse('La estrucutra del json no es valida','',415);
         }
     }
 

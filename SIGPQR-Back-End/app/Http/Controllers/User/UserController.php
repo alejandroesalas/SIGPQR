@@ -47,10 +47,8 @@ class UserController extends ApiController
             'name'=>'required',
             'lastname'=>'required',
             'email' => 'email|unique:users',
-            'password' => 'min:3|confirmed',
             'id_type' => 'required|in:'. User::CC_TYPE . ',' . User::TI_TYPE,
             'id_num' => 'required|unique:users',
-            'password' => 'required|min:3',
         ];
         $json = $request->input('json', null);
         if (!Empty($json)){
@@ -58,11 +56,12 @@ class UserController extends ApiController
             if (!Empty($params_array)){
                 $validation = $this->checkValidation($params_array,$rules);
                 if ($validation->fails()){
-                    return $this->errorResponse("datos no validos",404, $validation->errors());
+                    return $this->errorResponse("datos no validos",$validation->errors(),404 );
                 }else{
-                    $params_array['password'] = bcrypt($params_array['password']);
+                    unset($params_array['program_id ']);
+                    $params_array['password'] = bcrypt($params_array['id_num']);
                     $params_array['profile_id'] = User::TEACHER_PROFILE;
-                    $params_array['status'] = User::ACTIVE_STATE;
+                    $params_array['status'] = User::FALSE_STATE;
                     $params_array['admin'] = User::REGULAR_USER;
                     $params_array['verified']= User::VERIFIED_USER;
                    // $params_array['verification_token'] =User::createVerificationToken();
@@ -70,10 +69,10 @@ class UserController extends ApiController
                     return $this->showOne($user);
                 }
             }else{
-                return $this->errorResponse('Datos Vacios!', 400);
+                return $this->errorResponse('Datos Vacios!','' ,400);
             }
         }else{
-            return $this->errorResponse('La estrucutra del json no es valida',415);
+            return $this->errorResponse('La estrucutra del json no es valida','',415);
         }
     }
 

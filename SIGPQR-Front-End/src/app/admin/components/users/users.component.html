@@ -74,31 +74,38 @@
 
               </jw-modal>
 
+              <!--depliegue de usuarios-->
               <table class="table table-striped">
                 <thead>
                 <tr>
-                  <th>Nombre</th>
-                  <th>Email</th>
-                  <th>Tipo</th>
+                  <th class="text-center">Identificación</th>
+                  <th class="text-center">Nombre</th>
+                  <th class="text-center">Email</th>
+                  <th class="text-center">Tipo</th>
                   <th></th>
                 </tr>
                 </thead>
-                <tbody class="" id="tUsuarios">
+                <tbody class="" id="tUsuarios" *ngIf="docentes">
+                <tr *ngFor="let docente of docentes">
+                  <td class="text-center">{{docente.id_num}}</td>
+                  <td class="text-center">{{docente.name}}</td>
+                  <td class="text-center">{{docente.email}}</td>
+                  <td class="text-center">Docente</td>
+                  <td class="td-actions right">
+                    <a class="btn btn-success btn-link left modal-trigger btn tooltipped"
+                       data-position="bottom" data-toggle="tooltip" data-placement="right" title="Promover docente" rel="tooltip"
+                       href="#asignarDocente"><i class="fas fa-user-plus"></i></a>
+                    <a class="btn btn-info btn-link left btn tooltipped"
+                       data-position="bottom" data-toggle="tooltip" data-placement="right" title="Editar Usuario" rel="tooltip" href="#editarDocenteAdmin">
+                      <i class="fas fa-user-edit"></i></a>
+                    <button type="button" rel="tooltip" class="btn btn-danger btn-link btn tool" data-position="bottom" data-toggle="tooltip" data-placement="right" title="Deshabilitar Usuario">
+                      <i class="fas fa-user-lock"></i>
+                      </button>
+                  </td>
 
+                </tr>
 
-                <div class="modal modal-dialog" id="asignarDocente" style="  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 1050;
-  display: none;
-  overflow: hidden;
-  outline: 0;
-  max-height: 40%;
-  width: 100%;
-">
-
+                <jw-modal id="promoverDocente">
                   <!-- Inicio contenido MODAL 1-->
                   <div class="modal-content">
 
@@ -108,8 +115,6 @@
                       <!--Inicio FORM-->
                       <div class="card-body">
                         <form>
-
-
                           <div class="row">
                             <div class="input-field col s10">
                               <select>
@@ -145,10 +150,12 @@
 
                   </div>
 
-                </div>
+                </jw-modal>
 
                 </tbody>
               </table>
+
+
               <div class="card-footer">
                 <div class="stats">
                   <i class="material-icons text-success">access_time</i> Sistema de gestión PQR
@@ -162,4 +169,4 @@
     </div>
   </div>
 </main>
-    <!--Fin CONTAINER GENERAL-->
+<!--Fin CONTAINER GENERAL-->

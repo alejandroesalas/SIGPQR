@@ -1,9 +1,85 @@
 import { Injectable } from '@angular/core';
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {AuthService} from "../authService/auth.service";
+import {Observable} from "rxjs";
+import {global} from "../../global";
+import {map} from "rxjs/operators";
+import {Profile} from "../../models/Profile";
+import {User} from "../../models/User";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor() { }
+  public  currentUser;
+  constructor(private http: HttpClient,
+              authService:AuthService) {
+    this.currentUser = authService.currentUserValue;
+  }
+
+  public getAll():Observable<any>|boolean{
+    if (this.currentUser){
+      let headers = new HttpHeaders().set('content-type',global.contentType)
+        .set('Authorization',this.currentUser.token);
+      return this.http.get<any>(global.url+'users',{headers:headers}).
+      pipe(map(response => {
+        if (response.status == 'success'){
+          return response.data;
+        }else{
+          return response;
+        }
+      }));
+    }else {
+      return false;
+    }
+  }
+  public getUser(id:number):Observable<User>|boolean{
+    if (this.currentUser){
+      let headers = new HttpHeaders().set('content-type',global.contentType)
+        .set('Authorization',this.currentUser.token);
+      return this.http.get<any>(global.url+'users/'+id,{headers:headers}).
+      pipe(map(response => {
+        console.log(response);
+        return response;
+      }));
+    }else {
+      return false;
+    }
+  }
+  public store(user:User):Observable<any>|boolean{
+    let headers = new HttpHeaders().set('content-type',global.contentType);
+    let params = 'json='+JSON.stringify(user);
+    return this.http.post<any>(global.url+'users',params,{headers:headers}).
+    pipe(map(data => {
+      console.log(data);
+      return data;
+    }));
+  }
+  public delete(id:number):Observable<any>|boolean{
+    if (this.currentUser && this.currentUser.profile_id == Profile.admin){
+      let headers = new HttpHeaders().set('content-type',global.contentType)
+        .set('Authorization',this.currentUser.token);
+      return this.http.delete<any>(global.url+'users'+id,{headers:headers}).
+      pipe(map(response => {
+        console.log(response);
+        return response;
+      }));
+    }else {
+      return false;
+    }
+  }
+  public count(){
+    if (this.currentUser){
+      let headers = new HttpHeaders().set('content-type',global.contentType)
+        .set('Authorization',this.currentUser.token);
+      return this.http.get<any>(global.url+'count-teachers',{headers:headers}).
+      pipe(map(data => {
+        console.log(data);
+        return data;
+      }));
+    }else {
+      return false;
+    }
+  }
 }
