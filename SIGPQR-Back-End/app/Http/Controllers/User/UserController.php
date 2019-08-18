@@ -87,6 +87,7 @@ class UserController extends ApiController
     {
         //
     }
+
     /**
      * Update the specified resource in storage.
      *
@@ -96,7 +97,45 @@ class UserController extends ApiController
      */
     public function update(Request $request, User $user)
     {
-        //
+        $rules = [
+            'program_id'=>'required|integer',
+        ];
+
+        $json = $request->input('json', null);
+        if (!Empty($json)){
+            $params_array = array_map('trim', json_decode($json, true));
+            if (!Empty($params_array)){
+                $validate = $this->checkValidation($params_array, $rules);
+                if ($validate->fails()){
+                    return $this->errorResponse("datos no validos", 400, $validate->errors());
+                }else{
+
+                    $user->profile_id = User::COORDINATOR_PROFILE;
+                    if(!$user->isDirty()){
+                        return $this->errorResponse('se debe especificar al menos un valor', 422);
+                    }
+                    $isTeacher = $user->where('id', $user->id)
+                        ->where('profile_id', User::TEACHER_PROFILE)
+                        ->count();
+                    if($isTeacher == 0) {
+                        return $this->errorResponse("Este usuario no es docente", 404);
+                    }
+                    $user::where('id', $user->id)
+                        ->update([
+                            'profile_id' => User::COORDINATOR_PROFILE,
+                        ]);
+                    Program::where('id', $params_array['program_id'])
+                        ->update([
+                            'coordinator_id' => $user->id
+                        ]);
+                    return $this->showOne($user);
+                }
+            }else{
+                return $this->errorResponse('Datos Vacios!', 422);
+            }
+        }else{
+            return $this->errorResponse('La estrucutra del json no es valida', 422);
+        }
     }
 
     public function onlyTrashed(User $user)
