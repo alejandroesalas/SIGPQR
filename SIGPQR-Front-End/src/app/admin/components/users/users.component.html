@@ -20,60 +20,6 @@
             <br>
             <div class="col-md-12">
 
-              <jw-modal id="editUserModel">
-                <!-- Inicio contenido MODAL 1-->
-                <div class="modal-content">
-                  <!--Inicio CUERPO MODAL 1-->
-                  <div class="modal-body">
-                    <!--Inicio FORM-->
-                    <form #editForm="ngForm" (ngSubmit)="updateUser()">
-                      <div class="row">
-                        <div class="input-field col s10">
-                          <input id="Efirst_name" type="text" class="validate">
-                          <label for="Efirst_name">Nombre</label>
-                        </div>
-                        <div class="card-header card-header-success card-header-icon">
-                          <div class="card-icon">
-                            <i class="material-icons">face</i>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="row">
-                        <div class="input-field col s6">
-                          <input id="Elast_name" type="text" class="validate">
-                          <label for="Elast_name">Apellidos</label>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="input-field col s6">
-                          <input id="Eemail" type="email" class="validate">
-                          <label for="Eemail">Email</label>
-                        </div>
-                        <div class="input-field col s6">
-                          <select>
-                            <option value="" disabled selected>Seleccionar...</option>
-                            <option [value]="admin_profile">Administrador</option>
-                            <option [value]="teacher_profile">Docente</option>
-                          </select>
-                          <label>Tipo de usuario</label>
-                        </div>
-                      </div>
-                      <button (click)="closeModal('editUserModel')" class="btn btn-danger left">Cancelar <i
-                        class="fa fa-refresh"></i></button>
-                      <button type="submit" class="btn btn-success modal-trigger right">
-                        Guardar<i class="fa fa-arrow-circle-right"></i>
-                      </button>
-                    </form>
-                    <!--Fin FORM-->
-                  </div>
-                  <!--Fin CUERPO MODAL 1-->
-
-                </div>
-                <!-- Fin contenido MODAL 1-->
-
-              </jw-modal>
-
               <!--depliegue de usuarios-->
               <table class="table table-striped">
                 <thead>
@@ -92,15 +38,20 @@
                   <td class="text-center">{{docente.email}}</td>
                   <td class="text-center">Docente</td>
                   <td class="td-actions right">
-                    <a class="btn btn-success btn-link left modal-trigger btn tooltipped"
-                       data-position="bottom" data-toggle="tooltip" data-placement="right" title="Promover docente" rel="tooltip"
-                       href="#asignarDocente"><i class="fas fa-user-plus"></i></a>
-                    <a class="btn btn-info btn-link left btn tooltipped"
-                       data-position="bottom" data-toggle="tooltip" data-placement="right" title="Editar Usuario" rel="tooltip" href="#editarDocenteAdmin">
+                    <a (click)="openModal(docente,'promoverDocente')"
+                       class="btn btn-success btn-link left modal-trigger btn tooltipped"
+                       data-position="bottom" data-toggle="tooltip" data-placement="right" title="Promover docente"
+                       rel="tooltip">
+                      <i class="fas fa-user-plus"></i></a>
+                    <a [routerLink]="[docente.id,'edit']" class="btn btn-info btn-link left btn tooltipped"
+                       data-position="bottom" data-toggle="tooltip" data-placement="right" title="Editar Usuario"
+                       rel="tooltip">
                       <i class="fas fa-user-edit"></i></a>
-                    <button type="button" rel="tooltip" class="btn btn-danger btn-link btn tool" data-position="bottom" data-toggle="tooltip" data-placement="right" title="Deshabilitar Usuario">
+                    <button (click)="disableUser(docente)" type="button" rel="tooltip"
+                            class="btn btn-danger btn-link btn tool" data-position="bottom" data-toggle="tooltip"
+                            data-placement="right" title="Deshabilitar Usuario">
                       <i class="fas fa-user-lock"></i>
-                      </button>
+                    </button>
                   </td>
 
                 </tr>
@@ -126,21 +77,16 @@
                               <label>Asigando como coordinador de : </label>
                             </div>
                             <div class="card-header card-header-success card-header-icon">
-
                               <div class="card-icon">
                                 <i class="fas fa-users"></i>
                               </div>
                             </div>
                           </div>
-
                           <br>
-
-                          <button href="vistaDocenteAdmin.php" class="btn btn-danger left">Cancelar <i
+                          <button (click)="closeModal('promoverDocente')" class="btn btn-danger left">Cancelar <i
                             class="fa fa-refresh"></i></button>
-
-
-                          <button type="submit" class="btn btn-success">
-                            Crear<i class="fa fa-arrow-circle-right"></i>
+                          <button (click)="promoverDocente()" type="submit" class="btn btn-success">
+                            Promover<i class="fa fa-arrow-circle-right"></i>
                           </button>
                         </form>
                       </div>
