@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {DynamicScriptLoaderService} from "./services/dynamic-script-loader.service";
-
+declare var load;
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -13,6 +13,7 @@ constructor(private dynamicScriptLoader: DynamicScriptLoaderService){
 
 }
   ngOnInit() {
+  load();
     //this.loadScript('../assets/js/loadselect.js');
     //this.loadScript('../assets/js/material-dashboard-pro.js');
     //this.loadScripts();

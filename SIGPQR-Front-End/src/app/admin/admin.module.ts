@@ -18,6 +18,9 @@ import { FacultiesEditComponent } from './components/faculties-edit/faculties-ed
 import { UsersComponent } from './components/users/users.component';
 import { ProgramsComponent } from './components/programs/programs.component';
 import {ModalModule} from "../_modal";
+import { UsersEditComponent } from './components/users-edit/users-edit.component';
+import { UsersAddComponent } from './components/users-add/users-add.component';
+import {MatInputModule, MatSelectModule} from "@angular/material";
 
 
 @NgModule({
@@ -29,15 +32,19 @@ import {ModalModule} from "../_modal";
     FacultiesComponent,
     FacultiesEditComponent,
     UsersComponent,
-    ProgramsComponent
+    ProgramsComponent,
+    UsersEditComponent,
+    UsersAddComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    AdminRoutingModule,
     ModalModule,
+    MatSelectModule,
+    MatInputModule,
+    AdminRoutingModule
   ],
   exports:[
   ],

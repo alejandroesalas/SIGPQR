@@ -10,16 +10,25 @@ import {FacultiesComponent} from "./components/faculties/faculties.component";
 import {UsersComponent} from "./components/users/users.component";
 import {ProgramsComponent} from "./components/programs/programs.component";
 import {global} from "../global";
+import {UsersEditComponent} from "./components/users-edit/users-edit.component";
+import {UsersAddComponent} from "./components/users-add/users-add.component";
 
 const adminRoutes: Routes = [
   {path:global.tagAdmin,component:AdminComponent,
     children:[
       {path:'',component:AdminHomeComponent},
-      {path:global.tagUser,component:UsersComponent,
-        children:[{path:'disabled',component:DisabledUsersComponent}]
+      {path:global.tagUser,
+        children:[
+          {path:'',component:UsersComponent},
+          {path:'add',component:UsersAddComponent},
+          {path:':id/edit',component:UsersEditComponent},
+          {path:'disabled',component:DisabledUsersComponent},
+          {path:'**',pathMatch:'full',redirectTo:''}
+        ]
       },
       {path:global.tagFaculty,component:FacultiesComponent},
-      {path:global.tagProgram,component:ProgramsComponent}
+      {path:global.tagProgram,component:ProgramsComponent},
+      {path:'**',pathMatch:'full',redirectTo:''}
     ],
     canActivate:[_adminGuard],
     data:{rol:Profile.admin},

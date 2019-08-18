@@ -1,1 +1,165 @@
-<p>users works!</p>
+<main>
+  <!--Inicio CONTAINER GENERAL-->
+  <div class="container">
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card card-stats">
+          <div class="card-header card-header-icon card-header-success">
+            <div class="card-icon">
+              <i class="fas fa-users"></i>
+            </div>
+            <h5 class="card-title center ">Gestión de usuarios</h5>
+          </div>
+
+          <div class="card-body">
+            <a [routerLink]="'./add'" class="btn btn-success left">
+              Nuevo Usuario<i class="fa fa-user-plus"></i>
+            </a>
+            <br>
+            <br>
+            <div class="col-md-12">
+
+              <jw-modal id="editUserModel">
+                <!-- Inicio contenido MODAL 1-->
+                <div class="modal-content">
+                  <!--Inicio CUERPO MODAL 1-->
+                  <div class="modal-body">
+                    <!--Inicio FORM-->
+                    <form #editForm="ngForm" (ngSubmit)="updateUser()">
+                      <div class="row">
+                        <div class="input-field col s10">
+                          <input id="Efirst_name" type="text" class="validate">
+                          <label for="Efirst_name">Nombre</label>
+                        </div>
+                        <div class="card-header card-header-success card-header-icon">
+                          <div class="card-icon">
+                            <i class="material-icons">face</i>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="input-field col s6">
+                          <input id="Elast_name" type="text" class="validate">
+                          <label for="Elast_name">Apellidos</label>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="input-field col s6">
+                          <input id="Eemail" type="email" class="validate">
+                          <label for="Eemail">Email</label>
+                        </div>
+                        <div class="input-field col s6">
+                          <select>
+                            <option value="" disabled selected>Seleccionar...</option>
+                            <option [value]="admin_profile">Administrador</option>
+                            <option [value]="teacher_profile">Docente</option>
+                          </select>
+                          <label>Tipo de usuario</label>
+                        </div>
+                      </div>
+                      <button (click)="closeModal('editUserModel')" class="btn btn-danger left">Cancelar <i
+                        class="fa fa-refresh"></i></button>
+                      <button type="submit" class="btn btn-success modal-trigger right">
+                        Guardar<i class="fa fa-arrow-circle-right"></i>
+                      </button>
+                    </form>
+                    <!--Fin FORM-->
+                  </div>
+                  <!--Fin CUERPO MODAL 1-->
+
+                </div>
+                <!-- Fin contenido MODAL 1-->
+
+              </jw-modal>
+
+              <table class="table table-striped">
+                <thead>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Email</th>
+                  <th>Tipo</th>
+                  <th></th>
+                </tr>
+                </thead>
+                <tbody class="" id="tUsuarios">
+
+
+                <div class="modal modal-dialog" id="asignarDocente" style="  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1050;
+  display: none;
+  overflow: hidden;
+  outline: 0;
+  max-height: 40%;
+  width: 100%;
+">
+
+                  <!-- Inicio contenido MODAL 1-->
+                  <div class="modal-content">
+
+                    <!--Inicio CUERPO MODAL 1-->
+                    <div class="modal-body">
+
+                      <!--Inicio FORM-->
+                      <div class="card-body">
+                        <form>
+
+
+                          <div class="row">
+                            <div class="input-field col s10">
+                              <select>
+                                <option value="" disabled selected>Seleccionar...</option>
+                                <option value="1">Arquitectura</option>
+                                <option value="2">Ingeniería industrial</option>
+                                <option value="3">Ingeniería de sistemas</option>
+                              </select>
+                              <label>Asigando como coordinador de : </label>
+                            </div>
+                            <div class="card-header card-header-success card-header-icon">
+
+                              <div class="card-icon">
+                                <i class="fas fa-users"></i>
+                              </div>
+                            </div>
+                          </div>
+
+                          <br>
+
+                          <button href="vistaDocenteAdmin.php" class="btn btn-danger left">Cancelar <i
+                            class="fa fa-refresh"></i></button>
+
+
+                          <button type="submit" class="btn btn-success">
+                            Crear<i class="fa fa-arrow-circle-right"></i>
+                          </button>
+                        </form>
+                      </div>
+                      <!--Fin CONTENIDO MODAL 2-->
+                    </div>
+
+
+                  </div>
+
+                </div>
+
+                </tbody>
+              </table>
+              <div class="card-footer">
+                <div class="stats">
+                  <i class="material-icons text-success">access_time</i> Sistema de gestión PQR
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr>
+    </div>
+  </div>
+</main>
+    <!--Fin CONTAINER GENERAL-->

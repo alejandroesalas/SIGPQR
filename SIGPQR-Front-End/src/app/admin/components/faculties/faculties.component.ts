@@ -63,7 +63,7 @@ export class FacultiesComponent implements OnInit {
   openModal(selectedFaculty: Faculty, id: string) {
     this.currentFaculty = selectedFaculty;
     //console.log(selectedFaculty)
-    this.id_modal = id;
+    this.id_modal= id;
     this.modalService.open(id);
   }
 
