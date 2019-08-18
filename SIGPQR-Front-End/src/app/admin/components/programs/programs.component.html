@@ -1,1 +1,301 @@
-<p>programs works!</p>
+<main>
+  <!--Inicio CONTAINER GENERAL-->
+  <div class="container">
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card card-stats">
+          <div class="card-header card-header-icon card-header-success">
+            <div class="card-icon">
+              <i class="fas fa-sitemap"></i>
+            </div>
+            <h5 class="card-title center ">Gestión de programas</h5>
+          </div>
+
+          <div class="card-body">
+
+
+
+            <a  class="btn btn-success left modal-trigger" href="#registroPrograma" >
+              Nuevo programa<i class="fa fa-users"></i>
+            </a>
+
+            <!-- Modal -->
+            <div class="modal modal-dialog" id="registroPrograma" style="  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1050;
+  display: none;
+  overflow: hidden;
+  outline: 0;
+  max-height: 35%;
+  width: 100%;
+" >
+
+              <div class="modal-content">
+
+                <div class="modal-body">
+
+
+                  <form>
+
+
+
+                    <div class="row">
+                      <div class="input-field col s10">
+                        <input id="first_name" type="text" class="validate">
+                        <label for="first_name">Nombre</label>
+                      </div>
+                      <div class="card-header card-header-success card-header-icon">
+
+                        <div class="card-icon">
+                          <i class="fas fa-sitemap"></i>
+                        </div>
+                      </div>
+                    </div>
+
+
+
+                    <button type="reset" class="btn btn-danger left">Cancelar <i class="fa fa-refresh"></i></button>
+
+
+                    <button type="submit" class="btn btn-success modal-trigger" href="#" >
+                      Crear<i class="fa fa-arrow-circle-right"></i>
+                    </button>
+
+                  </form>
+                </div>
+
+
+              </div>
+
+
+            </div>
+          </div>
+
+          <div class="col-lg-12 col-md-6 col-sm-12">
+
+
+
+
+            <div class="card card-stats">
+              <div class="card-header card-header-success card-header-icon">
+
+                <p class="card-category left">PROGRAMAS</p>
+                <h3 class="card-title">
+
+
+
+                </h3>
+              </div>
+
+              <div class="card-body">
+
+                <table class="table table-striped">
+                  <thead>
+
+                  <tr>
+
+                  </tr>
+
+                  </thead>
+
+
+                  <tbody class="">
+
+                  <tr>
+                    <td>ARQUITECTURA</td>
+                    <td></td>
+                    <td></td>
+
+                    <td class="td-actions right">
+
+
+
+                      <!--Asignar docente a una coordinación-->
+                      <a  class="btn btn-success btn-link left modal-trigger btn tooltipped" data-position="bottom" data-tooltip="Agregar a una facultad"   rel="tooltip"  href="#asignarProgramaAFacultad" >
+                        <i class="fas fa-plus"></i>
+                      </a>
+                      <div class="modal modal-dialog" id="asignarProgramaAFacultad" style="  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1050;
+  display: none;
+  overflow: hidden;
+  outline: 0;
+  max-height: 50%;
+  width: 100%;
+" >
+
+                        <!-- Inicio contenido MODAL 1-->
+                        <div class="modal-content">
+                          <div class="card-header card-header-success card-header-icon" style="top: 10px">
+
+                            <div class="card-icon">
+                              <i class="fas fa-sitemap"></i>
+                            </div>
+                          </div>
+                          <!--Inicio CUERPO MODAL 1-->
+                          <div class="modal-body">
+
+                            <!--Inicio FORM-->
+                            <div class="card-body">
+                              <form>
+
+
+
+                                <div class="row">
+                                  <div class="input-field col s12">
+                                    <select>
+                                      <option value="" disabled selected>Seleccionar...</option>
+                                      <option value="1">CIENCIAS BÁSICAS, INGENIERÍAS Y ARQUITECTURA</option>
+                                      <option value="2">HUMANIDADES Y EDUCACIÓN</option>
+                                      <option value="3">DERECHO Y CIENCIAS POLÍTICAS</option>
+                                      <option value="3">CIENCIAS ECONÓMICAS Y ADMINISTRATIVAS</option>
+                                    </select>
+                                    <label>Asigar programa a facultad de : </label>
+                                  </div>
+                                  <!-- <div class="card-header card-header-success card-header-icon">
+
+                                             <div class="card-icon">
+                                               <i class="fas fa-sitemap"></i>
+                                             </div>
+                                 </div>-->
+                                </div>
+
+
+                                <button  href="vistaPrograma.php" class="btn btn-danger left">Cancelar</button>
+
+
+                                <button type="submit" class="btn btn-success">
+                                  Crear<i class="fa fa-arrow-circle-right"></i>
+                                </button>
+
+
+
+                              </form>
+                            </div>
+                            <!--Fin CONTENIDO MODAL 2-->
+                          </div>
+
+
+                        </div>
+
+                      </div>
+                      <!--Fin asignar docente -->
+                      <a class="btn btn-info btn-link modal-trigger btn tooltipped" data-position="bottom" data-tooltip="Editar nombre programa"href="#EditarNombrePrograma">
+                        <i class="fas fa-pencil-alt"></i>
+                      </a>
+
+                      <!-- Modal -->
+                      <div class="modal modal-dialog" id="EditarNombrePrograma" style="  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1050;
+  display: none;
+  overflow: hidden;
+  outline: 0;
+  max-height: 35%;
+  width: 100%;
+" >
+
+                        <div class="modal-content">
+                          <div class="modal-body">
+                            <form>
+                              <div class="row">
+                                <div class="input-field col s10">
+                                  <input id="first_name" type="text" class="validate">
+                                  <label for="first_name">Nombre</label>
+                                </div>
+                                <div class="card-header card-header-success card-header-icon">
+
+                                  <div class="card-icon">
+                                    <i class="fas fa-sitemap"></i>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <button hret="vistaPrograma.php" class="btn btn-danger left">Cancelar </button>
+                              <button type="submit" class="btn btn-success modal-trigger right" href="#" >
+                                Actualizar<i class="fa fa-refresh"></i>
+                              </button>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                      <button type="button" rel="tooltip" class="btn btn-danger btn-link btn tooltipped" data-position="bottom" data-tooltip="Deshabilitar programa" >
+                        <i class="fas fa-times"></i>
+                      </button>
+
+                    </td>
+
+
+                  </tr>
+
+                  <tr>
+                    <td>INGENIERÍA INDUSTRIAL</td>
+                    <td></td>
+                    <td></td>
+
+                    <td class="td-actions right">
+
+                      <a  class="btn btn-success btn-link left modal-trigger btn tooltipped" data-position="bottom" data-tooltip="Agregar a una facultad"   rel="tooltip"  href="#asignarProgramaAFacultad" >
+                        <i class="fas fa-plus"></i>
+                      </a>
+                      <a class="btn btn-info btn-link modal-trigger btn tooltipped" data-position="bottom" data-tooltip="Editar nombre programa" href="#EditarNombrePrograma">
+                        <i class="fas fa-pencil-alt"></i>
+                      </a>
+
+                      <button type="button" rel="tooltip" class="btn btn-danger btn-link btn tooltipped" data-position="bottom" data-tooltip="Deshabilitar programa" >
+                        <i class="fas fa-times"></i>
+                      </button>
+                    </td>
+
+                  </tr>
+
+                  <tr>
+                    <td>INGENIERÍA DE SISTEMAS</td>
+                    <td></td>
+                    <td></td>
+
+                    <td class="td-actions right">
+
+                      <a  class="btn btn-success btn-link left modal-trigger btn tooltipped" data-position="bottom" data-tooltip="Agregar a una facultad"   rel="tooltip"  href="#asignarProgramaAFacultad" >
+                        <i class="fas fa-plus"></i>
+                      </a>
+
+                      <a class="btn btn-info btn-link modal-trigger btn tooltipped" data-position="bottom" data-tooltip="Editar nombre programa"href="#EditarNombrePrograma">
+                        <i class="fas fa-pencil-alt"></i>
+                      </a>
+
+                      <button type="button" rel="tooltip" class="btn btn-danger btn-link btn tooltipped" data-position="bottom" data-tooltip="Deshabilitar programa" >
+                        <i class="fas fa-times"></i>
+                      </button>
+
+                    </td>
+                  </tr>
+
+                  </tbody>
+                </table>
+              </div>
+
+            </div>
+            <div class="card-footer">
+              <div class="stats">
+                <i class="material-icons text-success">access_time</i> Sistema de gestión PQR
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <!--Fin CONTAINER GENERAL-->
+</main>
