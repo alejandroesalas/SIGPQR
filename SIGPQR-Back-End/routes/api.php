@@ -60,11 +60,13 @@ Route::post('restore-student/{id}','Student\StudentController@restore');
 Route::get('count-students-eliminated','Student\StudentController@countStudentsEliminated');
 //ruta del controlador de Coordinadores
 Route::resource('coordinators', 'Coordinator\CoordinatorController', ['except' => ['create', 'edit']]);
+Route::put('abasement-coordinator/{coordinator}', 'Coordinator\CoordinatorController@abasement');
 Route::resource('coordinators.responses', 'Coordinator\CoordinatorResponseController', ['except' => ['create', 'edit']]);
 Route::get('count-coordinators','Coordinator\CoordinatorController@countCoordinators');
 Route::get('count-teachers','User\UserController@countTeachers');
 //ruta del controlador de usuarios
 Route::resource('users', 'User\UserController', ['except' => ['create', 'edit']]);
+Route::put('ascent-users/{user}', 'User\UserController@ascent');
 //soft deleting teachers
 Route::get('only-teachers-trashed','User\UserController@onlyTrashed');
 Route::post('restore-teacher/{id}','User\UserController@restore');

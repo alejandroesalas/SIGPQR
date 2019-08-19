@@ -6,6 +6,8 @@ use App\Http\Controllers\ApiController;
 use App\User;
 use Illuminate\Http\Request;
 use App\Profile;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends ApiController
 {
@@ -47,10 +49,9 @@ class UserController extends ApiController
             'name'=>'required',
             'lastname'=>'required',
             'email' => 'email|unique:users',
-            'password' => 'min:3|confirmed',
+            'password' => 'min:6|confirmed',
             'id_type' => 'required|in:'. User::CC_TYPE . ',' . User::TI_TYPE,
             'id_num' => 'required|unique:users',
-            'password' => 'required|min:3',
         ];
         $json = $request->input('json', null);
         if (!Empty($json)){
@@ -98,7 +99,8 @@ class UserController extends ApiController
     public function update(Request $request, User $user)
     {
         $rules = [
-            'program_id'=>'required|integer',
+            'email' => 'email|unique:users',
+            'id_num' => 'unique:users',
         ];
 
         $json = $request->input('json', null);
@@ -110,24 +112,27 @@ class UserController extends ApiController
                     return $this->errorResponse("datos no validos", 400, $validate->errors());
                 }else{
 
-                    $user->profile_id = User::COORDINATOR_PROFILE;
+                    if(Arr::has($params_array, 'name')) {
+                        $user->name = $params_array['name'];
+                    }
+
+                    if(Arr::has($params_array, 'lastname')) {
+                        $user->lastname = $params_array['lastname'];
+                    }
+
+                    if(Arr::has($params_array, 'id_type')) {
+                        $user->id_type = $params_array['id_type'];
+                    }
+
+                    if(Arr::has($params_array, 'id_num')) {
+                        $user->id_num = $params_array['id_num'];
+                    }
+
                     if(!$user->isDirty()){
                         return $this->errorResponse('se debe especificar al menos un valor', 422);
                     }
-                    $isTeacher = $user->where('id', $user->id)
-                        ->where('profile_id', User::TEACHER_PROFILE)
-                        ->count();
-                    if($isTeacher == 0) {
-                        return $this->errorResponse("Este usuario no es docente", 404);
-                    }
-                    $user::where('id', $user->id)
-                        ->update([
-                            'profile_id' => User::COORDINATOR_PROFILE,
-                        ]);
-                    Program::where('id', $params_array['program_id'])
-                        ->update([
-                            'coordinator_id' => $user->id
-                        ]);
+
+                    $user->save();
                     return $this->showOne($user);
                 }
             }else{
@@ -137,6 +142,46 @@ class UserController extends ApiController
             return $this->errorResponse('La estrucutra del json no es valida', 422);
         }
     }
+
+    public function ascent(Request $request, User $user)
+    {
+        $rules = [
+            'program_id'=>'required|integer',
+        ];
+
+        $json = $request->input('json', null);
+        if (!Empty($json)){
+            $params_array = array_map('trim', json_decode($json, true));
+            if (!Empty($params_array)){
+                $validate = $this->checkValidation($params_array, $rules);
+                if ($validate->fails()){
+                    return $this->errorResponse("datos no validos", 400, $validate->errors());
+                }else{
+                    if(!$user->isDirty()){
+                        return $this->errorResponse('se debe especificar al menos un valor', 422);
+                    }
+                    $isTeacher = $user->where('id', $user->id)
+                        ->where('profile_id', User::TEACHER_PROFILE)
+                        ->count();
+                    if($isTeacher == 0) {
+                        return $this->errorResponse("Este usuario no es docente", 404);
+                    }
+                    DB::transaction(function () use ($user, $params_array) {
+                        DB::table('users')->where('id', $user->id)
+                            ->update(['profile_id' => User::COORDINATOR_PROFILE]);
+                        DB::table('programs')->where('id', $params_array['program_id'])
+                            ->update(['coordinator_id' => $user->id]);
+                    });
+                    return $this->showOne($user);
+                }
+            }else{
+                return $this->errorResponse('Datos Vacios!', 422);
+            }
+        }else{
+            return $this->errorResponse('La estrucutra del json no es valida', 422);
+        }
+    }
+
 
     public function onlyTrashed(User $user)
     {
