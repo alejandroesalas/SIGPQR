@@ -24,7 +24,7 @@ export class UserService {
         .set('Authorization',this.currentUser.token);
       return this.http.get<any>(global.url+'users',{headers:headers}).
       pipe(map(response => {
-        if (response.status == 'success'){
+        if (response && response.status == 'success'){
           return response.data;
         }else{
           return response;
@@ -34,14 +34,17 @@ export class UserService {
       return false;
     }
   }
-  public getUser(id:number):Observable<User>|boolean{
+  public getUser(id:number):Observable<any>|boolean{
     if (this.currentUser){
       let headers = new HttpHeaders().set('content-type',global.contentType)
         .set('Authorization',this.currentUser.token);
       return this.http.get<any>(global.url+'users/'+id,{headers:headers}).
       pipe(map(response => {
-        console.log(response);
-        return response;
+        if (response && response.status == 'success'){
+          return response.data;
+        }else{
+          return response;
+        }
       }));
     }else {
       return false;

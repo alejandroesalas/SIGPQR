@@ -18,12 +18,14 @@ export class UsersComponent implements OnInit {
     public modal_id:string;
     public admin_profile = Profile.admin;
     public teacher_profile = Profile.teacher;
+    public loading: boolean;
   constructor(private userService:UserService,
               private modalService: ModalServiceService,
               private route: ActivatedRoute,
               private authService: AuthService,
               private router: Router,
              ) {
+    this.loading = true;
     this.modal_id = "newUserModal";
     this.currentUSer = new User(0,'','','','',0,'','','',0,0);
   }
@@ -45,6 +47,7 @@ export class UsersComponent implements OnInit {
     if (susbcription){
       susbcription.subscribe(value => {
         this.docentes = value;
+        this.loading = false;
       }, error => {
         console.log('errores', error);
       });
