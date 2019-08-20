@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {Profile} from "../../../models/Profile";
-import {ModalServiceService} from "../../../services/modal-service.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AuthService} from "../../../services/authService/auth.service";
 import {User} from "../../../models/User";

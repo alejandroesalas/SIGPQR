@@ -98,7 +98,6 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasMany(Token::class);
     }
-
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *

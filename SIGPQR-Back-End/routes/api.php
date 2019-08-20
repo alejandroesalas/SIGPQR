@@ -34,6 +34,10 @@ Route::resource('faculties.programs','Faculty\FacultyProgramController', ['only'
 Route::get('count-faculties','Faculty\FacultyController@countFaculties');
 //ruta del controlador de programas
 Route::apiResource('programs','Program\ProgramController');
+Route::get('only-programs-trashed','Program\ProgramController@onlyTrashed');
+Route::post('restore-program/{id}','Program\ProgramController@restore');
+Route::get('count-programs-eliminated','Program\ProgramController@countProgramsEliminated');
+Route::get('unassigned-programs','Program\ProgramController@showUnassignedPrograms');
 Route::get('programs/{id}/faculties','Program\ProgramController@faculty');
 Route::get('programs/{id}/coordinators','Program\ProgramController@coordinator');
 Route::get('programs/{id}/students','Program\ProgramController@getStudents');
@@ -56,11 +60,13 @@ Route::post('restore-student/{id}','Student\StudentController@restore');
 Route::get('count-students-eliminated','Student\StudentController@countStudentsEliminated');
 //ruta del controlador de Coordinadores
 Route::resource('coordinators', 'Coordinator\CoordinatorController', ['except' => ['create', 'edit']]);
+Route::put('abasement-coordinator/{coordinator}', 'Coordinator\CoordinatorController@abasement');
 Route::resource('coordinators.responses', 'Coordinator\CoordinatorResponseController', ['except' => ['create', 'edit']]);
 Route::get('count-coordinators','Coordinator\CoordinatorController@countCoordinators');
 Route::get('count-teachers','User\UserController@countTeachers');
 //ruta del controlador de usuarios
 Route::resource('users', 'User\UserController', ['except' => ['create', 'edit']]);
+Route::put('ascent-users/{user}', 'User\UserController@ascent');
 //soft deleting teachers
 Route::get('only-teachers-trashed','User\UserController@onlyTrashed');
 Route::post('restore-teacher/{id}','User\UserController@restore');

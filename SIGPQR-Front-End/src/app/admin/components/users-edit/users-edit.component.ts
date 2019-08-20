@@ -2,10 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {Profile} from "../../../models/Profile";
 import {ModalServiceService} from "../../../services/modal-service.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {AuthService} from "../../../services/authService/auth.service";
-import {error, isNumber} from "util";
+import { isNumber} from "util";
 import {UserService} from "../../../services/user/user.service";
-import {Observable} from "rxjs";
 import {User} from "../../../models/User";
 
 @Component({
@@ -38,7 +36,19 @@ export class UsersEditComponent implements OnInit {
     });
   }
   editUser(form){
-
+    this.loading = true;
+    let subscription;
+    subscription = this.userService.update(this.currentUser);
+    if (subscription){
+      subscription.subscribe(user=>{
+        this.currentUser = user;
+        this.loading = false;
+        this.router.navigate(['admin/users']);
+      },error =>{
+        console.log('errores', error);
+        this.loading = false;
+      });
+    }
   }
   getUser(id:number){
     let subscription;
@@ -51,6 +61,5 @@ export class UsersEditComponent implements OnInit {
         console.log('errores', error);
       });
     }
-
   }
 }

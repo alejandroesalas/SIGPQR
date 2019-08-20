@@ -10,6 +10,7 @@ class Profile extends Model
      const  ADMIN_PROFILE = 'administrador';
      const  STUDENT_PROFILE = 'estudiante';
      const  COOR_PROFILE = 'coordinador';
+    const  COOR_PROFILE_NUM = 2;
     use SoftDeletes;
     protected $table = 'profiles';
     protected $fillable = [

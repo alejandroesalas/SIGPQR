@@ -7,6 +7,7 @@ import {map} from "rxjs/operators";
 import {Profile} from "../../models/Profile";
 import {User} from "../../models/User";
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -54,6 +55,15 @@ export class UserService {
     let headers = new HttpHeaders().set('content-type',global.contentType);
     let params = 'json='+JSON.stringify(user);
     return this.http.post<any>(global.url+'users',params,{headers:headers}).
+    pipe(map(data => {
+      console.log(data);
+      return data;
+    }));
+  }
+  public update(user:User):Observable<any>|boolean{
+    let headers = new HttpHeaders().set('content-type',global.contentType);
+    let params = 'json='+JSON.stringify(user);
+    return this.http.put<any>(global.url+'users/'+user.id,params,{headers:headers}).
     pipe(map(data => {
       console.log(data);
       return data;

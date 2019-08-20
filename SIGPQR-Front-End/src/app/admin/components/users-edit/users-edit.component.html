@@ -34,14 +34,14 @@
               <div class="row form-group">
                 <i class="material-icons prefix">contact_mail</i>
                 <div class="input-field col s6">
-                  <input id="email" type="email" placeholder="Email" class="validate" [(ngModel)]="currentUser.email" name="email" required
+                  <input disabled id="email" type="email" placeholder="Email" class="validate" [(ngModel)]="currentUser.email" name="email" required
                          pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$">
-                  <label >Email</label>
+                  <!--<label >Email</label>-->
                 </div>
                 <div class="input-field col s6">
                   <mat-form-field style="width: 100%">
                     <mat-label>Tipo de usuario</mat-label>
-                    <mat-select required [(ngModel)]="currentUser.profile_id" name="profile_id">
+                    <mat-select required disabled [(ngModel)]="currentUser.profile_id" name="profile_id">
                       <mat-option value="" disabled selected>Seleccionar...</mat-option>
                       <mat-option [value]="admin_profile">Administrador</mat-option>
                       <mat-option [value]="teacher_profile">Docente</mat-option>

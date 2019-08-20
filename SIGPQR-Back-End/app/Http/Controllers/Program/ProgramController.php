@@ -5,13 +5,15 @@ namespace App\Http\Controllers\Program;
 use App\Coordinator;
 use App\Http\Controllers\ApiController;
 use App\Program;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProgramController extends ApiController
 {
     public function __construct()
     {
-        //$this->middleware('auth:api', ['except' => ['index']]);
+        $this->middleware('auth:api', ['except' => ['index']]);
         //$this->middleware('auth',['except'=>['auth/login']]);
     }
 
@@ -103,7 +105,7 @@ class ProgramController extends ApiController
                     return $this->errorResponse("datos no validos",$validate->errors());
                 }else{
                     $program->name = $params_array['name'];
-                    $program->saveOrFail();
+                   // $program->saveOrFail();
                     if($program->isDirty()){
                         return $this->errorResponse('se debe especificar al menos un valor','',422);
                     }
@@ -118,6 +120,34 @@ class ProgramController extends ApiController
         }
     }
 
+    public function showUnassignedPrograms()
+    {
+        $programs = Program::all()->where('coordinator_id', null);
+        return $this->showAll($programs);
+    }
+
+    public function onlyTrashed(Program $program)
+    {
+        $programs = $program->onlyTrashed()
+            ->get();
+        return $this->showAll($programs);
+    }
+
+    public function countProgramsEliminated(Program $program)
+    {
+        $countProgramsEliminated = $program->onlyTrashed()
+            ->count();
+        return $this->showOther($countProgramsEliminated);
+    }
+
+    public function restore($id)
+    {
+        $program = Program::onlyTrashed()->where('id', $id)
+            ->first();
+            $program->restore();
+        return $this->showOne($program);
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -126,6 +156,17 @@ class ProgramController extends ApiController
      */
     public function destroy(Program $program)
     {
-        //
+        DB::transaction(function () use ($program) {
+            $idCoordinator = $program->coordinator_id;
+            DB::table('users')->where('id', $idCoordinator)
+                ->update([
+                    'profile_id' => User::TEACHER_PROFILE,
+                    'status' => User::FALSE_STATE
+                ]);
+            DB::table('programs')->where('id', $program->id)
+                ->update(['coordinator_id' => null]);
+            $program->delete();
+        });
+        return $this->showOne($program);
     }
 }
