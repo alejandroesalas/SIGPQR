@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Profile;
 use App\Coordinator;
 use App\Program;
+use Illuminate\Support\Facades\DB;
 
 class CoordinatorController extends ApiController
 {
@@ -50,6 +51,11 @@ class CoordinatorController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Coordinator $coordinator)
+    {
+
+    }
+
+    public function abasement(Request $request, Coordinator $coordinator)
     {
         $rules = [
             'program_id'=>'required|integer',
