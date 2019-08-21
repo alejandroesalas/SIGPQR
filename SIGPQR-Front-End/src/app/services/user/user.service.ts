@@ -7,7 +7,6 @@ import {map} from "rxjs/operators";
 import {Profile} from "../../models/Profile";
 import {User} from "../../models/User";
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -18,7 +17,11 @@ export class UserService {
               authService:AuthService) {
     this.currentUser = authService.currentUserValue;
   }
-
+  public checkEmail(email:String):Observable<any>{
+    let headers = new HttpHeaders().set('content-type',global.contentType);
+    let params = 'json={\"email\":'+JSON.stringify(email)+'}';
+    return this.http.post<any>(global.url+'check-email',params,{headers:headers});
+  }
   public getAll():Observable<any>|boolean{
     if (this.currentUser){
       let headers = new HttpHeaders().set('content-type',global.contentType)
@@ -51,17 +54,15 @@ export class UserService {
       return false;
     }
   }
-  public store(user:User):Observable<any>|boolean{
-    let headers = new HttpHeaders().set('content-type',global.contentType);
+  public store(user:User):Observable<any>{
+    let headers = new HttpHeaders().set('content-type',global.contentType)
+      .set('Authorization',this.currentUser.token);
     let params = 'json='+JSON.stringify(user);
-    return this.http.post<any>(global.url+'users',params,{headers:headers}).
-    pipe(map(data => {
-      console.log(data);
-      return data;
-    }));
+    return this.http.post<any>(global.url+'users',params,{headers:headers});
   }
   public update(user:User):Observable<any>|boolean{
-    let headers = new HttpHeaders().set('content-type',global.contentType);
+    let headers = new HttpHeaders().set('content-type',global.contentType)
+      .set('Authorization',this.currentUser.token);
     let params = 'json='+JSON.stringify(user);
     return this.http.put<any>(global.url+'users/'+user.id,params,{headers:headers}).
     pipe(map(data => {

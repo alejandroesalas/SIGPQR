@@ -47,11 +47,10 @@ class UserController extends ApiController
     {
         $rules = [
             'name'=>'required',
-            'lastname'=>'required',
+            'lastName'=>'required',
             'email' => 'email|unique:users',
             'id_type' => 'required|in:'. User::CC_TYPE . ',' . User::TI_TYPE,
             'id_num' => 'required|unique:users',
-            'password' => 'required|min:3',
         ];
         $json = $request->input('json', null);
         if (!Empty($json)){
@@ -59,7 +58,7 @@ class UserController extends ApiController
             if (!Empty($params_array)){
                 $validation = $this->checkValidation($params_array,$rules);
                 if ($validation->fails()){
-                    return $this->errorResponse("datos no validos",$validation->errors(),404 );
+                    return $this->errorResponse("datos no validos",$validation->errors(),400 );
                 }else{
                     unset($params_array['program_id ']);
                     $params_array['password'] = bcrypt($params_array['id_num']);
@@ -227,7 +226,28 @@ class UserController extends ApiController
             $user->restore();
         return $this->showOne($user);
     }
-
+    public function checkEmail(Request $request)
+    {
+        $rules = [
+            'email' => 'required|email|unique:users',
+        ];
+        $json = $request->input('json', null);
+        if (!Empty($json)){
+            $params_array = array_map('trim', json_decode($json, true));
+            if (!Empty($params_array)){
+                $validate = $this->checkValidation($params_array, $rules);
+                if ($validate->fails()){
+                    return $this->showOther(1);
+                }else{
+                    return $this->showOther(0);
+                }
+            }else{
+                return $this->errorResponse('Datos Vacios!', 422);
+            }
+        }else{
+            return $this->errorResponse('La estrucutra del json no es valida', 422);
+        }
+    }
     public function verify($token)
     {
         $user = User::where('verification_token',$token)->firstOrFail();

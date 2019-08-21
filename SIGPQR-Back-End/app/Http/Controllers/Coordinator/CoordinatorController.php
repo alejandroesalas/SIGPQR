@@ -29,8 +29,9 @@ class CoordinatorController extends ApiController
         /*$cordinadores = Coordinator::where('users.profile_id','=',Profile::COOR_PROFILE_NUM)
             ->with(['programs'])->get();*/
         $cordinadores = Program::wherehas('coordinator')
-            ->with('coordinator')
+            ->with(['coordinator'])
             ->get();
+
         /*$cordinadores = $profile
             ->where('name','=','coordinador')
             ->with(['users'])

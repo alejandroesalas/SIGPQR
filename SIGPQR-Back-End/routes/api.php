@@ -66,6 +66,7 @@ Route::get('count-coordinators','Coordinator\CoordinatorController@countCoordina
 Route::get('count-teachers','User\UserController@countTeachers');
 //ruta del controlador de usuarios
 Route::resource('users', 'User\UserController', ['except' => ['create', 'edit']]);
+Route::post('check-email', 'User\UserController@checkEmail');
 Route::put('ascent-users/{user}', 'User\UserController@ascent');
 //soft deleting teachers
 Route::get('only-teachers-trashed','User\UserController@onlyTrashed');

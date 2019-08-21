@@ -20,7 +20,13 @@ import { ProgramsComponent } from './components/programs/programs.component';
 import {ModalModule} from "../_modal";
 import { UsersEditComponent } from './components/users-edit/users-edit.component';
 import { UsersAddComponent } from './components/users-add/users-add.component';
-import {MatInputModule, MatProgressSpinnerModule, MatSelectModule} from "@angular/material";
+import {
+  MatInputModule,
+  MatProgressSpinnerModule,
+  MatSelectModule,
+  MatSnackBar,
+  MatSnackBarModule
+} from "@angular/material";
 
 
 @NgModule({
@@ -45,11 +51,12 @@ import {MatInputModule, MatProgressSpinnerModule, MatSelectModule} from "@angula
     MatSelectModule,
     MatInputModule,
     AdminRoutingModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSnackBarModule
   ],
   exports:[
   ],
-  providers:[AuthService,_adminGuard,StudentService,ProgramService,FacultyService,CoordinatorService]
+  providers:[MatSnackBar,AuthService,_adminGuard,StudentService,ProgramService,FacultyService,CoordinatorService]
 })
 export class AdminModule {
 
