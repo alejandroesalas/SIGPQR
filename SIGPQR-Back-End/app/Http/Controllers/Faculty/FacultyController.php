@@ -13,7 +13,7 @@ class FacultyController extends ApiController
 {
     public function __construct()
     {
-        //$this->middleware('auth:api', ['except' => ['index']]);
+        $this->middleware('auth:api', ['except' => ['index']]);
         //$this->middleware('auth',['except'=>['auth/login']]);
     }
     private $rules =array(

@@ -18,8 +18,8 @@ export class FacultyService {
 
     public getAll():Observable<Array<Faculty>>|boolean{
       if (this.currentUser){
-        let headers = new HttpHeaders().set('content-type',global.contentType)
-          .set('Authorization',this.currentUser.token);
+        let headers = new HttpHeaders().set('content-type',global.contentType);
+          //.set('Authorization',this.currentUser.token);
         return this.http.get<any>(global.url+'faculties',{headers:headers}).
           pipe(map(response => {
           if (response.status == 'success'){
@@ -35,8 +35,8 @@ export class FacultyService {
     }
   public getFaculty(id:number):Observable<Faculty>|boolean{
     if (this.currentUser){
-      let headers = new HttpHeaders().set('content-type',global.contentType)
-        .set('Authorization',this.currentUser.token);
+      let headers = new HttpHeaders().set('content-type',global.contentType);
+       // .set('Authorization',this.currentUser.token);
       return this.http.get<Faculty>(global.url+'faculties/'+id,{headers:headers}).
       pipe(map(faculty => {
         console.log(faculty);
@@ -48,8 +48,8 @@ export class FacultyService {
   }
   public store(faculty:Faculty):Observable<any>|boolean{
     if (this.currentUser){
-      let headers = new HttpHeaders().set('content-type',global.contentType)
-        .set('Authorization',this.currentUser.token);
+      let headers = new HttpHeaders().set('content-type',global.contentType);
+        //.set('Authorization',this.currentUser.token);
       let params = 'json='+JSON.stringify(faculty);
       return this.http.post<any>(global.url+'faculties',params,{headers:headers}).
       pipe(map(data => {
@@ -62,8 +62,8 @@ export class FacultyService {
   }
   public delete(id:number):Observable<any>|boolean{
     if (this.currentUser){
-      let headers = new HttpHeaders().set('content-type',global.contentType)
-        .set('Authorization',this.currentUser.token);
+      let headers = new HttpHeaders().set('content-type',global.contentType);
+        //.set('Authorization',this.currentUser.token);
       return this.http.delete<any>(global.url+'faculties'+id,{headers:headers}).
       pipe(map(response => {
         console.log(response);
@@ -76,8 +76,8 @@ export class FacultyService {
 
   public updateFaculty(faculty:Faculty):Observable<any>|boolean{
     if (this.currentUser){
-      let headers = new HttpHeaders().set('content-type',global.contentType)
-        .set('Authorization',this.currentUser.token);
+      let headers = new HttpHeaders().set('content-type',global.contentType);
+        //.set('Authorization',this.currentUser.token);
       let params = 'json='+JSON.stringify(faculty,(key, value) => {
         if (key == 'programs') {
           return undefined;
@@ -95,8 +95,8 @@ export class FacultyService {
   }
   public getProgramsByFaculty(id:number):Observable<any>|boolean{
     if (this.currentUser){
-      let headers = new HttpHeaders().set('content-type',global.contentType)
-        .set('Authorization',this.currentUser.token);
+      let headers = new HttpHeaders().set('content-type',global.contentType);
+      //  .set('Authorization',this.currentUser.token);
       return this.http.get<any>(global.url+'faculties/'+id+'/programs',{headers:headers}).
       pipe(map(programs => {
         console.log(programs);
@@ -108,8 +108,8 @@ export class FacultyService {
   }
   public count(){
     if (this.currentUser){
-      let headers = new HttpHeaders().set('content-type',global.contentType)
-        .set('Authorization',this.currentUser.token);
+      let headers = new HttpHeaders().set('content-type',global.contentType);
+        //.set('Authorization',this.currentUser.token);
       return this.http.get<any>(global.url+'count-faculties',{headers:headers}).
       pipe(map(data => {
         console.log(data);

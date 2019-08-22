@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {global} from "../../global";
@@ -12,114 +12,128 @@ import {Program} from "../../models/Program";
 })
 export class ProgramService {
 
-  public  currentUser;
+  public currentUser;
+
   constructor(private http: HttpClient,
-              authService:AuthService) {
+              authService: AuthService) {
     this.currentUser = authService.currentUserValue;
   }
 
-  public getAll():Observable<Array<Program>>{
-      let headers = new HttpHeaders().set('content-type', global.contentType);
-      return this.http.get<any>(global.url + 'programs', {headers: headers}).pipe(map(data => {
-        if (data.status == 'success'){
-          console.log('programas',data.data);
-          return data.data
-        }else{
-          return data;
-        }
-      }));
+  public getAll(): Observable<Array<Program>> {
+    let headers = new HttpHeaders().set('content-type', global.contentType);
+    return this.http.get<any>(global.url + 'programs', {headers: headers}).pipe(map(data => {
+      if (data.status == 'success') {
+        console.log('programas', data.data);
+        return data.data
+      } else {
+        return data;
+      }
+    }));
   }
-  public getProgram(id:number):Observable<Program>|boolean{
-    if (this.currentUser){
-      let headers = new HttpHeaders().set('content-type',global.contentType)
-        .set('Authorization',this.currentUser.token);
-      return this.http.get<Program>(global.url+'programs/'+id,{headers:headers}).
-      pipe(map(program => {
+
+  //unassigned-programs
+  public unassignedPrograms(): Observable<Array<Program>> {
+    let headers = new HttpHeaders().set('content-type', global.contentType);
+      //.set('Authorization', this.currentUser.token);
+    return this.http.get<any>(global.url + 'unassigned-programs', {headers: headers}).pipe(map(data => {
+      if (data.status == 'success') {
+       // console.log('programas',data.data);
+        return data.data
+      } else {
+        return data;
+      }
+    }));
+  }
+
+  public getProgram(id: number): Observable<Program> | boolean {
+    if (this.currentUser) {
+      let headers = new HttpHeaders().set('content-type', global.contentType)
+        .set('Authorization', this.currentUser.token);
+      return this.http.get<Program>(global.url + 'programs/' + id, {headers: headers}).pipe(map(program => {
         console.log(program);
         return program;
       }));
-    }else {
-      return false;
-    }
-  }
-  public store(program:Program):Observable<any>|boolean{
-    if (this.currentUser){
-      let headers = new HttpHeaders().set('content-type',global.contentType)
-        .set('Authorization',this.currentUser.token);
-      let params = 'json='+JSON.stringify(program);
-      return this.http.post<any>(global.url+'programs',params,{headers:headers}).
-      pipe(map(data => {
-        console.log(data);
-        return data;
-      }));
-    }else {
-      return false;
-    }
-  }
-  public delete(id:number):Observable<any>|boolean{
-    if (this.currentUser){
-      let headers = new HttpHeaders().set('content-type',global.contentType)
-        .set('Authorization',this.currentUser.token);
-      return this.http.delete<any>(global.url+'programs'+id,{headers:headers}).
-      pipe(map(response => {
-        console.log(response);
-        return response;
-      }));
-    }else {
-      return false;
-    }
-  }
-  public update(program:Program):Observable<any>|boolean{
-    if (this.currentUser){
-      let headers = new HttpHeaders().set('content-type',global.contentType)
-        .set('Authorization',this.currentUser.token);
-      let params = 'json='+JSON.stringify(program);
-      return this.http.put<any>(global.url+'programs'+program.id,params,{headers:headers}).
-      pipe(map(response => {
-        console.log(response);
-        return response;
-      }));
-    }else {
+    } else {
       return false;
     }
   }
 
-  public getCoordinator(id:number):Observable<any>|boolean{
-    if (this.currentUser){
-      let headers = new HttpHeaders().set('content-type',global.contentType)
-        .set('Authorization',this.currentUser.token);
-      return this.http.get<any>(global.url+'programs/'+id+'/coordinators',{headers:headers}).
-      pipe(map(coordinator => {
-        console.log(coordinator);
-        return coordinator;
-      }));
-    }else {
-      return false;
-    }
-  }
-  public count(){
-    if (this.currentUser){
-      let headers = new HttpHeaders().set('content-type',global.contentType)
-        .set('Authorization',this.currentUser.token);
-      return this.http.get<any>(global.url+'count-programs',{headers:headers}).
-      pipe(map(data => {
+  public store(program: Program): Observable<any> | boolean {
+    if (this.currentUser) {
+      let headers = new HttpHeaders().set('content-type', global.contentType)
+        .set('Authorization', this.currentUser.token);
+      let params = 'json=' + JSON.stringify(program);
+      return this.http.post<any>(global.url + 'programs', params, {headers: headers}).pipe(map(data => {
         console.log(data);
         return data;
       }));
-    }else {
+    } else {
       return false;
     }
   }
-  public getRequests(id:number){
-    if (this.currentUser){
-      let headers = new HttpHeaders().set('content-type',global.contentType)
-        .set('Authorization',this.currentUser.token);
-      return this.http.get<any>(global.url+'programs/'+this.currentUser.program_id+'/requests',{headers:headers}).
-      pipe(map(coordinator => {
+
+  public delete(id: number): Observable<any> | boolean {
+    if (this.currentUser) {
+      let headers = new HttpHeaders().set('content-type', global.contentType)
+        .set('Authorization', this.currentUser.token);
+      return this.http.delete<any>(global.url + 'programs' + id, {headers: headers}).pipe(map(response => {
+        console.log(response);
+        return response;
+      }));
+    } else {
+      return false;
+    }
+  }
+
+  public update(program: Program): Observable<any> | boolean {
+    if (this.currentUser) {
+      let headers = new HttpHeaders().set('content-type', global.contentType)
+        .set('Authorization', this.currentUser.token);
+      let params = 'json=' + JSON.stringify(program);
+      return this.http.put<any>(global.url + 'programs' + program.id, params, {headers: headers}).pipe(map(response => {
+        console.log(response);
+        return response;
+      }));
+    } else {
+      return false;
+    }
+  }
+
+  public getCoordinator(id: number): Observable<any> | boolean {
+    if (this.currentUser) {
+      let headers = new HttpHeaders().set('content-type', global.contentType)
+        .set('Authorization', this.currentUser.token);
+      return this.http.get<any>(global.url + 'programs/' + id + '/coordinators', {headers: headers}).pipe(map(coordinator => {
         console.log(coordinator);
         return coordinator;
       }));
-    }else {
+    } else {
+      return false;
+    }
+  }
+
+  public count() {
+    if (this.currentUser) {
+      let headers = new HttpHeaders().set('content-type', global.contentType)
+        .set('Authorization', this.currentUser.token);
+      return this.http.get<any>(global.url + 'count-programs', {headers: headers}).pipe(map(data => {
+        console.log(data);
+        return data;
+      }));
+    } else {
+      return false;
+    }
+  }
+
+  public getRequests(id: number) {
+    if (this.currentUser) {
+      let headers = new HttpHeaders().set('content-type', global.contentType)
+        .set('Authorization', this.currentUser.token);
+      return this.http.get<any>(global.url + 'programs/' + this.currentUser.program_id + '/requests', {headers: headers}).pipe(map(coordinator => {
+        console.log(coordinator);
+        return coordinator;
+      }));
+    } else {
       return false;
     }
   }

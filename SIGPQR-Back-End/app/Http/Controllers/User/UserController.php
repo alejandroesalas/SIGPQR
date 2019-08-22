@@ -155,30 +155,33 @@ class UserController extends ApiController
             if (!Empty($params_array)){
                 $validate = $this->checkValidation($params_array, $rules);
                 if ($validate->fails()){
-                    return $this->errorResponse("datos no validos", 400, $validate->errors());
+                    return $this->errorResponse("datos no validos", $validate->errors(),400);
                 }else{
-                    if(!$user->isDirty()){
-                        return $this->errorResponse('se debe especificar al menos un valor', 422);
-                    }
+                    /*if(!$user->isDirty()){
+                        //dd($user);
+                        return $this->errorResponse('se debe especificar al menos un valor', '',422);
+                    }*/
                     $isTeacher = $user->where('id', $user->id)
                         ->where('profile_id', User::TEACHER_PROFILE)
                         ->count();
                     if($isTeacher == 0) {
-                        return $this->errorResponse("Este usuario no es docente", 404);
+                        return $this->errorResponse("Este usuario no es docente", '',404);
                     }
                     DB::transaction(function () use ($user, $params_array) {
                         DB::table('users')->where('id', $user->id)
                             ->update(['profile_id' => User::COORDINATOR_PROFILE]);
+                        DB::table('users')->where('id', $user->id)
+                            ->update(['status' => User::ACTIVE_STATE]);
                         DB::table('programs')->where('id', $params_array['program_id'])
                             ->update(['coordinator_id' => $user->id]);
                     });
-                    return $this->showOne($user);
+                    return $this->showMessage("$user->name ahora es coordinador");
                 }
             }else{
-                return $this->errorResponse('Datos Vacios!', 422);
+                return $this->errorResponse('Datos Vacios!', '',422);
             }
         }else{
-            return $this->errorResponse('La estrucutra del json no es valida', 422);
+            return $this->errorResponse('La estrucutra del json no es valida', '',422);
         }
     }
 

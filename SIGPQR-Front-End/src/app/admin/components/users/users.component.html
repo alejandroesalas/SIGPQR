@@ -57,45 +57,29 @@
                 </tr>
 
                 <jw-modal id="promoverDocente">
-                  <!-- Inicio contenido MODAL 1-->
-                  <div class="modal-content">
-
-                    <!--Inicio CUERPO MODAL 1-->
-                    <div class="modal-body">
-
                       <!--Inicio FORM-->
-                      <div class="card-body">
-                        <form>
-                          <div class="row">
-                            <div class="input-field col s10">
-                              <select>
-                                <option value="" disabled selected>Seleccionar...</option>
-                                <option value="1">Arquitectura</option>
-                                <option value="2">Ingeniería industrial</option>
-                                <option value="3">Ingeniería de sistemas</option>
+                  <div class="align-content-center">
+                        <form  #formteacherToCoordinator (ngSubmit)="promoverDocente(formteacherToCoordinator)" class="form-group">
+                          <div class="row center-align">
+                            <div class="card-icon mr-4">
+                              <i class="fas fa-users"></i>
+                            </div>
+                            <mat-form-field style="width: 50%;">
+                              <mat-label>Asignar como coordinador de : </mat-label>
+                              <select matNativeControl [(ngModel)]="selectedProgram" name="selectedProgram">
+                                <!--<option value="" disabled selected>Seleccionar...</option>-->
+                                <option *ngFor="let program of programs" [value]="program.id">{{program.name}}</option>
                               </select>
-                              <label>Asigando como coordinador de : </label>
-                            </div>
-                            <div class="card-header card-header-success card-header-icon">
-                              <div class="card-icon">
-                                <i class="fas fa-users"></i>
-                              </div>
-                            </div>
+                            </mat-form-field>
                           </div>
                           <br>
                           <button (click)="closeModal('promoverDocente')" class="btn btn-danger left">Cancelar <i
                             class="fa fa-refresh"></i></button>
-                          <button (click)="promoverDocente()" type="submit" class="btn btn-success">
+                          <button type="submit" class="btn btn-success">
                             Promover<i class="fa fa-arrow-circle-right"></i>
                           </button>
                         </form>
-                      </div>
-                      <!--Fin CONTENIDO MODAL 2-->
-                    </div>
-
-
                   </div>
-
                 </jw-modal>
 
                 </tbody>
