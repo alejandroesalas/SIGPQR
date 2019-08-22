@@ -122,7 +122,9 @@ class ProgramController extends ApiController
 
     public function showUnassignedPrograms()
     {
-        $programs = Program::all()->where('coordinator_id', null);
+        $programs = Program::doesntHave('coordinator')->get();
+       /* $programs = Program::all()->where('coordinator_id', '=',null);
+        dd($programs);*/
         return $this->showAll($programs);
     }
 
