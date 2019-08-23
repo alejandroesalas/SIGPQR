@@ -1,5 +1,13 @@
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 
+header, main, footer {
+  padding-left: 300px;
+}
+@media only screen and (max-width : 992px) {
+  header, main, footer {
+    padding-left: 0;
+  }
+}
 .sidenav .user-details {
   padding: 0 16px;
   height: 65px;

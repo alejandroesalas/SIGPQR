@@ -1,10 +1,4 @@
 
-/*$(document).ready(function(){
-  $('.modal').modal();
-  $('select').formSelect();
-});*/$(document).ready(function(){
-  console.log('antes de loadfunciton')
-});
 function load(){
   console.log('cargando recursos');
   $(document).ready(function(){
@@ -20,6 +14,7 @@ function loadCollapsiblle(){
   $('.collapsible').collapsible();
 }
 function loadSidenav() {
+  $('.sidenav-trigger').sideNav();
   $('.sidenav').sideNav();
 }
 function loadSelect() {

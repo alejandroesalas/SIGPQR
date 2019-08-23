@@ -64,11 +64,11 @@ export class ProgramService {
     }
   }
 
-  public delete(id: number): Observable<any> | boolean {
+  public delete(id: number): Observable<any> | false {
     if (this.currentUser) {
       let headers = new HttpHeaders().set('content-type', global.contentType)
         .set('Authorization', this.currentUser.token);
-      return this.http.delete<any>(global.url + 'programs' + id, {headers: headers}).pipe(map(response => {
+      return this.http.delete<any>(global.url + 'programs/' + id, {headers: headers}).pipe(map(response => {
         console.log(response);
         return response;
       }));

@@ -4,7 +4,8 @@ import {Subscription} from "rxjs";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AuthService} from "../services/authService/auth.service";
 declare const loadCollapsiblle: any;
-declare const loadSelect:any;
+declare const loadSidenav:any;
+declare const load:any;
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -16,6 +17,7 @@ export class AdminComponent implements OnInit,OnDestroy {
               private route: ActivatedRoute,
               private authService:AuthService,
               private router: Router) {
+    loadSidenav();
 
   }
 
@@ -23,7 +25,9 @@ export class AdminComponent implements OnInit,OnDestroy {
    /* this.dynamicScriptLoader.load('general').then(data => {
       // Script Loaded Successfully
     }).catch(error => console.log(error));*/
+    load();
     loadCollapsiblle();
+    loadSidenav();
    this.logout()
   }
   logout(){

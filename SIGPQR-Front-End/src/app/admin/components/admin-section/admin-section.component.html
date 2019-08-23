@@ -3,29 +3,20 @@
     <div class="container">
       <a href="#" class="brand-logo center "><img src="Imagenes/logo.png" alt="" class="responsive-img valign profile-image" style="max-width:144px;max-height:60px"></a>
       <ul class="right">
-
-        <li>
-          <a href="" class=" white-text"><b>Contacto</b></a>
-        </li>
         <li>
           <a [routerLink]="['/logout/1']" id="login" class="white-text"><b>Cerrar Sesión</b></a>
         </li>
       </ul>
-
-
     </div>
-    <a href="#" data-target="abrirYCerrar-sidenav" class="sidenav-trigger"><i class="material-icons green-text">menu</i></a>
-
+    <a href="#" data-activates="menu-sidenav" class="sidenav-trigger"><i class="material-icons green-text">menu</i></a>
   </nav>
 
   <!--Inicio UL-SIDENAV -->
-  <ul id="abrirYCerrar-sidenav" class="sidenav sidenav-fixed green darken-2" style="width: 305px; left: 0px;">
+  <ul href="#" id="menu-sidenav" class="sidenav sidenav-fixed green darken-2" style="width: 305px; left: 0px;">
 
     <li class="user-details white-text center" style="background-color: #016836;">
       SIG<b>PQR</b>
-
     </li>
-
     <li class="user-view green darken-4">
       <div class="row container ">
         <div class="col s4 m4 l4">
@@ -43,7 +34,7 @@
     <!-- Inicio CONTAINER-->
     <div class=" row container mt-3">
       <li class="">
-        <a [routerLink]="['/admin']" class="   waves-effect waves-teal white-text">
+        <a [routerLink]="['/admin']" class="waves-effect waves-teal white-text">
           <i class="material-icons white-text">home</i>Inicio
         </a>
       </li>
@@ -62,8 +53,6 @@
           <a class="collapsible-header waves-effect waves-teal white-text">
             <i class="material-icons left white-text">dashboard</i>Gestión
           </a>
-
-
           <div class="collapsible-body green darken-3">
             <ul>
               <li><a [routerLink]="['faculties']" class="white-text">Facultad</a>
@@ -84,6 +73,6 @@
 
     </div>
 
-    <!-- Fin CONTAINER-->
   </ul>
+  <!-- Fin Ul-SIdeNAv-->
 </header>

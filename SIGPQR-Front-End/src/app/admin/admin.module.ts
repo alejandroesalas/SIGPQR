@@ -29,6 +29,9 @@ import {
 } from "@angular/material";
 import { ProgramsAddComponent } from './components/programs-add/programs-add.component';
 import { ProgramsEditComponent } from './components/programs-edit/programs-edit.component';
+import { CoordinatorsHomeComponent } from './components/coordinators-home/coordinators-home.component';
+import { CoordinatorsAddComponent } from './components/coordinators-add/coordinators-add.component';
+import { CoordinatorsAditComponent } from './components/coordinators-adit/coordinators-adit.component';
 
 
 @NgModule({
@@ -44,7 +47,10 @@ import { ProgramsEditComponent } from './components/programs-edit/programs-edit.
     UsersEditComponent,
     UsersAddComponent,
     ProgramsAddComponent,
-    ProgramsEditComponent
+    ProgramsEditComponent,
+    CoordinatorsHomeComponent,
+    CoordinatorsAddComponent,
+    CoordinatorsAditComponent
   ],
   imports: [
     CommonModule,

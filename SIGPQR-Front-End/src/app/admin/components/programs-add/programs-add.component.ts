@@ -3,7 +3,6 @@ import {Program} from "../../../models/Program";
 import {ProgramService} from "../../../services/program/program.service";
 import {Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material";
-import {error} from "util";
 import {FacultyService} from "../../../services/faculty/faculty.service";
 import {Faculty} from "../../../models/Faculty";
 
@@ -19,7 +18,7 @@ export class ProgramsAddComponent implements OnInit {
               private facultyService:FacultyService,
               private router: Router,
               private _snackBar: MatSnackBar) {
-    this.currentProgram = new Program(0,'',0,0);
+    this.currentProgram = new Program(0,'',0,null);
   }
 
   ngOnInit() {
