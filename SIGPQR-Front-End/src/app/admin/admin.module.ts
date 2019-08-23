@@ -27,6 +27,8 @@ import {
   MatSnackBar,
   MatSnackBarModule
 } from "@angular/material";
+import { ProgramsAddComponent } from './components/programs-add/programs-add.component';
+import { ProgramsEditComponent } from './components/programs-edit/programs-edit.component';
 
 
 @NgModule({
@@ -40,7 +42,9 @@ import {
     UsersComponent,
     ProgramsComponent,
     UsersEditComponent,
-    UsersAddComponent
+    UsersAddComponent,
+    ProgramsAddComponent,
+    ProgramsEditComponent
   ],
   imports: [
     CommonModule,

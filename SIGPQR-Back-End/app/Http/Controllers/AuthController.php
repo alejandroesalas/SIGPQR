@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ApiController;
+use Tymon\JWTAuth\JWTAuth;
 
 class AuthController extends ApiController
 {
 
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login']]);
+        //$this->middleware('auth:api', ['except' => ['login']]);
         //$this->middleware('auth',['except'=>['auth/login']]);
     }
 

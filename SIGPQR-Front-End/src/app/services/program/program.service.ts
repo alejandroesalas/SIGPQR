@@ -19,25 +19,18 @@ export class ProgramService {
     this.currentUser = authService.currentUserValue;
   }
 
-  public getAll(): Observable<Array<Program>> {
+  public getAll(): Observable<any> {
     let headers = new HttpHeaders().set('content-type', global.contentType);
-    return this.http.get<any>(global.url + 'programs', {headers: headers}).pipe(map(data => {
-      if (data.status == 'success') {
-        console.log('programas', data.data);
-        return data.data
-      } else {
-        return data;
-      }
-    }));
+    return this.http.get<any>(global.url + 'programs', {headers: headers})
   }
 
   //unassigned-programs
   public unassignedPrograms(): Observable<Array<Program>> {
     let headers = new HttpHeaders().set('content-type', global.contentType);
-      //.set('Authorization', this.currentUser.token);
+    //.set('Authorization', this.currentUser.token);
     return this.http.get<any>(global.url + 'unassigned-programs', {headers: headers}).pipe(map(data => {
       if (data.status == 'success') {
-       // console.log('programas',data.data);
+        // console.log('programas',data.data);
         return data.data
       } else {
         return data;
@@ -45,7 +38,7 @@ export class ProgramService {
     }));
   }
 
-  public getProgram(id: number): Observable<Program> | boolean {
+  public getProgram(id: number): Observable<Program> | false {
     if (this.currentUser) {
       let headers = new HttpHeaders().set('content-type', global.contentType)
         .set('Authorization', this.currentUser.token);
@@ -58,10 +51,9 @@ export class ProgramService {
     }
   }
 
-  public store(program: Program): Observable<any> | boolean {
+  public store(program: Program): Observable<any> | false {
     if (this.currentUser) {
       let headers = new HttpHeaders().set('content-type', global.contentType)
-        .set('Authorization', this.currentUser.token);
       let params = 'json=' + JSON.stringify(program);
       return this.http.post<any>(global.url + 'programs', params, {headers: headers}).pipe(map(data => {
         console.log(data);
@@ -90,7 +82,7 @@ export class ProgramService {
       let headers = new HttpHeaders().set('content-type', global.contentType)
         .set('Authorization', this.currentUser.token);
       let params = 'json=' + JSON.stringify(program);
-      return this.http.put<any>(global.url + 'programs' + program.id, params, {headers: headers}).pipe(map(response => {
+      return this.http.put<any>(global.url + 'programs/' + program.id, params, {headers: headers}).pipe(map(response => {
         console.log(response);
         return response;
       }));

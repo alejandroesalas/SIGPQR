@@ -87,7 +87,7 @@ class Handler extends ExceptionHandler
         if(config('app.debug')){
             return parent::render($request, $exception);
         }
-        return $this->errorResponse('Falla inesperada. Intente luego', 500);
+        return $this->errorResponse('Falla inesperada. Intente luego', '',500);
     }
 
     /**
@@ -99,7 +99,7 @@ class Handler extends ExceptionHandler
      */
     protected function unauthenticated($request, AuthenticationException $exception)
     {
-        return $this->errorResponse('No autenticado.', 401);
+        return $this->errorResponse('No autenticado.', $exception->getMessage(),401);
     }
 
     /**
@@ -113,6 +113,6 @@ class Handler extends ExceptionHandler
     protected function convertValidationExceptionToResponse(ValidationException $e, $request)
     {
         $errors = $e->validator->errors()->getMessages();
-        return $this->errorResponse($errors, 422);
+        return $this->errorResponse('hay errores',$errors, 422);
     }
 }

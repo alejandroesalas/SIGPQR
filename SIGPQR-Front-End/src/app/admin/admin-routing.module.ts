@@ -12,6 +12,8 @@ import {ProgramsComponent} from "./components/programs/programs.component";
 import {global} from "../global";
 import {UsersEditComponent} from "./components/users-edit/users-edit.component";
 import {UsersAddComponent} from "./components/users-add/users-add.component";
+import {ProgramsAddComponent} from "./components/programs-add/programs-add.component";
+import {ProgramsEditComponent} from "./components/programs-edit/programs-edit.component";
 
 const adminRoutes: Routes = [
   {path:global.tagAdmin,component:AdminComponent,
@@ -27,7 +29,13 @@ const adminRoutes: Routes = [
         ]
       },
       {path:global.tagFaculty,component:FacultiesComponent},
-      {path:global.tagProgram,component:ProgramsComponent},
+      {path:global.tagProgram,
+      children:[
+        {path: '',component:ProgramsComponent},
+        {path: global.tagAdd,component: ProgramsAddComponent},
+        {path:':id/edit',component:ProgramsEditComponent}
+      ]
+      },
       {path:'**',pathMatch:'full',redirectTo:''}
     ],
     canActivate:[_adminGuard],

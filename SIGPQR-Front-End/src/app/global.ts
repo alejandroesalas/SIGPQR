@@ -6,4 +6,6 @@ export var global = {
   tagUser:'users',
   tagCoordinator:'coordinator',
   tagFaculty:'faculties',
+  tagAdd:'add',
+  tagEdit:'edit'
 }
