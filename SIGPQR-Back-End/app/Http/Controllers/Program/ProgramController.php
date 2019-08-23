@@ -7,6 +7,7 @@ use App\Http\Controllers\ApiController;
 use App\Program;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
 class ProgramController extends ApiController
@@ -20,7 +21,7 @@ class ProgramController extends ApiController
     private $rules =array(
         'name'=>'required',
         'faculty_id'=>'required|integer',
-        'coordinator_id'=>'required|integer'
+        'coordinator_id'=>'integer'
     );
     private $updateRules =array(
         'name'=>'required',
@@ -56,16 +57,19 @@ class ProgramController extends ApiController
             if (!Empty($params_array)){
                 $validate = $this->checkValidation($params_array,$this->rules);
                 if ($validate->fails()){
-                    return $this->errorResponse("datos no validos",$validate->errors());
+                    return $this->errorResponse("datos no validos", 422, $validate->errors());
                 }else{
-                    //Validar que la persona que se asigne como coordinador tenga ese perfil
-                    $coordinator = Coordinator::findOrFail($params_array['coordinator_id']);
-                    if($coordinator->profile->name == 'coordinador'){
-                        $program = Program::create($params_array);
-                        return $this->showOne($program);
-                    }else{
-                        return $this->errorResponse('El usuario especificado no es un coordinador',422);
+                    if(Arr::has($params_array, 'coordinator_id')) {
+                        $coordinator = Coordinator::findOrFail($params_array['coordinator_id']);
+                        if($coordinator->profile->name == 'coordinador'){
+                            $program = Program::create($params_array);
+                            return $this->showOne($program);
+                        }else{
+                            return $this->errorResponse('El usuario especificado no es un coordinador',422);
+                        }
                     }
+                    $program =  Program::create($params_array);
+                    return $this->showOne($program);
                 }
             }else{
                 return $this->errorResponse('Datos Vacios!',422);
@@ -100,13 +104,12 @@ class ProgramController extends ApiController
         if (!Empty($json)){
             $params_array = array_map('trim', json_decode($json, true));
             if (!Empty($params_array)){
-                $validate = $this->checkValidation($params_array,$this->updateRules);
+                $validate = $this->checkValidation($params_array, $this->updateRules);
                 if ($validate->fails()){
-                    return $this->errorResponse("datos no validos",$validate->errors());
+                    return $this->errorResponse("datos no validos", 422, $validate->errors());
                 }else{
                     $program->name = $params_array['name'];
-                   // $program->saveOrFail();
-                    if($program->isDirty()){
+                    if(!$program->isDirty()){
                         return $this->errorResponse('se debe especificar al menos un valor','',422);
                     }
                     $program->save();
