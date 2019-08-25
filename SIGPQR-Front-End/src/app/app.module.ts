@@ -30,7 +30,7 @@ import {TokenInterceptorService} from "./services/token-interceptor.service";
     ErrorComponent,
     VerifyComponent,
     ForgotPasswordComponent,
-    LogoSectionComponent,
+    LogoSectionComponent
   ],
   imports: [
     BrowserModule,

@@ -23,9 +23,7 @@ export class ProgramService {
     let headers = new HttpHeaders().set('content-type', global.contentType);
     if (withCoordinators){
       return this.http.get<any>(global.url + 'coordinators', {headers: headers})
-
     }else{
-
       return this.http.get<any>(global.url + 'programs', {headers: headers})
     }
   }

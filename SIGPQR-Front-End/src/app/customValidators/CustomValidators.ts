@@ -1,5 +1,5 @@
 import {UserService} from "../services/user/user.service";
-import {AbstractControl, AsyncValidatorFn, ValidationErrors} from "@angular/forms";
+import {AbstractControl, AsyncValidatorFn, ValidationErrors, ValidatorFn} from "@angular/forms";
 import {Observable} from "rxjs";
 import {map} from "rxjs/operators";
 
@@ -12,6 +12,14 @@ export function emailValidation(userService: UserService): AsyncValidatorFn {
       }
       return {'notAvailable':true};
     }));
+  }
+}
+export function passwordValidation(passWord:AbstractControl):ValidatorFn {
+  return(control: AbstractControl):{[key:string]:boolean}|null=>{
+    if (control.value !== passWord.value){
+      return {'notequal':true};
+    }
+    return null;
   }
 
 }

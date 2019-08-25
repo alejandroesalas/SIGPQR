@@ -255,6 +255,7 @@ class UserController extends ApiController
     {
         $user = User::where('verification_token',$token)->firstOrFail();
         $user->verified = User::VERIFIED_USER;
+        $user->status =  User::ACTIVE_STATE;
         $user->verification_token = null;
         $user->save();
         return $this->showMessage('Correo validado con exito.');

@@ -11,6 +11,7 @@ const appRoutes: Routes = [
   {path:'registro',component:RegisterComponent},
   {path:'verify/:token',component:VerifyComponent},
   {path:'logout/:sure',component:LoginComponent},
+  {path:'error',component:ErrorComponent},
   {path:'**',component:ErrorComponent}
 ];
 

@@ -62,7 +62,7 @@ class StudentController extends ApiController
                 }else{
                     $params_array['password'] = bcrypt($params_array['password']);
                     $params_array['profile_id'] = User::STUDENT_PROFILE;
-                    $params_array['status'] = User::ACTIVE_STATE;
+                    $params_array['status'] = User::FALSE_STATE;
                     $params_array['admin'] = User::REGULAR_USER;
                     $params_array['verified']= User::NOT_VERIFIED_USER;
                     $params_array['verification_token'] =User::createVerificationToken();

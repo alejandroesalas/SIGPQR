@@ -47,6 +47,11 @@ export class AuthService {
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
   }
+
+  activateUser(token:string):Observable<any>{
+    let headers = new HttpHeaders().set('content-type',global.contentType);
+    return this.http.get<any>(global.url+`users/verify/`+token,{headers:headers})
+  }
   private redirectTo(profile_id:number){
     switch (profile_id) {
       case 1:

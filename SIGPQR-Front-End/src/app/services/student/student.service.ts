@@ -46,7 +46,7 @@ export class StudentService {
       return false;
     }
   }
-  public store(student:Student):Observable<any>|boolean{
+  public store(student:Student):Observable<any>{
       let headers = new HttpHeaders().set('content-type',global.contentType);
       let params = 'json='+JSON.stringify(student);
       return this.http.post<any>(global.url+'students',params,{headers:headers}).
