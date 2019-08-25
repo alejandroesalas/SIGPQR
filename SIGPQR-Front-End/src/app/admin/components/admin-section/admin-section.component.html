@@ -36,6 +36,11 @@
           <i class="material-icons white-text">home</i>Inicio
         </a>
       </li>
+      <li class="" *ngIf="iscoordinator()">
+        <a [routerLink]="['/coordinador']" class="waves-effect waves-teal white-text">
+          <i class="material-icons white-text">home</i>Coordinación
+        </a>
+      </li>
 
       <li>
         <a [routerLink]="['users']" class="  waves-effect waves-teal white-text">

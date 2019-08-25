@@ -3,6 +3,7 @@ import {DynamicScriptLoaderService} from "../../../services/dynamic-script-loade
 import {AuthService} from "../../../services/authService/auth.service";
 import {global} from "../../../global";
 import {Subscription} from "rxjs";
+import {Profile} from "../../../models/Profile";
 
 @Component({
   selector: 'admin-section',
@@ -27,5 +28,9 @@ export class AdminSectionComponent implements OnInit,OnDestroy {
   logout(){
     this.authService.logout();
   }
-
+ iscoordinator(){
+   if (this.currentUser && this.currentUser.profile_id == Profile.coordinator){
+     return true;
+   }
+}
 }
