@@ -75,10 +75,10 @@ export class ProgramService {
       let headers = new HttpHeaders().set('content-type', global.contentType)
         .set('Authorization', this.currentUser.token);
       return this.http.delete<any>(global.url + 'programs/' + id, {headers: headers}).pipe(map(response => {
-        console.log(response);
         return response;
       }));
     }
+    return null;
   }
 
   public update(program: Program): Observable<any> | boolean {
