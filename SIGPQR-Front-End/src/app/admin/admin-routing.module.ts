@@ -14,6 +14,9 @@ import {UsersEditComponent} from "./components/users-edit/users-edit.component";
 import {UsersAddComponent} from "./components/users-add/users-add.component";
 import {ProgramsAddComponent} from "./components/programs-add/programs-add.component";
 import {ProgramsEditComponent} from "./components/programs-edit/programs-edit.component";
+import {CoordinatorsHomeComponent} from "../admin/components/coordinators-home/coordinators-home.component";
+import {CoordinatorsAddComponent} from "./components/coordinators-add/coordinators-add.component";
+import {CoordinatorsAditComponent} from "./components/coordinators-adit/coordinators-adit.component";
 
 const adminRoutes: Routes = [
   {path:global.tagAdmin,component:AdminComponent,
@@ -36,6 +39,13 @@ const adminRoutes: Routes = [
         {path:':id/edit',component:ProgramsEditComponent}
       ]
       },
+      {path:global.tagCoordinator,
+      children:[
+        {path:'',component:CoordinatorsHomeComponent},
+        {path:'add',component:CoordinatorsAddComponent},
+        {path:':id/edit',component:CoordinatorsAditComponent},
+        {path:'**',pathMatch:'full',redirectTo:''}
+      ]},
       {path:'**',pathMatch:'full',redirectTo:''}
     ],
     canActivate:[_adminGuard],

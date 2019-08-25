@@ -5,4 +5,7 @@ export class Coordinator extends User{
     super(0, '','' , '', '',0 , '',''
       , '', 0,0 ,'' ,'' );
   }
+
+
+
 }

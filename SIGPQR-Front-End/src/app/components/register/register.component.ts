@@ -18,7 +18,7 @@ export class RegisterComponent implements OnInit {
     this.loadPrograms();
   }
   private loadPrograms(){
-    this.programService.getAll().subscribe(value => {
+    this.programService.getAll(false).subscribe(value => {
       this.programas = value;
       //console.log('indice 1',this.programas[1]);
        //console.log('respuesta',value);

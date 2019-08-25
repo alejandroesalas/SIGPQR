@@ -26,7 +26,6 @@
             "styles": [
               "node_modules/materialize-css/dist/css/ghpages-materialize.css",
               "node_modules/material-dashboard/assets/css/material-dashboard-pro.css",
-              "node_modules/bootstrap-select/dist/css/bootstrap-select.min.css",
               "src/styles.css"
             ],
             "scripts": [

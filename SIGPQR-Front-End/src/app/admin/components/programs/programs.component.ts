@@ -23,7 +23,7 @@ export class ProgramsComponent implements OnInit {
     this.loadPrograms();
   }
   loadPrograms(){
-    this.programService.getAll().pipe(map(data=>{
+    this.programService.getAll(false).pipe(map(data=>{
       if (data.status == 'success') {
         return data.data
       } else {

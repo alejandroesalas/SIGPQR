@@ -1,6 +1,7 @@
 <main>
   <!--Inicio CONTAINER GENERAL-->
   <div class="container">
+    <mat-spinner *ngIf="loading"></mat-spinner>
     <!--Inicio ROW-->
     <div class="row">
 
@@ -17,7 +18,7 @@
               <i class="fas fa-sitemap"></i>
             </div>
             <p class="card-category"><a class="green-text" [routerLink]="['faculties']">Facultades</a></p>
-            <h3 class="card-title">1</h3>
+            <h3 class="card-title">{{totalOfFaculties}}</h3>
           </div>
 
           <div class="card-footer">
@@ -43,7 +44,7 @@
               <i class="fas fa-sitemap"></i>
             </div>
             <p class="card-category"><a class="green-text" [routerLink]="['programs']">Programas</a></p>
-            <h3 class="card-title">3</h3>
+            <h3 class="card-title">{{totalOfPrograms}}</h3>
           </div>
 
 
@@ -70,7 +71,7 @@
               <i class="fas fa-users"></i>
             </div>
             <p class="card-category"><a class="green-text" [routerLink]="['users']">Docentes</a></p>
-            <h3 class="card-title">0</h3>
+            <h3 class="card-title">{{totalOfUsers}}</h3>
           </div>
 
 
@@ -97,8 +98,8 @@
 
               <i class="fas fa-users"></i>
             </div>
-            <p class="card-category"><a class="green-text" href="vistaDocenteAdmin.php">Coordinadores</a></p>
-            <h3 class="card-title">3</h3>
+            <p class="card-category"><a class="green-text" [routerLink]="['coordinators']">Coordinadores</a></p>
+            <h3 class="card-title">{{totalOfcoordinators}}</h3>
           </div>
           <div class="card-footer">
             <div class="stats">

@@ -8,12 +8,11 @@
         </li>
       </ul>
     </div>
-    <a href="#" data-activates="menu-sidenav" class="sidenav-trigger"><i class="material-icons green-text">menu</i></a>
+    <a href="#" data-activates="menu-sidenav" class="button-collapse"><i class="material-icons green-text">menu</i></a>
   </nav>
 
   <!--Inicio UL-SIDENAV -->
-  <ul href="#" id="menu-sidenav" class="sidenav sidenav-fixed green darken-2" style="width: 305px; left: 0px;">
-
+  <ul id="menu-sidenav" class="sidenav fixed sidenav-fixed green darken-2" style="width: 305px; left: 0px;">
     <li class="user-details white-text center" style="background-color: #016836;">
       SIG<b>PQR</b>
     </li>
@@ -30,7 +29,6 @@
         </div>
       </div>
     </li>
-
     <!-- Inicio CONTAINER-->
     <div class=" row container mt-3">
       <li class="">
@@ -59,7 +57,7 @@
               </li>
               <li><a [routerLink]="['programs']" class="white-text">Programa</a>
               </li>
-              <li><a href="vistaCoordinador.php" class="white-text">Coordinador</a>
+              <li><a [routerLink]="['coordinators']" class="white-text">Coordinador</a>
             </ul>
           </div>
         </li>
@@ -72,7 +70,6 @@
       </li>
 
     </div>
-
   </ul>
   <!-- Fin Ul-SIdeNAv-->
 </header>

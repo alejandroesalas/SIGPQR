@@ -61,7 +61,7 @@ Route::post('restore-student/{id}','Student\StudentController@restore');
 Route::get('count-students-eliminated','Student\StudentController@countStudentsEliminated');
 //ruta del controlador de Coordinadores
 Route::resource('coordinators', 'Coordinator\CoordinatorController', ['except' => ['create', 'edit']]);
-Route::put('abasement-coordinator/{coordinator}', 'Coordinator\CoordinatorController@abasement');
+Route::put('degradeCoordinator/{coordinator}', 'Coordinator\CoordinatorController@degrade');
 Route::resource('coordinators.responses', 'Coordinator\CoordinatorResponseController', ['except' => ['create', 'edit']]);
 Route::get('count-coordinators','Coordinator\CoordinatorController@countCoordinators');
 Route::get('count-teachers','User\UserController@countTeachers');

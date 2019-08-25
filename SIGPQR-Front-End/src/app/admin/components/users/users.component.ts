@@ -32,7 +32,7 @@ export class UsersComponent implements OnInit {
               private authService: AuthService,
               private router: Router,
               private programService: ProgramService,
-              private adminService:AdminService,
+              private adminService: AdminService,
               private _snackBar: MatSnackBar
   ) {
     this.selectedProgram = '';
@@ -43,19 +43,20 @@ export class UsersComponent implements OnInit {
 
   ngOnInit() {
     this.loadUsers();
-   // this.loadPrograms();
+    this.loadPrograms();
   }
 
   openModal(selectedUser, id: string) {
-    this.loadPrograms();
-    if (this.programs){
+    this.currentUSer = selectedUser;
+    this.modalService.open(id);
+    /*if (this.programs){
       this.currentUSer = selectedUser;
       this.modalService.open(id);
     }else{
       this._snackBar.open('No hay programas disponibles o Los existentes ya tienen un coordinador','Warning', {
         duration: 2000,
       });
-    }
+    }*/
   }
 
   closeModal(id: string) {
@@ -83,7 +84,6 @@ export class UsersComponent implements OnInit {
     if (susbcription) {
       susbcription.subscribe(value => {
         this.programs = value;
-        //this.loading = false;
       }, error => {
         console.log('errores', error);
       });
@@ -98,20 +98,20 @@ export class UsersComponent implements OnInit {
   }
 
   promoverDocente(form) {
-    this.adminService.promoverDocente(this.selectedProgram,this.currentUSer).subscribe(response=>{
-      if (response.status == 'success'){
+    this.adminService.promoverDocente(this.selectedProgram, this.currentUSer).subscribe(response => {
+      if (response.status == 'success') {
         this.loading = true;
         this.closeModal('promoverDocente');
         form.reset();
-        this._snackBar.open(response.data,'Success', {
+        this._snackBar.open(response.data, 'Success', {
           duration: 2000,
         });
         this.loadUsers();
         //this.loadPrograms();
       }
-    },error => {
+    }, error => {
       console.log(error)
-      this._snackBar.open(error.error.message,'Error', {
+      this._snackBar.open(error.error.message, 'Error', {
         duration: 2000,
       });
 

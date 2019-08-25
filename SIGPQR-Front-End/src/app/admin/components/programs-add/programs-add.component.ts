@@ -18,7 +18,7 @@ export class ProgramsAddComponent implements OnInit {
               private facultyService:FacultyService,
               private router: Router,
               private _snackBar: MatSnackBar) {
-    this.currentProgram = new Program(0,'',0,null);
+    this.currentProgram = new Program(0,'',0);
   }
 
   ngOnInit() {
@@ -40,7 +40,7 @@ export class ProgramsAddComponent implements OnInit {
     if (subscription){
       subscription.subscribe(response=>{
         if (response.status == 'success'){
-          this.router.navigate(['../']);
+          this.router.navigate(['admin/programs']);
         }
 
       },error =>{

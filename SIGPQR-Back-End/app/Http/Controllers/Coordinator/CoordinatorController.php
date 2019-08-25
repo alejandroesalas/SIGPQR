@@ -64,7 +64,7 @@ class CoordinatorController extends ApiController
 
     }
 
-    public function abasement(Request $request, Coordinator $coordinator)
+    public function degrade(Request $request, Coordinator $coordinator)
     {
         $rules = [
             'program_id'=>'required|integer',
@@ -76,16 +76,16 @@ class CoordinatorController extends ApiController
             if (!Empty($params_array)){
                 $validate = $this->checkValidation($params_array, $rules);
                 if ($validate->fails()){
-                    return $this->errorResponse("datos no validos", 400, $validate->errors());
+                    return $this->errorResponse("datos no validos", $validate->errors(),400);
                 }else{
-                    if(!$coordinator->isDirty()){
-                        return $this->errorResponse('se debe especificar al menos un valor', 422);
-                    }
+                    /*if(!$coordinator->isDirty()){
+                        return $this->errorResponse('se debe especificar al menos un valor', '',422);
+                    }*/
                     $isCoordinator = $coordinator->where('id', $coordinator->id)
                         ->where('profile_id', User::COORDINATOR_PROFILE)
                         ->count();
                     if($isCoordinator == 0) {
-                        return $this->errorResponse("Este usuario no es coordinador", 404);
+                        return $this->errorResponse("Este usuario no es coordinador", '',404);
                     }
                     //updating coordinator to teacher
                     DB::transaction(function () use ($coordinator, $params_array) {
@@ -101,10 +101,10 @@ class CoordinatorController extends ApiController
                     return $this->showOne($coordinator);
                 }
             }else{
-                return $this->errorResponse('Datos Vacios!', 422);
+                return $this->errorResponse('Datos Vacios!','', 422);
             }
         }else{
-            return $this->errorResponse('La estrucutra del json no es valida', 422);
+            return $this->errorResponse('La estrucutra del json no es valida', '',422);
         }
     }
 

@@ -19,9 +19,15 @@ export class ProgramService {
     this.currentUser = authService.currentUserValue;
   }
 
-  public getAll(): Observable<any> {
+  public getAll(withCoordinators:boolean): Observable<any> {
     let headers = new HttpHeaders().set('content-type', global.contentType);
-    return this.http.get<any>(global.url + 'programs', {headers: headers})
+    if (withCoordinators){
+      return this.http.get<any>(global.url + 'coordinators', {headers: headers})
+
+    }else{
+
+      return this.http.get<any>(global.url + 'programs', {headers: headers})
+    }
   }
 
   //unassigned-programs
@@ -64,7 +70,7 @@ export class ProgramService {
     }
   }
 
-  public delete(id: number): Observable<any> | false {
+  public delete(id: number): Observable<any> {
     if (this.currentUser) {
       let headers = new HttpHeaders().set('content-type', global.contentType)
         .set('Authorization', this.currentUser.token);
@@ -72,8 +78,6 @@ export class ProgramService {
         console.log(response);
         return response;
       }));
-    } else {
-      return false;
     }
   }
 
@@ -104,7 +108,7 @@ export class ProgramService {
     }
   }
 
-  public count() {
+  public count():Observable<any> {
     if (this.currentUser) {
       let headers = new HttpHeaders().set('content-type', global.contentType)
         .set('Authorization', this.currentUser.token);
@@ -112,8 +116,6 @@ export class ProgramService {
         console.log(data);
         return data;
       }));
-    } else {
-      return false;
     }
   }
 

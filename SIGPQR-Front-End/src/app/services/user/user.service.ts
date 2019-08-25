@@ -83,7 +83,7 @@ export class UserService {
       return false;
     }
   }
-  public count(){
+  public count():Observable<any>{
     if (this.currentUser){
       let headers = new HttpHeaders().set('content-type',global.contentType)
         .set('Authorization',this.currentUser.token);
@@ -92,8 +92,6 @@ export class UserService {
         console.log(data);
         return data;
       }));
-    }else {
-      return false;
     }
   }
 }

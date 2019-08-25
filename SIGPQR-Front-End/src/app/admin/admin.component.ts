@@ -16,10 +16,7 @@ export class AdminComponent implements OnInit,OnDestroy {
   constructor(private dynamicScriptLoader: DynamicScriptLoaderService,
               private route: ActivatedRoute,
               private authService:AuthService,
-              private router: Router) {
-    loadSidenav();
-
-  }
+              private router: Router) {}
 
   ngOnInit() {
    /* this.dynamicScriptLoader.load('general').then(data => {

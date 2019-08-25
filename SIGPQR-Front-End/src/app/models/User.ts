@@ -3,7 +3,7 @@ export class User {
   constructor(
     public id:number,
     public name: string,
-    public lastName: string,
+    public lastname: string,
     public email: string,
     public id_type: string,
     public id_num:number,
@@ -17,4 +17,7 @@ export class User {
     public status?:string,
     public admin?:boolean,
   ){}
+
+
+
 }

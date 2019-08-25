@@ -63,7 +63,7 @@ export class ProgramsEditComponent implements OnInit {
     if (subscription){
       subscription.subscribe(response=>{
         if (response.status == 'success'){
-          this.router.navigate(['../']);
+          this.router.navigate(['admin/programs']);
         }
       },error =>{
         this._snackBar.open(error.error.message,'Error', {

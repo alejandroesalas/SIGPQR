@@ -14,7 +14,7 @@ function loadCollapsiblle(){
   $('.collapsible').collapsible();
 }
 function loadSidenav() {
-  $('.sidenav-trigger').sideNav();
+  $(".button-collapse").sideNav();
   $('.sidenav').sideNav();
 }
 function loadSelect() {
