@@ -17,7 +17,18 @@ class Profile extends Model
         'name','description'
     ];
 
-    public function users(){
+    public function setNameAttribute($valor)
+    {
+        $this->attributes['name'] = Str::lower($valor);
+    }
+
+    public function getNameAttribute($valor)
+    {
+        return ucwords($valor);
+    }
+
+    public function users()
+    {
         return $this->hasMany(User::class);
     }
 }

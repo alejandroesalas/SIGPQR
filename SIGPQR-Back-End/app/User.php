@@ -62,42 +62,52 @@ class User extends Authenticatable implements JWTSubject
     {
         $this->attributes['name'] = Str::lower($valor);
     }
+
     public function getNameAttribute($valor)
     {
         return ucwords($valor);
     }
+
     public function setEmailAttribute($valor)
     {
         $this->attributes['email'] = Str::lower($valor);
     }
+
     public function setLastNameAttribute($valor)
     {
         $this->attributes['lastname'] = Str::lower($valor);
     }
+
     public function getLastNameAttribute($valor)
     {
         return ucwords($valor);
     }
+
     public function isVerified()
     {
         return $this->verified == User::VERIFIED_USER;
     }
+
     public function isAdmin()
     {
         return $this->admin == User::ADMIN_USER;
     }
+
     public static function createVerificationToken()
     {
         return Str::random(40);
     }
+
     public function profile()
     {
         return $this->belongsTo(Profile::class,'profile_id');
     }
+
     public function tokens()
     {
         return $this->hasMany(Token::class);
     }
+
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *

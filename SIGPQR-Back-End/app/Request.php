@@ -14,16 +14,33 @@ class Request extends Model
         'program_id'
     ];
 
-    public function student(){
+    public function setTitleAttribute($valor)
+    {
+        $this->attributes['title'] = Str::lower($valor);
+    }
+
+    public function getTitleAttribute($valor)
+    {
+        return ucwords($valor);
+    }
+
+    public function student()
+    {
         return $this->belongsTo(Student::class,'student_id');
     }
-    public function program(){
+
+    public function program()
+    {
         return $this->belongsTo(Program::class,'program_id');
     }
-    public function requestType(){
+
+    public function requestType()
+    {
         return $this->belongsTo(RequestType::class,'request_type_id');
     }
-    public function responses(){
+
+    public function responses()
+    {
         return $this->hasMany(Response::class);
     }
 

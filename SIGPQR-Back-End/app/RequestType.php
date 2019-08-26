@@ -12,7 +12,19 @@ class RequestType extends Model
     protected $fillable = [
         'type','description'
     ];
-    public function requests(){
+
+    public function setTypeAttribute($valor)
+    {
+        $this->attributes['type'] = Str::lower($valor);
+    }
+
+    public function getTypeAttribute($valor)
+    {
+        return ucwords($valor);
+    }
+
+    public function requests()
+    {
         return $this->hasMany(Request::class);
     }
 }
