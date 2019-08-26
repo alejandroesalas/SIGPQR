@@ -4,7 +4,7 @@ import { AdminComponent } from './admin.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import { AdminHomeComponent } from './components/admin-home/admin-home.component';
-import { DisabledUsersComponent } from './components/disabled-users/disabled-users.component';
+import { DisabledSectionComponent } from './components/disabled-section/disabled-section.component';
 import {AdminRoutingModule} from "./admin-routing.module";
 import { AdminSectionComponent } from './components/admin-section/admin-section.component';
 import {AuthService} from "../services/authService/auth.service";
@@ -32,6 +32,7 @@ import { ProgramsEditComponent } from './components/programs-edit/programs-edit.
 import { CoordinatorsHomeComponent } from './components/coordinators-home/coordinators-home.component';
 import { CoordinatorsAddComponent } from './components/coordinators-add/coordinators-add.component';
 import { CoordinatorsAditComponent } from './components/coordinators-adit/coordinators-adit.component';
+import { DisabledSectionBodyComponent } from './components/disabled-section/disabled-section-body/disabled-section-body.component';
 
 
 @NgModule({
@@ -39,7 +40,7 @@ import { CoordinatorsAditComponent } from './components/coordinators-adit/coordi
     AdminComponent,
     AdminSectionComponent,
     AdminHomeComponent,
-    DisabledUsersComponent,
+    DisabledSectionComponent,
     FacultiesComponent,
     FacultiesEditComponent,
     UsersComponent,
@@ -50,8 +51,8 @@ import { CoordinatorsAditComponent } from './components/coordinators-adit/coordi
     ProgramsEditComponent,
     CoordinatorsHomeComponent,
     CoordinatorsAddComponent,
-    CoordinatorsAditComponent
-  ],
+    CoordinatorsAditComponent,
+    DisabledSectionBodyComponent],
   imports: [
     CommonModule,
     FormsModule,

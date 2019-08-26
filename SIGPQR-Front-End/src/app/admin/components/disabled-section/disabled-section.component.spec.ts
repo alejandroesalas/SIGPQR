@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DisabledUsersComponent } from './disabled-users.component';
+import { DisabledSectionComponent } from './disabled-section.component';
 
 describe('DisabledUsersComponent', () => {
-  let component: DisabledUsersComponent;
-  let fixture: ComponentFixture<DisabledUsersComponent>;
+  let component: DisabledSectionComponent;
+  let fixture: ComponentFixture<DisabledSectionComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DisabledUsersComponent ]
+      declarations: [ DisabledSectionComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DisabledUsersComponent);
+    fixture = TestBed.createComponent(DisabledSectionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

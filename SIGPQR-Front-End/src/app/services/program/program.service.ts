@@ -27,6 +27,21 @@ export class ProgramService {
       return this.http.get<any>(global.url + 'programs', {headers: headers})
     }
   }
+  public getAllDisabledPrograms():Observable<any>{
+    if (this.currentUser) {
+      let headers = new HttpHeaders().set('content-type', global.contentType)
+      return this.http.get<any>(global.url + 'only-programs-trashed', {headers: headers});
+    }
+  }
+  public countDisabledPrograms():Observable<any>{
+    if (this.currentUser){
+      let headers = new HttpHeaders().set('content-type',global.contentType)
+      return this.http.get<any>(global.url+'count-programs-eliminated',{headers:headers}).
+      pipe(map(data => {
+        return data;
+      }));
+    }
+  }
 
   //unassigned-programs
   public unassignedPrograms(): Observable<Array<Program>> {

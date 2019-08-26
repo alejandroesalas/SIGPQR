@@ -22,6 +22,7 @@ export class UserService {
     let params = 'json={\"email\":'+JSON.stringify(email)+'}';
     return this.http.post<any>(global.url+'check-email',params,{headers:headers});
   }
+
   public getAll():Observable<any>|boolean{
     if (this.currentUser){
       let headers = new HttpHeaders().set('content-type',global.contentType)
@@ -36,6 +37,12 @@ export class UserService {
       }));
     }else {
       return false;
+    }
+  }
+  public getAllDisabledUsers():Observable<any> {
+    if (this.currentUser) {
+      let headers = new HttpHeaders().set('content-type', global.contentType)
+      return this.http.get<any>(global.url + 'only-teachers-trashed', {headers: headers});
     }
   }
   public getUser(id:number):Observable<any>|boolean{
@@ -81,6 +88,16 @@ export class UserService {
       }));
     }else {
       return false;
+    }
+  }
+
+  public countDisabledUsers():Observable<any>{
+    if (this.currentUser){
+      let headers = new HttpHeaders().set('content-type',global.contentType)
+      return this.http.get<any>(global.url+'count-teachers-eliminated',{headers:headers}).
+      pipe(map(data => {
+        return data;
+      }));
     }
   }
   public count():Observable<any>{
