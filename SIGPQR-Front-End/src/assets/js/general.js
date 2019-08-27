@@ -1,15 +1,20 @@
 
 function load(){
-  console.log('cargando recursos');
   $(document).ready(function(){
-    console.log('entro al ready');
     $('.sidenav').sideNav();
     $('.modal').modal();
     $('select').material_select();
     $('.collapsible').collapsible();
+    $('.tooltipped').tooltip();
   });
 }
-
+function loadAllResources() {
+  $('.sidenav').sideNav();
+  $('.modal').modal();
+  $('select').material_select();
+  $('.collapsible').collapsible();
+  $('.tooltipped').tooltip();
+}
 function loadCollapsiblle(){
   $('.collapsible').collapsible();
 }

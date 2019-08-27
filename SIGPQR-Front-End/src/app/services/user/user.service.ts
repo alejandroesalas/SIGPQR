@@ -63,7 +63,6 @@ export class UserService {
   }
   public store(user:User):Observable<any>{
     let headers = new HttpHeaders().set('content-type',global.contentType)
-      .set('Authorization',this.currentUser.token);
     let params = 'json='+JSON.stringify(user);
     return this.http.post<any>(global.url+'users',params,{headers:headers});
   }

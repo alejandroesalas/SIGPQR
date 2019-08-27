@@ -48,6 +48,7 @@ export class UsersAddComponent implements OnInit {
   }*/
   createNewUser(){
     this.newUser = this.regForm.value;
+    this.newUser.lastname = this.regForm.get('lastName').value;
     this.userService.store(this.newUser).subscribe(response => {
       if (response.status = 'success'){
         this._snackBar.open("Usuario creado con exito",'', {

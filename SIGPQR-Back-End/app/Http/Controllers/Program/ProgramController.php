@@ -174,4 +174,13 @@ class ProgramController extends ApiController
         });
         return $this->showOne($program);
     }
+
+    public function getCoordinator(Program $program){
+        $user = auth()->user();
+        $currentProgram = Program::find($user->program_id);
+        if (!$currentProgram){
+            return $this->errorResponse("No existe coordinador para el programa $currentProgram->name");
+        }
+        return  $this->showOne($currentProgram->coordinator);
+    }
 }

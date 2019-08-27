@@ -20,6 +20,7 @@ import {AdminModule} from "./admin/admin.module";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MatInputModule, MatSelectModule} from "@angular/material";
 import {TokenInterceptorService} from "./services/token-interceptor.service";
+import {CKEditorModule} from "@ckeditor/ckeditor5-angular";
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import {TokenInterceptorService} from "./services/token-interceptor.service";
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    CKEditorModule,
     ModalModule,
     MatSelectModule,
     MatInputModule,

@@ -40,7 +40,7 @@ Route::post('restore-program/{id}','Program\ProgramController@restore');
 Route::get('count-programs-eliminated','Program\ProgramController@countProgramsEliminated');
 Route::get('unassigned-programs','Program\ProgramController@showUnassignedPrograms');
 Route::get('programs/{id}/faculties','Program\ProgramController@faculty');
-Route::get('programs/{id}/coordinators','Program\ProgramController@coordinator');
+Route::get('programs/{id}/coordinators','Program\ProgramController@getCoordinator');
 Route::get('programs/{id}/students','Program\ProgramController@getStudents');
 //Route::get('programs/{id}/programs','Program\ProgramController@getRequests');
 Route::resource('programs.requests','Program\ProgramRequestController', ['only' => ['index']]);

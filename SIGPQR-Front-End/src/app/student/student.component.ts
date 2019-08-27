@@ -5,6 +5,7 @@ import {AuthService} from "../services/authService/auth.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Subscription} from "rxjs";
 
+declare var loadAllResources;
 @Component({
   selector: 'app-student',
   templateUrl: './student.component.html',
@@ -18,6 +19,7 @@ export class StudentComponent implements OnInit, OnDestroy {
               private router: Router,) { }
 
   ngOnInit() {
+    loadAllResources();
     this.logout();
   }
 

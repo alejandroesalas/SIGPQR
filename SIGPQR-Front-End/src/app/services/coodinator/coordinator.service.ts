@@ -28,6 +28,14 @@ export class CoordinatorService {
       }));
     }
   }
+  public getCoordinatorByProgram(program_id:number): Observable<any>{
+    if (this.currentUser) {
+      let headers = new HttpHeaders().set('content-type', global.contentType);
+      return this.http.get<any>(global.url + 'programs/' + program_id+'/coordinators',{headers: headers}).pipe(map(response => {
+        return response;
+      }));
+    }
+  }
   public degradeUser(id: number,programTarget:Program): Observable<any> {
     if (this.currentUser) {
       let headers = new HttpHeaders().set('content-type', global.contentType);

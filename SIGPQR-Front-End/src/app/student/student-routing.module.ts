@@ -7,6 +7,7 @@ import { StudenRequestsComponent } from './components/studen-requests/studen-req
 import {StudentProfileComponent} from "./components/student-profile/student-profile.component";
 import {AuthGuard} from "../guards/auth.guard";
 import {Profile} from "../models/Profile";
+import {RequestsAddComponent} from "./components/requests-add/requests-add.component";
 
 
 const studentRoutes: Routes = [
@@ -16,7 +17,10 @@ const studentRoutes: Routes = [
     data:{rol:Profile.student},
       children:[
         {path:'',component:HomeStudentComponent},
-        {path:'requests',component:StudenRequestsComponent},
+        {path:'requests',children:[
+            {path:'',component:StudenRequestsComponent},
+            {path:'add',component:RequestsAddComponent}
+          ]},
         {path:'profile',component:StudentProfileComponent}
       ]
   }

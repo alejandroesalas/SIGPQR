@@ -47,7 +47,7 @@ class UserController extends ApiController
     {
         $rules = [
             'name'=>'required',
-            'lastName'=>'required',
+            'lastname'=>'required',
             'email' => 'email|unique:users',
             'id_type' => 'required|in:'. User::CC_TYPE . ',' . User::TI_TYPE,
             'id_num' => 'required|unique:users',

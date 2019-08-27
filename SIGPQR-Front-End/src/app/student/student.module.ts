@@ -12,6 +12,9 @@ import { StudenSectionComponent } from './components/studen-section/studen-secti
 import { StudentComponent } from './student.component';
 import {AuthService} from "../services/authService/auth.service";
 import {AuthGuard} from "../guards/auth.guard";
+import { RequestsAddComponent } from './components/requests-add/requests-add.component';
+import {CKEditorModule} from "@ckeditor/ckeditor5-angular";
+import {MatSelectModule} from "@angular/material";
 
 @NgModule({
   declarations:[
@@ -19,14 +22,17 @@ import {AuthGuard} from "../guards/auth.guard";
     HomeStudentComponent,
     StudenRequestsComponent,
     StudentProfileComponent,
-    StudenSectionComponent
+    StudenSectionComponent,
+    RequestsAddComponent
   ],
-  imports:[
+  imports: [
     CommonModule,
+    CKEditorModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    StudentRoutingModule
+    StudentRoutingModule,
+    MatSelectModule
   ],
   exports:[
     HomeStudentComponent,
