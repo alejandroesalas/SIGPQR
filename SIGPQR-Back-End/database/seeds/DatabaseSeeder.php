@@ -39,12 +39,12 @@ class DatabaseSeeder extends Seeder
             'id_type' => User::CC_TYPE,
             'id_num' => '1234',
             'password' => bcrypt('admin'),
-            'verified' => Str::random(40),
+            'verified' => 1,
             'status' => User::ACTIVE_STATE,
             'admin' => User::ADMIN_USER,
             'program_id' => null,
             'profile_id' => User::ADMIN_PROFILE,
-            'verification_token' => 1,
+            'verification_token' => Str::random(40),
         ]);
         DB::table('users')->insert([
             'name' => 'coordinador',
@@ -53,12 +53,12 @@ class DatabaseSeeder extends Seeder
             'id_type' => User::CC_TYPE,
             'id_num' => '123',
             'password' => bcrypt('123'),
-            'verified' => Str::random(40),
+            'verified' => 1,
             'status' => User::ACTIVE_STATE,
             'admin' => User::REGULAR_USER,
             'program_id' => null,
             'profile_id' => User::ADMIN_PROFILE,
-            'verification_token' => 1,
+            'verification_token' => Str::random(40),
         ]);
 
         // Registro de perfiles
@@ -96,12 +96,12 @@ class DatabaseSeeder extends Seeder
                 'id_type' => User::CC_TYPE,
                 'id_num' => $i,
                 'password' => bcrypt('password'),
-                'verified' => Str::random(40),
+                'verified' => 1,
                 'status' => User::ACTIVE_STATE,
                 'admin' => User::REGULAR_USER,
                 'program_id' => 1,
                 'profile_id' => User::STUDENT_PROFILE,
-                'verification_token' => 1,
+                'verification_token' => Str::random(40),
             ]);
         }
         // Registro de peticion

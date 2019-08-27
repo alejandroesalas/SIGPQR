@@ -28,4 +28,16 @@ class RequestTypeRequestController extends ApiController
         return $this->showAll($requests);
     }
 
+    public function showByStudent(RequestType $requestType)
+    {
+        $student = auth()->user();
+        // $program = Program::where('coordinator_id', $student->id)
+        //     ->first();
+        //dd($student->id);
+        $requests = $requestType->requests()
+            ->where('student_id', $student->id)
+            ->get();
+        return $this->showAll($requests);
+    }
+
 }
