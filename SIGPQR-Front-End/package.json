@@ -23,6 +23,7 @@
     "@angular/router": "~8.1.2",
     "@ckeditor/ckeditor5-angular": "^1.1.0",
     "@ckeditor/ckeditor5-build-decoupled-document": "^12.4.0",
+    "angular-file-uploader": "^5.0.2",
     "angular-popper": "^2.0.1",
     "angular2-materialize": "^15.1.10",
     "bootstrap-material-design": "^4.1.2",

@@ -12,9 +12,10 @@ export class _Request {
     public title:string,
     public description:string,
     public student_id:number,
-    public status:string,
+    public request_type_id:number,
     public program_id:number,
-    public created_at:string
+    public status:string,
+    public created_at?:string
   ){
   }
 

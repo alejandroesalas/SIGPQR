@@ -15,6 +15,7 @@ import {AuthGuard} from "../guards/auth.guard";
 import { RequestsAddComponent } from './components/requests-add/requests-add.component';
 import {CKEditorModule} from "@ckeditor/ckeditor5-angular";
 import {MatSelectModule} from "@angular/material";
+import {AngularFileUploaderModule} from "angular-file-uploader";
 
 @NgModule({
   declarations:[
@@ -32,7 +33,8 @@ import {MatSelectModule} from "@angular/material";
     ReactiveFormsModule,
     HttpClientModule,
     StudentRoutingModule,
-    MatSelectModule
+    MatSelectModule,
+    AngularFileUploaderModule
   ],
   exports:[
     HomeStudentComponent,

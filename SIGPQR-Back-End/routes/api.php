@@ -78,6 +78,8 @@ Route::name('verify')->get('users/verify/{token}','User\UserController@verify');
 Route::resource('request-types.requests','RequestType\RequestTypeRequestController', ['only' => ['index']]);
 Route::get('student-request-types/{request_type}/requests','RequestType\RequestTypeRequestController@showByStudent');
 
+//Rutas para el requests
+Route::post('requests/uploadFiles','Request\RequestController@uploadFiles');
 
 /*Route::post('/api/users/upload','PostController@upload');
 Route::get('/api/post/avatar/{filename}','PostController@getImage');

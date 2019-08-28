@@ -21,7 +21,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MatInputModule, MatSelectModule} from "@angular/material";
 import {TokenInterceptorService} from "./services/token-interceptor.service";
 import {CKEditorModule} from "@ckeditor/ckeditor5-angular";
-
+import {AngularFileUploaderModule}from "angular-file-uploader";
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,6 +37,7 @@ import {CKEditorModule} from "@ckeditor/ckeditor5-angular";
     BrowserModule,
     BrowserAnimationsModule,
     CKEditorModule,
+    AngularFileUploaderModule,
     ModalModule,
     MatSelectModule,
     MatInputModule,
