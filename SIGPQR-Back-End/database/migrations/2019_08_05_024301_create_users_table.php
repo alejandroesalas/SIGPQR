@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('lastname');
             $table->string('email')->unique();
-            $table->string('id_type');
+            $table->enum('id_type', ['CC','TI']);
             $table->string('id_num')->unique();
             $table->string('password');
             $table->string('verified');

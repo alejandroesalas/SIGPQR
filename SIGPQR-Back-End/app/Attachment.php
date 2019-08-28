@@ -11,7 +11,8 @@ class Attachment extends Model
         'response_id','route','name'
     ];
 
-    public function response(){
+    public function response()
+    {
         return $this->belongsTo(Response::class,'response_id');
     }
 }

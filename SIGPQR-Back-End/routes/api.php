@@ -76,6 +76,7 @@ Route::get('count-teachers-eliminated','User\UserController@countTeachersElimina
 //Verificacion del correo del usuario
 Route::name('verify')->get('users/verify/{token}','User\UserController@verify');
 Route::resource('request-types.requests','RequestType\RequestTypeRequestController', ['only' => ['index']]);
+Route::get('student-request-types/{request_type}/requests','RequestType\RequestTypeRequestController@showByStudent');
 
 
 /*Route::post('/api/users/upload','PostController@upload');

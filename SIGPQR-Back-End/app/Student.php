@@ -5,11 +5,14 @@ namespace App;
 
 class Student extends User
 {
-    public function program(){
+
+    public function program()
+    {
         return $this->belongsTo(Program::class,'program_id');
     }
 
-    public function requests(){
+    public function requests()
+    {
         return $this->hasMany(Request::class);
     }
 
