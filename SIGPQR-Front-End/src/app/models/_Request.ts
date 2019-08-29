@@ -1,12 +1,11 @@
 import {Program} from "./Program";
 
 export const enum STATUS_TYPE {
-  _new ='en espera',
-  _open ='abierto',
+  _onProcess ='en proceso',
+  _open ='abierta',
   _closed = 'cerrada'
 }
 export class _Request {
-
   constructor(
     public id:number,
     public title:string,
@@ -15,8 +14,8 @@ export class _Request {
     public request_type_id:number,
     public program_id:number,
     public status:string,
+    public program?:Program,
     public created_at?:string
-
   ){
   }
 

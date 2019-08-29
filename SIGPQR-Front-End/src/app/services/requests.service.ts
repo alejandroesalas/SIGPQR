@@ -15,6 +15,10 @@ export class RequestsService {
     authService.currentUser.subscribe(user=>this.currentUser=user);
   }
 
+  getAll():Observable<any>{
+    let headers = new HttpHeaders().set('content-type',global.contentType);
+    return this.http.get<any>(global.url+'requests',{headers:headers});
+  }
   storeRequest(request:_Request):Observable<any>{
     let headers = new HttpHeaders().set('content-type',global.contentType);
     let params = 'json=' + JSON.stringify(request);
@@ -29,8 +33,12 @@ export class RequestsService {
     let headers = new HttpHeaders().set('content-type',global.contentType);
     return this.http.get<any>(global.url+"requests/"+id,{headers:headers});
   }
-  getRequestTypes(){
+  getRequestTypes():Observable<any>{
     let headers = new HttpHeaders().set('content-type',global.contentType);
     return this.http.get<any>(global.url+'request-types',{headers:headers});
+  }
+  getRequestByType(type_id:number):Observable<any>{
+    let headers = new HttpHeaders().set('content-type',global.contentType);
+    return this.http.get<any>(global.url+'student-request-types/'+type_id+'/requests',{headers:headers});
   }
 }

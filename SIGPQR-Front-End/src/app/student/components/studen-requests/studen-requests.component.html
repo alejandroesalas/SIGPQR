@@ -72,59 +72,172 @@
             <div class="tab-content">
               <!--Aqui se colocan las solicitudes que vienen del backend-->
               <div class="tab-pane active" id="PeticionEnEspera">
-
-                <div class="col s12 m7 l7 card-panel z-depth-4">
-                  <p class="email-subject truncate"><b><h3>Asunto</h3></b></p>
-                  <hr class="grey-text text-lighten-2">
-                  <div class="email-content-wrap">
-                    <div class="row">
-                      <div class="col s10 m10 l10">
-                        <ul class="collection">
-                          <li class="collection-item avatar">
-                            <i class=" circle light-blue ">A</i>
-                            <span class="email-title">Remitente</span>
-                            <p class="truncate grey-text ultra-small">Para, Destinatario</p>
-                            <p class="grey-text ultra-small">Fecha</p>
-                          </li>
-                        </ul>
+                <div *ngIf="mapRequests.get('open') && mapRequests.get('open').length>0"
+                     class="col s12 m7 l7 card-panel z-depth-2">
+                  <div *ngFor="let awaitingRequest of mapRequests.get('open')"
+                       class="col s12 m7 l7 card-panel z-depth-4">
+                    <p class="email-subject truncate"><b><h3>{{awaitingRequest.title}}</h3></b></p>
+                    <hr class="grey-text text-lighten-2">
+                    <div class="email-content-wrap">
+                      <div class="row">
+                        <div class="col s10 m10 l10">
+                          <ul class="collection">
+                            <li class="collection-item avatar">
+                              <i class=" circle light-blue ">A</i>
+                              <span class="email-title">{{currentUser.email}}</span>
+                              <p class="truncate grey-text ultra-small">
+                                Para,{{awaitingRequest.program.coordinator.email}}</p>
+                              <p class="grey-text ultra-small">{{awaitingRequest.created_at}}</p>
+                            </li>
+                          </ul>
+                        </div>
+                        <div class="col s2 m2 l2 email-actions">
+                          <a href="#!"><span><i class="mdi-content-reply"></i></span></a>
+                          <a href="#!"><span><i class="mdi-navigation-more-vert"></i></span></a>
+                        </div>
                       </div>
-                      <div class="col s2 m2 l2 email-actions">
-                        <a href="#!"><span><i class="mdi-content-reply"></i></span></a>
-                        <a href="#!"><span><i class="mdi-navigation-more-vert"></i></span></a>
+                      <div class="email-content">
+                        <div [id]="'sol'+awaitingRequest.id">{{awaitingRequest.description}}</div>
                       </div>
                     </div>
-                    <div class="email-content">
-                      <div id="sol'+obj[0]+'"><p>Descripcion</p></div>
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="email-reply">
-                    <div class="row">
-                      <div class="col s4 m4 l4 center-align">
-                        <!--href="#modal-02"-->
-                        <a [routerLink]="['timeline']" title="Historial" id="'+(elemento+idSolicitud)+'" data-id="'+(elemento+idSolicitud)+'" data-solicitud="'+obj[0]+'" class="pulse btn-floating btn-large  yellow waves-effect waves-light " data-toggle="tab" data-tipo="btn-histo"><i class="material-icons ">access_time</i></a>
-                      </div>
-                      <div class="col s4 m4 l4 center-align">
-                        <a title="Adjuntos" class="waves-effect btn-floating btn-large pulse waves-light red" data-tipo="btn-adj" data-solicitud="'+obj[0]+'"><i class="material-icons ">attachment</i></a>
-                      </div>
-                      <div class="col s4 m4 l4 center-align">
-                        <a title="Responder" style="visibility:visible" class="respuesta pulse btn-floating btn-large  waves-effect waves-light  modal-trigger" data-remitente="'+obj[3]+'" data-solicitud="'+obj[0]+'" data-destinatoario="'+obj[4]+'" data-estado="'+obj[8]+'"  data-tipo="btn-reply"><i class="material-icons ">reply</i></a>
+                    <hr>
+                    <div class="email-reply">
+                      <div class="row">
+                        <div class="col s4 m4 l4 center-align">
+                          <!--href="#modal-02"-->
+                          <a [routerLink]="['timeline']" title="Historial" data-id="'+(elemento+idSolicitud)+'"
+                             data-solicitud="'+obj[0]+'"
+                             class="pulse btn-floating btn-large  yellow waves-effect waves-light " data-toggle="tab"
+                             data-tipo="btn-histo"><i class="material-icons ">access_time</i></a>
+                        </div>
+                        <div class="col s4 m4 l4 center-align">
+                          <a title="Adjuntos" class="waves-effect btn-floating btn-large pulse waves-light red"
+                             data-tipo="btn-adj" data-solicitud="'+obj[0]+'"><i
+                            class="material-icons ">attachment</i></a>
+                        </div>
+                        <div class="col s4 m4 l4 center-align">
+                          <a title="Responder" style="visibility:visible"
+                             class="respuesta pulse btn-floating btn-large  waves-effect waves-light  modal-trigger"
+                             data-remitente="'+obj[3]+'" data-solicitud="'+obj[0]+'" data-destinatoario="'+obj[4]+'"
+                             data-estado="'+obj[8]+'" data-tipo="btn-reply"><i class="material-icons ">reply</i></a>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-
               </div>
 
               <div class="tab-pane" id="PeticionEnProceso">
-
-
+                <div *ngIf="mapRequests.get('onProcess') && mapRequests.get('onProcess').length>0"
+                     class="col s12 m7 l7 card-panel z-depth-2">
+                  <div *ngFor="let awaitingRequest of mapRequests.get('onProcess')"
+                       class="col s12 m7 l7 card-panel z-depth-4">
+                    <p class="email-subject truncate"><b><h3>{{awaitingRequest.title}}</h3></b></p>
+                    <hr class="grey-text text-lighten-2">
+                    <div class="email-content-wrap">
+                      <div class="row">
+                        <div class="col s10 m10 l10">
+                          <ul class="collection">
+                            <li class="collection-item avatar">
+                              <i class=" circle light-blue ">A</i>
+                              <span class="email-title">{{currentUser.email}}</span>
+                              <p class="truncate grey-text ultra-small">
+                                Para,{{awaitingRequest.program.coordinator.email}}</p>
+                              <p class="grey-text ultra-small">{{awaitingRequest.created_at}}</p>
+                            </li>
+                          </ul>
+                        </div>
+                        <div class="col s2 m2 l2 email-actions">
+                          <a href="#!"><span><i class="mdi-content-reply"></i></span></a>
+                          <a href="#!"><span><i class="mdi-navigation-more-vert"></i></span></a>
+                        </div>
+                      </div>
+                      <div class="email-content">
+                        <div [id]="'sol'+awaitingRequest.id">{{awaitingRequest.description}}</div>
+                      </div>
+                    </div>
+                    <hr>
+                    <div class="email-reply">
+                      <div class="row">
+                        <div class="col s4 m4 l4 center-align">
+                          <!--href="#modal-02"-->
+                          <a [routerLink]="['timeline']" title="Historial" data-id="'+(elemento+idSolicitud)+'"
+                             data-solicitud="'+obj[0]+'"
+                             class="pulse btn-floating btn-large  yellow waves-effect waves-light " data-toggle="tab"
+                             data-tipo="btn-histo"><i class="material-icons ">access_time</i></a>
+                        </div>
+                        <div class="col s4 m4 l4 center-align">
+                          <a title="Adjuntos" class="waves-effect btn-floating btn-large pulse waves-light red"
+                             data-tipo="btn-adj" data-solicitud="'+obj[0]+'"><i
+                            class="material-icons ">attachment</i></a>
+                        </div>
+                        <div class="col s4 m4 l4 center-align">
+                          <a title="Responder" style="visibility:visible"
+                             class="respuesta pulse btn-floating btn-large  waves-effect waves-light  modal-trigger"
+                             data-remitente="'+obj[3]+'" data-solicitud="'+obj[0]+'" data-destinatoario="'+obj[4]+'"
+                             data-estado="'+obj[8]+'" data-tipo="btn-reply"><i class="material-icons ">reply</i></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
 
               <div class="tab-pane" id="PeticionFinalizada">
-
+                <div *ngIf="mapRequests.get('closed') && mapRequests.get('closed').length>0"
+                     class="col s12 m7 l7 card-panel z-depth-2">
+                  <div *ngFor="let awaitingRequest of mapRequests.get('closed')"
+                       class="col s12 m7 l7 card-panel z-depth-4">
+                    <p class="email-subject truncate"><b><h3>{{awaitingRequest.title}}</h3></b></p>
+                    <hr class="grey-text text-lighten-2">
+                    <div class="email-content-wrap">
+                      <div class="row">
+                        <div class="col s10 m10 l10">
+                          <ul class="collection">
+                            <li class="collection-item avatar">
+                              <i class=" circle light-blue ">A</i>
+                              <span class="email-title">{{currentUser.email}}</span>
+                              <p class="truncate grey-text ultra-small">
+                                Para,{{awaitingRequest.program.coordinator.email}}</p>
+                              <p class="grey-text ultra-small">{{awaitingRequest.created_at}}</p>
+                            </li>
+                          </ul>
+                        </div>
+                        <div class="col s2 m2 l2 email-actions">
+                          <a href="#!"><span><i class="mdi-content-reply"></i></span></a>
+                          <a href="#!"><span><i class="mdi-navigation-more-vert"></i></span></a>
+                        </div>
+                      </div>
+                      <div class="email-content">
+                        <div [id]="'sol'+awaitingRequest.id">{{awaitingRequest.description}}</div>
+                      </div>
+                    </div>
+                    <hr>
+                    <div class="email-reply">
+                      <div class="row">
+                        <div class="col s4 m4 l4 center-align">
+                          <!--href="#modal-02"-->
+                          <a [routerLink]="['timeline']" title="Historial" data-id="'+(elemento+idSolicitud)+'"
+                             data-solicitud="'+obj[0]+'"
+                             class="pulse btn-floating btn-large  yellow waves-effect waves-light " data-toggle="tab"
+                             data-tipo="btn-histo"><i class="material-icons ">access_time</i></a>
+                        </div>
+                        <div class="col s4 m4 l4 center-align">
+                          <a title="Adjuntos" class="waves-effect btn-floating btn-large pulse waves-light red"
+                             data-tipo="btn-adj" data-solicitud="'+obj[0]+'"><i
+                            class="material-icons ">attachment</i></a>
+                        </div>
+                        <div class="col s4 m4 l4 center-align">
+                          <a title="Responder" style="visibility:visible"
+                             class="respuesta pulse btn-floating btn-large  waves-effect waves-light  modal-trigger"
+                             data-remitente="'+obj[3]+'" data-solicitud="'+obj[0]+'" data-destinatoario="'+obj[4]+'"
+                             data-estado="'+obj[8]+'" data-tipo="btn-reply"><i class="material-icons ">reply</i></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-
             </div>
 
           </div>
@@ -163,22 +276,171 @@
             <br>
 
             <div class="tab-content">
-
               <div class="tab-pane active" id="QuejaEnEspera">
-
-
+                <div *ngIf="mapComplaints.get('open') && mapComplaints.get('open').length>0"
+                     class="col s12 m7 l7 card-panel z-depth-2">
+                  <div *ngFor="let awaitingRequest of mapComplaints.get('open')"
+                       class="col s12 m7 l7 card-panel z-depth-4">
+                    <p class="email-subject truncate"><b><h3>{{awaitingRequest.title}}</h3></b></p>
+                    <hr class="grey-text text-lighten-2">
+                    <div class="email-content-wrap">
+                      <div class="row">
+                        <div class="col s10 m10 l10">
+                          <ul class="collection">
+                            <li class="collection-item avatar">
+                              <i class=" circle light-blue ">A</i>
+                              <span class="email-title">{{currentUser.email}}</span>
+                              <p class="truncate grey-text ultra-small">
+                                Para,{{awaitingRequest.program.coordinator.email}}</p>
+                              <p class="grey-text ultra-small">{{awaitingRequest.created_at}}</p>
+                            </li>
+                          </ul>
+                        </div>
+                        <div class="col s2 m2 l2 email-actions">
+                          <a href="#!"><span><i class="mdi-content-reply"></i></span></a>
+                          <a href="#!"><span><i class="mdi-navigation-more-vert"></i></span></a>
+                        </div>
+                      </div>
+                      <div class="email-content">
+                        <div [id]="'sol'+awaitingRequest.id">{{awaitingRequest.description}}</div>
+                      </div>
+                    </div>
+                    <hr>
+                    <div class="email-reply">
+                      <div class="row">
+                        <div class="col s4 m4 l4 center-align">
+                          <!--href="#modal-02"-->
+                          <a [routerLink]="['timeline']" title="Historial" data-id="'+(elemento+idSolicitud)+'"
+                             data-solicitud="'+obj[0]+'"
+                             class="pulse btn-floating btn-large  yellow waves-effect waves-light " data-toggle="tab"
+                             data-tipo="btn-histo"><i class="material-icons ">access_time</i></a>
+                        </div>
+                        <div class="col s4 m4 l4 center-align">
+                          <a title="Adjuntos" class="waves-effect btn-floating btn-large pulse waves-light red"
+                             data-tipo="btn-adj" data-solicitud="'+obj[0]+'"><i
+                            class="material-icons ">attachment</i></a>
+                        </div>
+                        <div class="col s4 m4 l4 center-align">
+                          <a title="Responder" style="visibility:visible"
+                             class="respuesta pulse btn-floating btn-large  waves-effect waves-light  modal-trigger"
+                             data-remitente="'+obj[3]+'" data-solicitud="'+obj[0]+'" data-destinatoario="'+obj[4]+'"
+                             data-estado="'+obj[8]+'" data-tipo="btn-reply"><i class="material-icons ">reply</i></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-
               <div class="tab-pane" id="QuejaEnProceso">
-
-
+                <div *ngIf="mapComplaints.get('onProcess') && mapComplaints.get('onProcess').length>0"
+                     class="col s12 m7 l7 card-panel z-depth-2">
+                  <div *ngFor="let awaitingRequest of mapRequests.get('onProcess')"
+                       class="col s12 m7 l7 card-panel z-depth-4">
+                    <p class="email-subject truncate"><b><h3>{{awaitingRequest.title}}</h3></b></p>
+                    <hr class="grey-text text-lighten-2">
+                    <div class="email-content-wrap">
+                      <div class="row">
+                        <div class="col s10 m10 l10">
+                          <ul class="collection">
+                            <li class="collection-item avatar">
+                              <i class=" circle light-blue ">A</i>
+                              <span class="email-title">{{currentUser.email}}</span>
+                              <p class="truncate grey-text ultra-small">
+                                Para,{{awaitingRequest.program.coordinator.email}}</p>
+                              <p class="grey-text ultra-small">{{awaitingRequest.created_at}}</p>
+                            </li>
+                          </ul>
+                        </div>
+                        <div class="col s2 m2 l2 email-actions">
+                          <a href="#!"><span><i class="mdi-content-reply"></i></span></a>
+                          <a href="#!"><span><i class="mdi-navigation-more-vert"></i></span></a>
+                        </div>
+                      </div>
+                      <div class="email-content">
+                        <div [id]="'sol'+awaitingRequest.id">{{awaitingRequest.description}}</div>
+                      </div>
+                    </div>
+                    <hr>
+                    <div class="email-reply">
+                      <div class="row">
+                        <div class="col s4 m4 l4 center-align">
+                          <!--href="#modal-02"-->
+                          <a [routerLink]="['timeline']" title="Historial" data-id="'+(elemento+idSolicitud)+'"
+                             data-solicitud="'+obj[0]+'"
+                             class="pulse btn-floating btn-large  yellow waves-effect waves-light " data-toggle="tab"
+                             data-tipo="btn-histo"><i class="material-icons ">access_time</i></a>
+                        </div>
+                        <div class="col s4 m4 l4 center-align">
+                          <a title="Adjuntos" class="waves-effect btn-floating btn-large pulse waves-light red"
+                             data-tipo="btn-adj" data-solicitud="'+obj[0]+'"><i
+                            class="material-icons ">attachment</i></a>
+                        </div>
+                        <div class="col s4 m4 l4 center-align">
+                          <a title="Responder" style="visibility:visible"
+                             class="respuesta pulse btn-floating btn-large  waves-effect waves-light  modal-trigger"
+                             data-remitente="'+obj[3]+'" data-solicitud="'+obj[0]+'" data-destinatoario="'+obj[4]+'"
+                             data-estado="'+obj[8]+'" data-tipo="btn-reply"><i class="material-icons ">reply</i></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-
               <div class="tab-pane" id="QuejaFinalizada">
-
-
+                <div *ngIf="mapComplaints.get('closed') && mapComplaints.get('closed').length>0"
+                     class="col s12 m7 l7 card-panel z-depth-2">
+                  <div *ngFor="let awaitingRequest of mapComplaints.get('closed')"
+                       class="col s12 m7 l7 card-panel z-depth-4">
+                    <p class="email-subject truncate"><b><h3>{{awaitingRequest.title}}</h3></b></p>
+                    <hr class="grey-text text-lighten-2">
+                    <div class="email-content-wrap">
+                      <div class="row">
+                        <div class="col s10 m10 l10">
+                          <ul class="collection">
+                            <li class="collection-item avatar">
+                              <i class=" circle light-blue ">A</i>
+                              <span class="email-title">{{currentUser.email}}</span>
+                              <p class="truncate grey-text ultra-small">
+                                Para,{{awaitingRequest.program.coordinator.email}}</p>
+                              <p class="grey-text ultra-small">{{awaitingRequest.created_at}}</p>
+                            </li>
+                          </ul>
+                        </div>
+                        <div class="col s2 m2 l2 email-actions">
+                          <a href="#!"><span><i class="mdi-content-reply"></i></span></a>
+                          <a href="#!"><span><i class="mdi-navigation-more-vert"></i></span></a>
+                        </div>
+                      </div>
+                      <div class="email-content">
+                        <div [id]="'sol'+awaitingRequest.id">{{awaitingRequest.description}}</div>
+                      </div>
+                    </div>
+                    <hr>
+                    <div class="email-reply">
+                      <div class="row">
+                        <div class="col s4 m4 l4 center-align">
+                          <!--href="#modal-02"-->
+                          <a [routerLink]="['timeline']" title="Historial" data-id="'+(elemento+idSolicitud)+'"
+                             data-solicitud="'+obj[0]+'"
+                             class="pulse btn-floating btn-large  yellow waves-effect waves-light " data-toggle="tab"
+                             data-tipo="btn-histo"><i class="material-icons ">access_time</i></a>
+                        </div>
+                        <div class="col s4 m4 l4 center-align">
+                          <a title="Adjuntos" class="waves-effect btn-floating btn-large pulse waves-light red"
+                             data-tipo="btn-adj" data-solicitud="'+obj[0]+'"><i
+                            class="material-icons ">attachment</i></a>
+                        </div>
+                        <div class="col s4 m4 l4 center-align">
+                          <a title="Responder" style="visibility:visible"
+                             class="respuesta pulse btn-floating btn-large  waves-effect waves-light  modal-trigger"
+                             data-remitente="'+obj[3]+'" data-solicitud="'+obj[0]+'" data-destinatoario="'+obj[4]+'"
+                             data-estado="'+obj[8]+'" data-tipo="btn-reply"><i class="material-icons ">reply</i></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-
             </div>
 
           </div>
@@ -218,17 +480,174 @@
             <div class="tab-content">
 
               <div class="tab-pane active" id="ReclamoEnEspera">
+                <div *ngIf="mapClaims.get('open') && mapClaims.get('open').length>0"
+                     class="col s12 m7 l7 card-panel z-depth-2">
+                  <div *ngFor="let awaitingRequest of mapClaims.get('open')"
+                       class="col s12 m7 l7 card-panel z-depth-4">
+                    <p class="email-subject truncate"><b><h3>{{awaitingRequest.title}}</h3></b></p>
+                    <hr class="grey-text text-lighten-2">
+                    <div class="email-content-wrap">
+                      <div class="row">
+                        <div class="col s10 m10 l10">
+                          <ul class="collection">
+                            <li class="collection-item avatar">
+                              <i class=" circle light-blue ">A</i>
+                              <span class="email-title">{{currentUser.email}}</span>
+                              <p class="truncate grey-text ultra-small">
+                                Para,{{awaitingRequest.program.coordinator.email}}</p>
+                              <p class="grey-text ultra-small">{{awaitingRequest.created_at}}</p>
+                            </li>
+                          </ul>
+                        </div>
+                        <div class="col s2 m2 l2 email-actions">
+                          <a href="#!"><span><i class="mdi-content-reply"></i></span></a>
+                          <a href="#!"><span><i class="mdi-navigation-more-vert"></i></span></a>
+                        </div>
+                      </div>
+                      <div class="email-content">
+                        <div [id]="'sol'+awaitingRequest.id">{{awaitingRequest.description}}</div>
+                      </div>
+                    </div>
+                    <hr>
+                    <div class="email-reply">
+                      <div class="row">
+                        <div class="col s4 m4 l4 center-align">
+                          <!--href="#modal-02"-->
+                          <a [routerLink]="['timeline']" title="Historial" data-id="'+(elemento+idSolicitud)+'"
+                             data-solicitud="'+obj[0]+'"
+                             class="pulse btn-floating btn-large  yellow waves-effect waves-light " data-toggle="tab"
+                             data-tipo="btn-histo"><i class="material-icons ">access_time</i></a>
+                        </div>
+                        <div class="col s4 m4 l4 center-align">
+                          <a title="Adjuntos" class="waves-effect btn-floating btn-large pulse waves-light red"
+                             data-tipo="btn-adj" data-solicitud="'+obj[0]+'"><i
+                            class="material-icons ">attachment</i></a>
+                        </div>
+                        <div class="col s4 m4 l4 center-align">
+                          <a title="Responder" style="visibility:visible"
+                             class="respuesta pulse btn-floating btn-large  waves-effect waves-light  modal-trigger"
+                             data-remitente="'+obj[3]+'" data-solicitud="'+obj[0]+'" data-destinatoario="'+obj[4]+'"
+                             data-estado="'+obj[8]+'" data-tipo="btn-reply"><i class="material-icons ">reply</i></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
 
               </div>
 
               <div class="tab-pane" id="ReclamoEnProceso">
-
+                <div *ngIf="mapClaims.get('onProcess') && mapClaims.get('onProcess').length>0"
+                     class="col s12 m7 l7 card-panel z-depth-2">
+                  <div *ngFor="let awaitingRequest of mapClaims.get('onProcess')"
+                       class="col s12 m7 l7 card-panel z-depth-4">
+                    <p class="email-subject truncate"><b><h3>{{awaitingRequest.title}}</h3></b></p>
+                    <hr class="grey-text text-lighten-2">
+                    <div class="email-content-wrap">
+                      <div class="row">
+                        <div class="col s10 m10 l10">
+                          <ul class="collection">
+                            <li class="collection-item avatar">
+                              <i class=" circle light-blue ">A</i>
+                              <span class="email-title">{{currentUser.email}}</span>
+                              <p class="truncate grey-text ultra-small">
+                                Para,{{awaitingRequest.program.coordinator.email}}</p>
+                              <p class="grey-text ultra-small">{{awaitingRequest.created_at}}</p>
+                            </li>
+                          </ul>
+                        </div>
+                        <div class="col s2 m2 l2 email-actions">
+                          <a href="#!"><span><i class="mdi-content-reply"></i></span></a>
+                          <a href="#!"><span><i class="mdi-navigation-more-vert"></i></span></a>
+                        </div>
+                      </div>
+                      <div class="email-content">
+                        <div [id]="'sol'+awaitingRequest.id">{{awaitingRequest.description}}</div>
+                      </div>
+                    </div>
+                    <hr>
+                    <div class="email-reply">
+                      <div class="row">
+                        <div class="col s4 m4 l4 center-align">
+                          <!--href="#modal-02"-->
+                          <a [routerLink]="['timeline']" title="Historial" data-id="'+(elemento+idSolicitud)+'"
+                             data-solicitud="'+obj[0]+'"
+                             class="pulse btn-floating btn-large  yellow waves-effect waves-light " data-toggle="tab"
+                             data-tipo="btn-histo"><i class="material-icons ">access_time</i></a>
+                        </div>
+                        <div class="col s4 m4 l4 center-align">
+                          <a title="Adjuntos" class="waves-effect btn-floating btn-large pulse waves-light red"
+                             data-tipo="btn-adj" data-solicitud="'+obj[0]+'"><i
+                            class="material-icons ">attachment</i></a>
+                        </div>
+                        <div class="col s4 m4 l4 center-align">
+                          <a title="Responder" style="visibility:visible"
+                             class="respuesta pulse btn-floating btn-large  waves-effect waves-light  modal-trigger"
+                             data-remitente="'+obj[3]+'" data-solicitud="'+obj[0]+'" data-destinatoario="'+obj[4]+'"
+                             data-estado="'+obj[8]+'" data-tipo="btn-reply"><i class="material-icons ">reply</i></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
               </div>
 
               <div class="tab-pane" id="ReclamoFinalizada">
-
+                <div *ngIf="mapClaims.get('closed') && mapClaims.get('closed').length>0"
+                     class="col s12 m7 l7 card-panel z-depth-2">
+                  <div *ngFor="let awaitingRequest of mapClaims.get('closed')"
+                       class="col s12 m7 l7 card-panel z-depth-4">
+                    <p class="email-subject truncate"><b><h3>{{awaitingRequest.title}}</h3></b></p>
+                    <hr class="grey-text text-lighten-2">
+                    <div class="email-content-wrap">
+                      <div class="row">
+                        <div class="col s10 m10 l10">
+                          <ul class="collection">
+                            <li class="collection-item avatar">
+                              <i class=" circle light-blue ">A</i>
+                              <span class="email-title">{{currentUser.email}}</span>
+                              <p class="truncate grey-text ultra-small">
+                                Para,{{awaitingRequest.program.coordinator.email}}</p>
+                              <p class="grey-text ultra-small">{{awaitingRequest.created_at}}</p>
+                            </li>
+                          </ul>
+                        </div>
+                        <div class="col s2 m2 l2 email-actions">
+                          <a href="#!"><span><i class="mdi-content-reply"></i></span></a>
+                          <a href="#!"><span><i class="mdi-navigation-more-vert"></i></span></a>
+                        </div>
+                      </div>
+                      <div class="email-content">
+                        <div [id]="'sol'+awaitingRequest.id">{{awaitingRequest.description}}</div>
+                      </div>
+                    </div>
+                    <hr>
+                    <div class="email-reply">
+                      <div class="row">
+                        <div class="col s4 m4 l4 center-align">
+                          <!--href="#modal-02"-->
+                          <a [routerLink]="['timeline']" title="Historial" data-id="'+(elemento+idSolicitud)+'"
+                             data-solicitud="'+obj[0]+'"
+                             class="pulse btn-floating btn-large  yellow waves-effect waves-light " data-toggle="tab"
+                             data-tipo="btn-histo"><i class="material-icons ">access_time</i></a>
+                        </div>
+                        <div class="col s4 m4 l4 center-align">
+                          <a title="Adjuntos" class="waves-effect btn-floating btn-large pulse waves-light red"
+                             data-tipo="btn-adj" data-solicitud="'+obj[0]+'"><i
+                            class="material-icons ">attachment</i></a>
+                        </div>
+                        <div class="col s4 m4 l4 center-align">
+                          <a title="Responder" style="visibility:visible"
+                             class="respuesta pulse btn-floating btn-large  waves-effect waves-light  modal-trigger"
+                             data-remitente="'+obj[3]+'" data-solicitud="'+obj[0]+'" data-destinatoario="'+obj[4]+'"
+                             data-estado="'+obj[8]+'" data-tipo="btn-reply"><i class="material-icons ">reply</i></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
 
 

@@ -56,7 +56,7 @@ export class RequestsAddComponent implements OnInit {
         afterUploadMsg_error: 'No se ha podido subir los archivos'
       }
     };
-    this.request = new _Request(0,'','',null,null,null,STATUS_TYPE._new);
+    this.request = new _Request(0,'','',null,null,null,STATUS_TYPE._open);
   }
 
   ngOnInit() {

@@ -8,7 +8,14 @@ use Illuminate\Support\Facades\Validator;
 
 class RequestController extends ApiController
 {
-
+public function index(){
+    $student = auth()->user();
+    $_requests = \App\Request::where('student_id', $student->id)
+        ->with('program')
+        ->with('program.coordinator')
+        ->get();
+    return $this->showAll($_requests);
+}
 public function uploadFiles(Request $request){
     $files = $request->allFiles();
     dd($files);
