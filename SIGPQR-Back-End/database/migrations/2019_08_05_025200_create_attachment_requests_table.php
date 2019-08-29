@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAttachmentTable extends Migration
+class CreateAttachmentRequestsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateAttachmentTable extends Migration
      */
     public function up()
     {
-        Schema::create('attachment', function (Blueprint $table) {
+        Schema::create('attachment_requests', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('route');
-            $table->unsignedBigInteger('response_id');
+            $table->unsignedBigInteger('request_id');
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('response_id')->references('id')->on('responses');
+            $table->foreign('request_id')->references('id')->on('requests');
         });
     }
 
@@ -31,6 +31,6 @@ class CreateAttachmentTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('attachment');
+        Schema::dropIfExists('attachment_requests');
     }
 }

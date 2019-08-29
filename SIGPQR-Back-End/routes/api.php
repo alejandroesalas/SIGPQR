@@ -80,7 +80,8 @@ Route::get('student-request-types/{request_type}/requests','RequestType\RequestT
 
 //Rutas para el requests
 Route::post('requests/uploadFiles','Request\RequestController@uploadFiles');
-
+Route::resource('requests','Request\RequestController', ['only' => ['store', 'update']]);
+Route::resource('responses','Response\ResponseController', ['only' => ['store', 'update']]);
 /*Route::post('/api/users/upload','PostController@upload');
 Route::get('/api/post/avatar/{filename}','PostController@getImage');
 Route::get('/api/post/category/{id}','PostController@getPostsByCategory');
