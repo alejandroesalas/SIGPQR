@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {RequestsService} from "../../../services/requests.service";
 
 @Component({
   selector: 'app-studen-requests',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StudenRequestsComponent implements OnInit {
 
-  constructor() { }
+  public awaitingRequests:Array<Request>;
+  public onProcessRequests:Array<Request>;
+  public DoneRequests:Array<Request>;
+  constructor(private requestService:RequestsService) { }
 
   ngOnInit() {
+  }
+
+  loadRequests(){
+
   }
 
 }

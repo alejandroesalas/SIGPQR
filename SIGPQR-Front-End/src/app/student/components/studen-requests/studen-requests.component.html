@@ -74,9 +74,45 @@
               <div class="tab-pane active" id="PeticionEnEspera">
 
                 <div class="col s12 m7 l7 card-panel z-depth-4">
-                  <p class="email-subject truncate"><b><h3>obj[1]</h3></b>
+                  <p class="email-subject truncate"><b><h3>Asunto</h3></b></p>
+                  <hr class="grey-text text-lighten-2">
+                  <div class="email-content-wrap">
+                    <div class="row">
+                      <div class="col s10 m10 l10">
+                        <ul class="collection">
+                          <li class="collection-item avatar">
+                            <i class=" circle light-blue ">A</i>
+                            <span class="email-title">Remitente</span>
+                            <p class="truncate grey-text ultra-small">Para, Destinatario</p>
+                            <p class="grey-text ultra-small">Fecha</p>
+                          </li>
+                        </ul>
+                      </div>
+                      <div class="col s2 m2 l2 email-actions">
+                        <a href="#!"><span><i class="mdi-content-reply"></i></span></a>
+                        <a href="#!"><span><i class="mdi-navigation-more-vert"></i></span></a>
+                      </div>
+                    </div>
+                    <div class="email-content">
+                      <div id="sol'+obj[0]+'"><p>Descripcion</p></div>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="email-reply">
+                    <div class="row">
+                      <div class="col s4 m4 l4 center-align">
+                        <!--href="#modal-02"-->
+                        <a [routerLink]="['timeline']" title="Historial" id="'+(elemento+idSolicitud)+'" data-id="'+(elemento+idSolicitud)+'" data-solicitud="'+obj[0]+'" class="pulse btn-floating btn-large  yellow waves-effect waves-light " data-toggle="tab" data-tipo="btn-histo"><i class="material-icons ">access_time</i></a>
+                      </div>
+                      <div class="col s4 m4 l4 center-align">
+                        <a title="Adjuntos" class="waves-effect btn-floating btn-large pulse waves-light red" data-tipo="btn-adj" data-solicitud="'+obj[0]+'"><i class="material-icons ">attachment</i></a>
+                      </div>
+                      <div class="col s4 m4 l4 center-align">
+                        <a title="Responder" style="visibility:visible" class="respuesta pulse btn-floating btn-large  waves-effect waves-light  modal-trigger" data-remitente="'+obj[3]+'" data-solicitud="'+obj[0]+'" data-destinatoario="'+obj[4]+'" data-estado="'+obj[8]+'"  data-tipo="btn-reply"><i class="material-icons ">reply</i></a>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-
 
               </div>
 

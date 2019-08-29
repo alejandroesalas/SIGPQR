@@ -16,6 +16,7 @@ import { RequestsAddComponent } from './components/requests-add/requests-add.com
 import {CKEditorModule} from "@ckeditor/ckeditor5-angular";
 import {MatSelectModule} from "@angular/material";
 import {AngularFileUploaderModule} from "angular-file-uploader";
+import { RequestsTimelineComponent } from './components/requests-timeline/requests-timeline.component';
 
 @NgModule({
   declarations:[
@@ -24,7 +25,8 @@ import {AngularFileUploaderModule} from "angular-file-uploader";
     StudenRequestsComponent,
     StudentProfileComponent,
     StudenSectionComponent,
-    RequestsAddComponent
+    RequestsAddComponent,
+    RequestsTimelineComponent
   ],
   imports: [
     CommonModule,

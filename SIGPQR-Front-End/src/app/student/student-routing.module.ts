@@ -8,6 +8,7 @@ import {StudentProfileComponent} from "./components/student-profile/student-prof
 import {AuthGuard} from "../guards/auth.guard";
 import {Profile} from "../models/Profile";
 import {RequestsAddComponent} from "./components/requests-add/requests-add.component";
+import {RequestsTimelineComponent} from "./components/requests-timeline/requests-timeline.component";
 
 
 const studentRoutes: Routes = [
@@ -19,7 +20,8 @@ const studentRoutes: Routes = [
         {path:'',component:HomeStudentComponent},
         {path:'requests',children:[
             {path:'',component:StudenRequestsComponent},
-            {path:'add',component:RequestsAddComponent}
+            {path:'add',component:RequestsAddComponent},
+            {path:'timeline',component:RequestsTimelineComponent}
           ]},
         {path:'profile',component:StudentProfileComponent}
       ]

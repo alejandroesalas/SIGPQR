@@ -26,6 +26,7 @@
             "styles": [
               "node_modules/materialize-css/dist/css/ghpages-materialize.css",
               "node_modules/material-dashboard/assets/css/material-dashboard-pro.css",
+              "src/assets/css/ckeditor.css",
               "src/styles.css"
             ],
             "scripts": [
