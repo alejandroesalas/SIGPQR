@@ -3,11 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Attachment;
 
-class AttachmentRequest extends Attachment
+class AttachmentRequest extends Model
 {
     protected $table = 'attachment_requests';
+    protected $fillable = [
+        'request_id','route','name','extension'
+    ];
 
     public function request()
     {

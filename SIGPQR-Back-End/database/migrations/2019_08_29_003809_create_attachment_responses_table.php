@@ -17,6 +17,7 @@ class CreateAttachmentResponsesTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('route');
+            $table->string('extension');
             $table->unsignedBigInteger('response_id');
             $table->timestamps();
             $table->softDeletes();

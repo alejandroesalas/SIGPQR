@@ -6,6 +6,8 @@ use App\AttachmentRequest;
 use App\Http\Controllers\ApiController;
 use App\Request as AppRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
  use lluminate\Support\Facades\File;
 use Tymon\JWTAuth\JWTAuth;
@@ -68,14 +70,33 @@ class RequestController extends ApiController
         {
             $json = $request->input('json', null);
             if (!Empty($json)) {
-                $params_array = array_map('trim', json_decode($json, true));
+                // $params_array = array_map('trim', json_decode($json, true));
+                $params_array = json_decode(trim($json), true);
+
                 if (!Empty($params_array)) {
                     $validate = $this->checkValidation($params_array, $this->rules);
-
                     if ($validate->fails()) {
                         return $this->errorResponse("datos no validos", $validate->errors());
                     } else {
-                        $response = AppRequest::create($params_array);
+                        $response = new AppRequest;
+                        $response->title = $params_array['title'];
+                        $response->description = $params_array['description'];
+                        $response->status = $params_array['status'];
+                        $response->request_type_id = $params_array['request_type_id'];
+                        $response->program_id = $params_array['program_id'];
+                        $response->student_id = $params_array['student_id'];
+
+                        DB::transaction(function () use ($params_array) {
+                            $response =  AppRequest::create($params_array);
+                            $requestId = $response->id;
+                            if(Arr::has($params_array, 'attachments')) {
+                                $length = count($params_array['attachments']);
+                                for ($i=0; $i < $length; $i++) {
+                                    $params_array['attachments'][$i]['request_id'] = $requestId;
+                                    AttachmentRequest::create($params_array['attachments'][$i]);
+                                }
+                            }
+                        });
                         return $this->showOne($response);
                     }
                 } else {
@@ -93,7 +114,7 @@ class RequestController extends ApiController
          * @param \App\Request $request
          * @return \Illuminate\Http\Response
          */
-        public function update(Request $request1, AppRequest $response)
+        public function update(Request $request1, AppRequest $request)
         {
             $json = $request1->input('json', null);
             if (!Empty($json)) {
@@ -103,13 +124,13 @@ class RequestController extends ApiController
                     if ($validate->fails()) {
                         return $this->errorResponse("datos no validos", $validate->errors());
                     } else {
-                        $response->title = $params_array['title'];
-                        $response->description = $params_array['description'];
-                        if ($response->isDirty()) {
+                        $request->title = $params_array['title'];
+                        $request->description = $params_array['description'];
+                        if ($request->isDirty()) {
                             return $this->errorResponse('se debe especificar al menos un valor', 422);
                         }
-                        $response->save();
-                        return $this->showOne($response);
+                        $request->save();
+                        return $this->showOne($request);
                     }
                 } else {
                     return $this->errorResponse('Datos Vacios!', 422);

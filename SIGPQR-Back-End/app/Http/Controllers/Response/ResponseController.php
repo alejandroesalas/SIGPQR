@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Response;
 
+use App\AttachmentResponse;
 use App\Http\Controllers\ApiController;
 use App\Response;
 use Illuminate\Http\Request;
@@ -47,13 +48,33 @@ class ResponseController extends ApiController
     {
         $json = $request->input('json', null);
         if (!Empty($json)){
-            $params_array = array_map('trim', json_decode($json, true));
+            $params_array = json_decode(trim($json), true);
             if (!Empty($params_array)){
                     $validate = $this->checkValidation($params_array,$this->rules);
                     if ($validate->fails()){
                             return $this->errorResponse("datos no validos",$validate->errors());
                     }else{
-                        $response = Response::create($params_array);
+
+                        $response = new Response;
+                        $response->title = $params_array['title'];
+                        $response->description = $params_array['description'];
+                        $response->status_response = $params_array['status_response'];
+                        $response->type = $params_array['type'];
+                        $response->request_id = $params_array['request_id'];
+                        $response->student_id = $params_array['student_id'];
+                        $response->coordinator_id = $params_array['coordinator_id'];
+
+                        DB::transaction(function () use ($params_array) {
+                            $response =  Response::create($params_array);
+                            $responseId = $response->id;
+                            if(Arr::has($params_array, 'attachments')) {
+                                $length = count($params_array['attachments']);
+                                for ($i=0; $i < $length; $i++) {
+                                    $params_array['attachments'][$i]['response_id'] = $responseId;
+                                    AttachmentResponse::create($params_array['attachments'][$i]);
+                                }
+                            }
+                        });
                         return $this->showOne($response);
                     }
             }else{
