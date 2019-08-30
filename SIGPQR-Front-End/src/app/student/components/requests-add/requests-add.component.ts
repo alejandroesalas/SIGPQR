@@ -10,6 +10,7 @@ import {_RequestType} from "../../../models/_RequestType";
 import {global} from "../../../global";
 import {AngularFileUploaderComponent} from "angular-file-uploader";
 import {_Request, STATUS_TYPE} from "../../../models/_Request";
+import {AttachmentRequest} from "../../../models/AttachmentRequest";
 
 @Component({
   selector: 'app-requests-add',
@@ -92,16 +93,18 @@ export class RequestsAddComponent implements OnInit {
     },error => {
       console.log(error);
     });
-
   }
 
-  uploadedFiles(datos){
-    console.log('archivos',this.fileUpload1.ApiResponse);
-    console.log(datos);
+  uploadedFiles(data){
+    let dat = JSON.parse(data.response);
+    console.log('archivos',dat);
+    this.request.attachments = dat.data;
+    console.log('request',this.request);
   }
   storeRequest(form){
-    console.log(this.request);
     this.request.student_id = this.student.id;
+    console.log(this.request);
+
   }
 
 }
