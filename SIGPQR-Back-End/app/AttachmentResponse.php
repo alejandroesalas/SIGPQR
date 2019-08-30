@@ -3,11 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Attachment;
 
-class AttachmentResponse extends Attachment
+class AttachmentResponse extends Model
 {
     protected $table = 'attachment_responses';
+    protected $fillable = [
+        'response_id','route','name','extension'
+    ];
 
     public function response()
     {

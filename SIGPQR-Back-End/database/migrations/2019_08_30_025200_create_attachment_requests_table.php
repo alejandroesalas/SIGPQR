@@ -17,6 +17,7 @@ class CreateAttachmentRequestsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('route');
+            $table->string('extension');
             $table->unsignedBigInteger('request_id');
             $table->timestamps();
             $table->softDeletes();
