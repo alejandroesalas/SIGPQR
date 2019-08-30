@@ -8,7 +8,7 @@ use App\Request as AppRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
  use lluminate\Support\Facades\File;
-
+use Tymon\JWTAuth\JWTAuth;
 class RequestController extends ApiController
 {
     private $rules = array(
@@ -48,10 +48,10 @@ class RequestController extends ApiController
                     Storage::disk('upload')->makeDirectory($student->id_num);
                 }
                 Storage::disk('upload')->put($student->id_num.'/'.$fileName,\File::get($file));
-                $attachmentRequest->route = 'upload'.$student->id_num.'/'.$fileName;
+                $attachmentRequest->route = 'upload/'.$student->id_num.'/'.$fileName;
                 $attachments[]=$attachmentRequest;
             }
-            return $this->showAll($attachments);
+            return $this->showOther($attachments);
 
         }else{
             return $this->showMessage('error al subi archivos',400);

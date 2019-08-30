@@ -39,7 +39,10 @@ export class RequestsAddComponent implements OnInit {
       formatsAllowed:".jpg,.png,.pdf,.docx",
       maxSize:"10",
       uploadAPI:  {
-        url:global.url+"requests/uploadFiles"
+        url:global.url+"requests/uploadFiles",
+        headers: {
+          'Authorization':'Bearer '+this.student.token
+        }
       },
       theme: "dragNDrop",
       hideProgressBar: false,
