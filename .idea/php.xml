@@ -93,6 +93,7 @@
       <path value="$PROJECT_DIR$/SIGPQR-Back-End/vendor/symfony/polyfill-util" />
       <path value="$PROJECT_DIR$/SIGPQR-Back-End/vendor/symfony/polyfill-php56" />
       <path value="$PROJECT_DIR$/SIGPQR-Back-End/vendor/namshi/jose" />
+      <path value="$PROJECT_DIR$/SIGPQR-Back-End/vendor/wildbit/swiftmailer-postmark" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.1" />
