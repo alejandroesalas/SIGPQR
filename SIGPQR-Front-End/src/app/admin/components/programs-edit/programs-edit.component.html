@@ -1,0 +1,56 @@
+<main>
+
+  <div class="container">
+
+    <div class="row">
+      <div class="col-md-10">
+
+        <div class="card card-stats">
+
+          <div class="card-header card-header-icon card-header-success">
+            <div class="card-icon">
+              <i class="fas fa-users"></i>
+            </div>
+            <h5 class="card-title center ">Registro de Nuevos Programas</h5>
+          </div>
+
+          <div class="card-body" *ngIf="currentProgram">
+            <!--Inicio FORM-->
+            <form #editProgramForm="ngForm" (ngSubmit)="editProgram(editProgramForm)">
+              <div class="row form-group">
+                <div class="input-field col s10">
+                  <input id="first_name" type="text" [(ngModel)]="currentProgram.name" [value]="currentProgram.name" name="first_name" class="validate" required minlength="5">
+                  <label for="first_name">Nombre del Nuevo Programa</label>
+                </div>
+                <div class="card-icon">
+                  <i class="fas fa-sitemap"></i>
+                </div>
+              </div>
+              <div class="row form-group" *ngIf="faculties">
+                <mat-form-field class="mat-form-field width w-50">
+                  <mat-label>Facultad</mat-label>
+                  <mat-select required [(ngModel)]="currentProgram.faculty_id"name="faculty_id">
+                    <mat-option *ngFor="let faculty of faculties" [value]="faculty.id">{{faculty.name}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <a [routerLink]="['../']" class="btn btn-danger center">
+                <i class="  fa fa-arrow-circle-left"></i>Cancelar</a>
+              <button [disabled]="editProgramForm.invalid" type="submit" class="btn btn-success center">
+                Guardar<i class="fa fa-arrow-circle-right"></i>
+              </button>
+            </form>
+            <!--Fin FORM-->
+          </div>
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+</main>
+

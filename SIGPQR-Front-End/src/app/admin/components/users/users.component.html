@@ -1,0 +1,102 @@
+<main>
+  <!--Inicio CONTAINER GENERAL-->
+  <div class="container">
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card card-stats">
+          <div class="card-header card-header-icon card-header-success">
+            <div class="card-icon">
+              <i class="fas fa-users"></i>
+            </div>
+            <h5 class="card-title center ">Gestión de usuarios</h5>
+          </div>
+
+          <div class="card-body">
+            <a [routerLink]="'./add'" class="btn btn-success left">
+              Nuevo Usuario<i class="fa fa-user-plus"></i>
+            </a>
+            <br>
+            <br>
+            <div class="col-md-12">
+              <mat-spinner *ngIf="loading"></mat-spinner>
+              <!--depliegue de usuarios-->
+              <table class="table table-striped">
+                <thead>
+                <tr>
+                  <th class="text-center">Identificación</th>
+                  <th class="text-center">Nombre</th>
+                  <th class="text-center">Email</th>
+                  <th class="text-center">Tipo</th>
+                  <th></th>
+                </tr>
+                </thead>
+                <tbody class="" id="tUsuarios" *ngIf="docentes">
+                <tr *ngFor="let docente of docentes">
+                  <td class="text-center">{{docente.id_num}}</td>
+                  <td class="text-center">{{docente.name}}</td>
+                  <td class="text-center">{{docente.email}}</td>
+                  <td class="text-center">Docente</td>
+                  <td class="td-actions right">
+                    <a (click)="openModal(docente,'promoverDocente')"
+                       class="btn btn-success btn-link left modal-trigger btn tooltipped"
+                       data-position="bottom" data-toggle="tooltip" data-placement="right" title="Promover docente"
+                       rel="tooltip">
+                      <i class="fas fa-user-plus"></i></a>
+                    <a [routerLink]="[docente.id,'edit']" class="btn btn-info btn-link left btn tooltipped"
+                       data-position="bottom" data-toggle="tooltip" data-placement="right" title="Editar Usuario"
+                       rel="tooltip">
+                      <i class="fas fa-user-edit"></i></a>
+                    <button (click)="disableUser(docente)" type="button" rel="tooltip"
+                            class="btn btn-danger btn-link btn tool" data-position="bottom" data-toggle="tooltip"
+                            data-placement="right" title="Deshabilitar Usuario">
+                      <i class="fas fa-user-lock"></i>
+                    </button>
+                  </td>
+
+                </tr>
+
+                <jw-modal id="promoverDocente">
+                      <!--Inicio FORM-->
+                  <div class="align-content-center">
+                        <form  #formteacherToCoordinator="ngForm" (ngSubmit)="promoverDocente(formteacherToCoordinator)" class="form-group">
+                          <div class="row center-align">
+                            <div class="card-icon mr-4">
+                              <i class="fas fa-users"></i>
+                            </div>
+                            <mat-form-field style="width: 50%;">
+                              <mat-label>Asignar como coordinador de : </mat-label>
+                              <select required matNativeControl [(ngModel)]="selectedProgram" name="selectedProgram">
+                                <!--<option value="" disabled selected>Seleccionar...</option>-->
+                                <option *ngFor="let program of programs" [value]="program.id">{{program.name}}</option>
+                              </select>
+                            </mat-form-field>
+                          </div>
+                          <br>
+                          <button type="button" (click)="closeModal('promoverDocente')" class="btn btn-danger left">Cancelar <i
+                            class="fa fa-refresh"></i></button>
+                          <button [disabled]="formteacherToCoordinator.invalid" type="submit" class="btn btn-success">
+                            Promover<i class="fa fa-arrow-circle-right"></i>
+                          </button>
+                        </form>
+                  </div>
+                </jw-modal>
+
+                </tbody>
+              </table>
+
+
+              <div class="card-footer">
+                <div class="stats">
+                  <i class="material-icons text-success">access_time</i> Sistema de gestión PQR
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr>
+    </div>
+  </div>
+</main>
+<!--Fin CONTAINER GENERAL-->

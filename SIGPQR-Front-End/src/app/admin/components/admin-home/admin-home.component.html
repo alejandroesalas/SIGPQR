@@ -1,0 +1,120 @@
+<main>
+  <!--Inicio CONTAINER GENERAL-->
+  <div class="container">
+    <mat-spinner *ngIf="loading"></mat-spinner>
+    <!--Inicio ROW-->
+    <div class="row">
+
+      <!--Inicio COLUMNAS-->
+      <div class="col-lg-3 col-md-6 col-sm-6">
+
+        <div class="card card-stats">
+
+          <div class="card-header card-header-success card-header-icon">
+
+            <div class="card-icon"
+                 data-header-animation="true">
+
+              <i class="fas fa-sitemap"></i>
+            </div>
+            <p class="card-category"><a class="green-text" [routerLink]="['faculties']">Facultades</a></p>
+            <h3 class="card-title">{{totalOfFaculties}}</h3>
+          </div>
+
+          <div class="card-footer">
+            <div class="stats">
+              <i class="material-icons text-success">access_time</i> Sistema de gestión PQR
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <!--Fin COLUMNAS-->
+
+      <!--Inicio COLUMNAS-->
+      <div class="col-lg-3 col-md-6 col-sm-6">
+
+        <div class="card card-stats">
+
+          <div class="card-header card-header-success card-header-icon">
+
+            <div class="card-icon"
+                 data-header-animation="true">
+
+              <i class="fas fa-sitemap"></i>
+            </div>
+            <p class="card-category"><a class="green-text" [routerLink]="['programs']">Programas</a></p>
+            <h3 class="card-title">{{totalOfPrograms}}</h3>
+          </div>
+
+
+          <div class="card-footer">
+            <div class="stats">
+              <i class="material-icons text-success">access_time</i> Sistema de gestión PQR
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <!--Fin COLUMNAS-->
+
+      <!--Inicio COLUMNAS-->
+      <div class="col-lg-3 col-md-6 col-sm-6">
+
+        <div class="card card-stats">
+
+          <div class="card-header card-header-success card-header-icon">
+
+            <div class="card-icon"
+                 data-header-animation="true">
+
+              <i class="fas fa-users"></i>
+            </div>
+            <p class="card-category"><a class="green-text" [routerLink]="['users']">Docentes</a></p>
+            <h3 class="card-title">{{totalOfUsers}}</h3>
+          </div>
+
+
+          <div class="card-footer">
+            <div class="stats">
+              <i class="material-icons text-success">access_time</i> Sistema de gestión PQR
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <!--Fin COLUMNAS-->
+
+
+      <!--Inicio COLUMNAS-->
+      <div class="col-lg-3 col-md-6 col-sm-6">
+
+        <div class="card card-stats">
+
+          <div class="card-header card-header-success card-header-icon">
+
+            <div class="card-icon"
+                 data-header-animation="true">
+
+              <i class="fas fa-users"></i>
+            </div>
+            <p class="card-category"><a class="green-text" [routerLink]="['coordinators']">Coordinadores</a></p>
+            <h3 class="card-title">{{totalOfcoordinators}}</h3>
+          </div>
+          <div class="card-footer">
+            <div class="stats">
+              <i class="material-icons text-success">access_time</i> Sistema de gestión PQR
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <!--Fin COLUMNAS-->
+    </div>
+    <!--Fin ROW-->
+  </div>
+  <!--Fin COLUMNAS-->
+  <footer class="footer footer-copyright green darken-3 white-text" style="position: fixed; bottom: 0; width: 100%">
+  </footer>
+  <!--Fin CONTAINER GENERAL--></main>
+

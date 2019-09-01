@@ -1,0 +1,167 @@
+<header>
+
+  <div class="container">
+    <div class="row">
+
+      <!--<div class="col-md-4 col-sm-3"></div>-->
+
+      <div class="col-md-6 col-sm-8 " style="overflow: auto">
+        <form class="form-group" style="margin-top: 0px;">
+          <div class="card card-wizard active">
+            <div class="card-header text-center">
+              <h3 class="card-title">
+                Construye tu perfil
+              </h3>
+              <h5 class="card-description">Esta información nos permitirá saber más acerca de ti</h5>
+            </div>
+
+            <div class="card-body">
+
+              <ul class="nav nav-pills nav-pills-icons nav-pills-success" role="tablist">
+
+                <li class="nav-item" style="width: 33.3333%;">
+                  <a class="nav-link active" href="#dashboard-1" role="tab" data-toggle="tab">
+                    Datos Personales
+                  </a>
+                </li>
+                <li class="nav-item" style="width: 33.3333%;">
+                  <a class="nav-link" href="#tasks-1" role="tab" data-toggle="tab">
+                    Cuenta de Usuario
+                  </a>
+                </li>
+              </ul>
+
+              <div class="tab-content tab-space">
+                <div class="tab-pane active" id="dashboard-1">
+                  <form class="form-group" [formGroup]="regForm" (ngSubmit)="register()">
+                    <div class="row justify-content-center">
+                      <div class="col-md-10">
+                        <div class="form-group input-field">
+                          <i class="material-icons prefix">face</i>
+                          <input id="first_name" name="name" formControlName="name" type="text" class="validate form-control" required>
+                          <label for="first_name" class="">Nombres*</label>
+                          <div  *ngIf="regForm.controls['name'].errors?.required && regForm.controls['name'].touched"
+                                class="error right">El campo Nombre es obligatorio</div>
+                          <div *ngIf="regForm.controls['name'].errors?.pattern && regForm.controls['name'].touched"
+                                class="error right">Campo Nombre No puede contener Numeros o Caracteres especiales</div>
+                        </div>
+                        <div class="form-group input-field">
+                          <i class="material-icons prefix">face</i>
+                          <input id="second_name" formControlName="lastname" name="lastname" type="text"
+                                 class="validate" required>
+                          <label for="second_name" class="">Apellidos*</label>
+                          <small *ngIf="regForm.controls['lastname'].errors?.required && regForm.controls['lastname'].touched"
+                                 class="error right">El campo Apellidos es obligatorio</small>
+                          <small *ngIf="regForm.controls['lastname'].hasError('pattern') && regForm.controls['lastname'].touched"
+                                 class="error right">Campo Apellidos No puede contener Numeros o Caracteres especiales</small>
+                        </div>
+                        <div class="input-field">
+                          <i class="material-icons prefix">contact_mail</i>
+                          <input id="email" type="email" formControlName="email" name="email" class="validate" required>
+                          <label for="email" class="">Email*</label>
+                          <small *ngIf="regForm.controls['email'].hasError('required') && regForm.controls['email'].touched"
+                                 class="error right">El campo Email es requerido</small>
+                          <small *ngIf="regForm.controls['email'].hasError('pattern') && regForm.controls['email'].touched"
+                                 class="error right">El campo Email No tiene un formato valido. eg:pepitoplus@gmail.com</small>
+                          <small class="error" *ngIf="regForm.get('email').hasError('notAvailable')">Ya Existe una cuenta asociada a este correo</small>
+                        </div>
+                        <div>
+                          <mat-form-field style="width: 100%;">
+                            <mat-label for="id_type">Tipo de de documento</mat-label>
+                            <mat-select matNativeControl id="id_type" formControlName="id_type" name="id_type">
+                              <mat-option value="" disabled selected>Seleccionar...</mat-option>
+                              <mat-option value="CC">Cedula</mat-option>
+                              <mat-option value="TI">Tarjeta de identidad</mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="regForm.get('id_type').invalid">El campo es requerido</mat-error>
+                          </mat-form-field>
+                        </div>
+                        <div class="input-field">
+                          <input id="id_num" type="text" class="validate" formControlName="id_num" name="id_num"
+                                 aria-required="true" required>
+                          <label for="id_num" class="">N° de Identificación</label>
+                          <small *ngIf="regForm.controls['id_num'].hasError('required') && regForm.controls['id_num'].touched"
+                                 class="error right">El campo Identificación es requerido</small>
+                          <small *ngIf="regForm.controls['id_num'].hasError('pattern') && regForm.controls['id_num'].touched"
+                                 class="error right">campo identificación no es numerico</small>
+                        </div>
+                        <div class="form-group">
+                          <mat-form-field style="width: 100%;">
+                            <mat-label>Programa Educativo</mat-label>
+                            <mat-select formControlName="_program" name="_program">
+                              <mat-option value="" disabled selected>Seleccionar...</mat-option>
+                              <mat-option *ngFor="let program of programas"
+                                          [value]="program.id">{{program.name}}</mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="regForm.get('_program').invalid">El campo es requerido</mat-error>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="center">
+                      <a [routerLink]="['/login']" class="btn btn-danger">Cancelar</a>
+                      <a class="btn btn-next btn-success" href="#tasks-1" role="tab" data-toggle="tab" id="btnRegistro">Siguiente</a>
+                    </div>
+                  </form>
+                </div>
+
+                <div class="tab-pane" id="tasks-1">
+                  <form class="form-group col-md-12" [formGroup]="regForm" (ngSubmit)="register()">
+                    <div class="row justify-content-center">
+                      <div class="col-md-4">
+                        <div class="picture-container">
+                          <div class="picture">
+                            <img src="../../../assets/imagenes/default-avatar.png" class="picture-src"
+                                 style="max-width:144px;max-height:150px">
+                            <input type="file">
+                          </div>
+                          <h6 class="description center">Imagen usuario</h6>
+                        </div>
+                      </div>
+
+                      <div class="col-md-8">
+                        <div class="input-field">
+                          <i class="material-icons prefix">vpn_key</i>
+
+                          <input id="fPaswoord" type="password" class="validate" formControlName="password"
+                                 name="password" aria-required="true">
+                          <label for="first_name" class="">Contraseña</label>
+                          <span class="helper-text" data-error="wrong" data-success="right">MAximo 6 Caracteres</span>
+                          <small *ngIf="regForm.controls['password'].hasError('required') && regForm.controls['password'].touched"
+                                 class="error right">Campo obligatorio</small>
+                        </div>
+                        <div class="input-field">
+                          <i class="material-icons prefix"></i>
+                          <input type="password" id="CPassword" required="true" name="CPassword" aria-required="true"
+                                 formControlName="CPassword">
+                          <span class="helper-text" data-error="wrong" data-success="right">Confirmar contraseña</span>
+                          <small *ngIf="regForm.controls['CPassword'].hasError('notequal') && regForm.controls['CPassword'].touched"
+                                 class="error right">La contraseña no coincide!</small>
+                          <small *ngIf="regForm.controls['CPassword'].hasError('required') && regForm.controls['CPassword'].touched"
+                                 class="error right">Campo obligatorio</small>
+                        </div>
+                      </div>
+
+                    </div>
+                    <div class="center">
+                      <button [disabled]="regForm.invalid || regForm.pending" type="submit"
+                              class="btn btn-next btn-success">
+                        Guardar<i class="fa fa-arrow-circle-right"></i>
+                      </button>
+                      <!-- <a class="btn btn-next btn-success modal-trigger">Registrar</a>-->
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </form>
+      </div>
+      <div class="col-md-2 col-sm-1"></div>
+    </div>
+  </div>
+
+</header>
+<logo-section></logo-section>
+

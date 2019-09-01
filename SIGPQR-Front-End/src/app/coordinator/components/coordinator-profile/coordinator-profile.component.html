@@ -1,0 +1,35 @@
+<main>
+  <!--Inicio CONTAINER GENERAL-->
+  <div class="container">
+
+    <div class="container" align="center">
+      <form action="">
+        <div class="col-md-4">
+          <div class="card card-profile">
+            <div class="card-avatar">
+              <a href="#pablo">
+                <img class="img" src="../../../../assets/imagenes/default-avatar.png">
+              </a>
+            </div>
+            <div class="card-body">
+              <h6 class="card-category text-gray">Coordinador</h6>
+              <h6><small>Ingeniería de Sistemas</small></h6>
+              <h6 *ngIf="currentUser">{{currentUser.id_num}}</h6>
+              <h4 class="card-title" *ngIf="currentUser">{{currentUser.name}}</h4>
+              <h4 class="card-title"*ngIf="currentUser">{{currentUser.lastname}}</h4>
+
+              <p class="card-description" align="justify">
+
+                Queremos ser más felices que los demás, y eso es dificilísimo, porque siempre les imaginamos mucho más felices de lo que son en realidad. Montesquieu
+              </p>
+
+              <small>Corporación Universitaria del Caribe - CECAR</small>
+              <a [routerLink]="['/coordinador']" class="btn btn-success btn-round">SIGPQR</a>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+  </div>
+  </main>

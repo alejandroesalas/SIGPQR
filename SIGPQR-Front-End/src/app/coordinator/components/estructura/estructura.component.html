@@ -1,0 +1,85 @@
+<header>
+
+  <nav class="nav-wrapper green darken-4">
+    <div class="container">
+      <a href="#" class="brand-logo center "><img src="../../../../assets/imagenes/logo.png" alt="" class="responsive-img valign profile-image" style="max-width:144px;max-height:60px"></a>
+      <ul class="right">
+        <li>
+          <a  [routerLink]="['/logout/1']" id="login" class="btn btn-success">Cerrar sesión</a>
+        </li>
+      </ul>
+    </div>
+    <a href="#" data-target="abrirYCerrar-sidenav" class="sidenav-trigger"><i class="material-icons green-text">menu</i></a>
+  </nav>
+  <!--Inicio UL-SIDENAV -->
+  <ul id="abrirYCerrar-sidenav" class="sidenav sidenav-fixed green darken-2" style="width: 305px; left: 0px;">
+
+    <li class="user-details white-text center" style="background-color: #016836;">
+      SIG<b>PQR</b>
+    </li>
+
+    <li class="user-view green darken-4">
+      <div class="row">
+        <div class="col s3 m3 l3">
+
+          <div class="card card-wizard active transparent" style="min-height: 70px; width: 135px; top: -35px;">
+
+            <div class="picture-container">
+              <div class="picture"  style="width: 80px;height: 80px;">
+                <img src="../../../../assets/imagenes/default-avatar.png" class="picture-src" style="max-width:144px;max-height:150px">
+                <input type="file">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col s19 m9 l9">
+          <a id="usuario"class="white-text" *ngIf="currentUser">{{currentUser.email}}</a>
+          <a class="white-text"> <i class="fa fa-circle text-success"></i>Online</a>
+          <a [routerLink]="['profile']" rel="tooltip" class="btn btn-danger btn-link  btn tooltipped" data-tooltip="Mi perfil">
+            <i class="white-text  fas fa-user-tie"></i>
+          </a>
+        </div>
+      </div>
+    </li>
+
+    <div class="">
+    <!-- Inicio CONTAINER-->
+    <div class="container">
+      <li class="">
+        <a [routerLink]="['/coordinador']" class="waves-effect waves-teal white-text">
+          <i class="material-icons white-text">home</i>Inicio
+        </a>
+      </li>
+      <li class="" *ngIf="isAdmin()">
+        <a [routerLink]="['/admin']" class="waves-effect waves-teal white-text">
+          <i class="material-icons white-text">home</i>Administración
+        </a>
+      </li>
+      <!-- Inicio UL-->
+      <ul class="collapsible">
+        <!-- Inicio-->
+        <li>
+          <a class="collapsible-header waves-effect waves-teal white-text">
+            <i class="material-icons left white-text">dashboard</i>Gestión
+          </a>
+
+
+          <div class="collapsible-body green darken-3">
+            <ul>
+              <li><a [routerLink]="['requests/1']" class="white-text">Peticiones</a>
+              </li>
+              <li><a [routerLink]="['requests/2']" class="white-text">Quejas</a>
+              </li>
+              <li><a [routerLink]="['requests/3']" class="white-text">Reclamos</a>
+            </ul>
+          </div>
+        </li>
+      </ul>
+      <!-- Fin UL-->
+    </div>
+    <!-- Fin CONTAINER-->
+    </div>
+  </ul><!--Fin UL-SIDENAV -->
+
+</header>
+

@@ -1,0 +1,76 @@
+<main>
+  <!--Inicio CONTAINER GENERAL-->
+  <div class="container">
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card card-stats">
+          <div class="card-header card-header-icon card-header-success">
+            <div class="card-icon">
+              <i class="fas fa-sitemap"></i>
+            </div>
+            <h5 class="card-title center ">Gestión de programas</h5>
+          </div>
+
+          <div class="card-body">
+            <a class="btn btn-success left modal-trigger" [routerLink]="['add']">
+              Nuevo programa<i class="fa fa-users"></i>
+            </a>
+          </div>
+
+
+        </div>
+      </div>
+
+      <div class="col-lg-12 col-md-6 col-sm-12">
+
+
+        <div class="card card-stats">
+          <div class="card-header card-header-success card-header-icon">
+
+            <p class="card-category left">PROGRAMAS</p>
+            <h3 class="card-title">
+            </h3>
+          </div>
+          <div class="card-body">
+            <table class="table table-striped">
+              <thead>
+              <tr>
+              </tr>
+              </thead>
+              <tbody *ngIf="programs" class="">
+              <tr *ngFor="let program of programs">
+                <td>{{program.name}}</td>
+                <td></td>
+                <td></td>
+                <td class="td-actions right">
+                  <a class="btn btn-success btn-link left modal-trigger btn tooltipped" data-position="bottom"
+                     data-tooltip="Agregar a una facultad" rel="tooltip" href="#asignarProgramaAFacultad">
+                    <i class="fas fa-plus"></i>
+                  </a>
+                  <a class="btn btn-info btn-link modal-trigger btn tooltipped" data-position="bottom"
+                     data-tooltip="Editar nombre programa" [routerLink]="[program.id,'edit']">
+                    <i class="fas fa-pencil-alt"></i>
+                  </a>
+                  <button (click)="disable(program)" type="button" rel="tooltip" class="btn btn-danger btn-link btn tooltipped"
+                          data-position="bottom" data-tooltip="Deshabilitar programa">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="stats">
+            <i class="material-icons text-success">access_time</i> Sistema de gestión PQR
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Fin CONTAINER GENERAL-->
+  <footer class="footer footer-copyright green darken-3 white-text" style="position: fixed; bottom: 0; width: 100%">
+  </footer>
+</main>

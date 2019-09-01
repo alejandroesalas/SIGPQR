@@ -1,0 +1,106 @@
+<main>
+  <!--Inicio CONTAINER GENERAL-->
+  <div class="container">
+
+    <div class="row">
+
+      <a class="btn btn-success btn-link left" [routerLink]="['../']">
+        <i class="fas fa-arrow-left"></i>
+      </a>
+      <div class="col-md-12">
+        <div class="card card-stats">
+          <div class="card-header card-header-icon card-header-success">
+            <div class="card-icon">
+              <i class="fas fa-clipboard-list"></i>
+            </div>
+            <h5 class="card-title center ">Gestión de solicitudes</h5>
+          </div>
+          <!--Inicio CARD-BODY-->
+          <div class="card-body">
+
+
+            <!--Inicio FORMULARIO-->
+            <form #regRequest="ngForm" (ngSubmit)="storeRequest(regRequest)">
+
+              <div class="input-field col s12 green-text">
+                <i class="material-icons prefix">account_circle</i>
+                <!--nombres y apellidos-->
+                <input disabled [value]="student.name + ' ' + (student.lastname?student.lastname:'')" id="disabled"
+                       type="text" class="validate" name="" required>
+                <!--Correo-->
+                <label for="disabled" id="correoR">Remitente</label>
+              </div>
+
+              <div class="input-field col s12 m4 green-text">
+                <i class="material-icons prefix">mode_edit</i>
+                <input id="inAsunto" type="text" name="title" [(ngModel)]="request.title" required>
+                <label for="inAsunto">Asunto </label>
+              </div>
+
+              <div id="divSelCoordinador" class="input-field col s12 m4 green-text">
+                <mat-form-field style="width: 100%">
+                <mat-label>Dirigido a</mat-label>
+                <mat-select id="selCoordinador" name="program_id" [(ngModel)]="request.program_id" required>
+                  <mat-option  [value]="student.program_id" selected>{{coordinator.name+' '+(coordinator.lastname?coordinator.lastname:'')}}</mat-option>
+                </mat-select>
+                </mat-form-field>
+              </div>
+
+
+              <div class="input-field col s12 m4 green-text">
+                <mat-form-field style="width: 100%">
+                  <mat-label>Categoria</mat-label>
+                <mat-select id="docid" name="request_type" [(ngModel)]="request.request_type_id" required>
+                  <mat-option *ngFor="let type of requestTypes" [value]="type.id">{{type.type}}</mat-option>
+                </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div class="input-field col s12 black-text">
+
+                <label class="green-text">Descripción</label>
+                <br>
+                <br>
+                <ckeditor [editor]="Editor" (ready)="onReady($event)" name="description" [(ngModel)]="request.description"
+                required maxlength="500"></ckeditor>
+                <!--
+                <div class="document-editor">
+                  <div class="document-editor__toolbar"></div>
+                  <div class="document-editor__editable-container">
+                    <div class="document-editor__editable" id="editor">
+
+                    </div>
+                  </div>
+                </div>
+              -->
+              </div>
+              <div class="file-field input-field col s12">
+                <angular-file-uploader #fileUpload1 id="image" [config]="afuConfig" [resetUpload]="resetUploader"
+                                       (ApiResponse)="uploadedFiles($event)"></angular-file-uploader>
+                <!--<span class="title">Adjuntar archivos</span>
+                <input type="file" multiple id="files">
+                <div class="file-path-wrapper">
+                  <input class="file-path validate" type="text" placeholder="No se ha seleccionado ningún archivo">
+                </div>-->
+              </div>
+              <div class="col s12" align="center">
+                <button [routerLink]="['../']" type="button" href="" class="btn btn-danger">Cancelar</button>
+                <button [disabled]="regRequest.invalid" type="submit" class="btn btn-success" id="btnRegistrar">Registrar</button>
+              </div>
+            </form>
+            <!--Fin FORMULARIO-->
+          </div>
+          <!--Fin CARD-BODY-->
+          <div class="card-footer">
+            <div class="stats">
+              <i class="material-icons text-success">access_time</i> Sistema de gestión PQR
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <footer class="footer footer-copyright green darken-3 white-text" style="position: fixed; bottom: 0; width: 100%">
+  </footer>
+</main>

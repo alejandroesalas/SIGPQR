@@ -1,0 +1,51 @@
+<main>
+  <!--Inicio CONTAINER GENERAL-->
+  <div class="container">
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card card-stats">
+          <div class="card-header card-header-icon card-header-success">
+            <div class="card-icon">
+              <i class="fas fa-users-cog"></i>
+            </div>
+            <h5 class="card-title center ">Gestión de coordinadores</h5>
+          </div>
+          <div class="card-body">
+          </div>
+          <div class="col-md-12">
+            <mat-spinner *ngIf="loading"></mat-spinner>
+            <table class="table table-striped">
+              <thead>
+              <tr>
+                <th>PROGRAMA</th>
+                <th>COORDINADOR</th>
+                <th>EMAIL</th>
+                <th></th>
+              </tr>
+              </thead>
+              <tbody class="">
+              <tr *ngFor="let program of programs">
+                <td>{{program.name}}</td>
+                <td *ngIf="program.coordinator.name && program.coordinator.lastname">{{program.coordinator.name+' '+program.coordinator.lastname}}</td>
+                <td *ngIf="program.coordinator.name && !program.coordinator.lastname">{{program.coordinator.name}}</td>
+                <td>{{program.coordinator.email}}</td>
+                <td class="td-actions right">
+                  <button (click)="confirmAction(program)" type="button" rel="tooltip" class="btn btn-danger btn-link btn" data-position="bottom"
+                          data-toggle="tooltip" data-placement="right" title="Quitar coordinador asignado">
+                    <i class=" fas fa-user-minus"></i>
+                  </button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <!--Fin CONTAINER GENERAL-->
+  <footer class="footer footer-copyright green darken-3 white-text" style="position: fixed; bottom: 0; width: 100%">
+  </footer>
+</main>

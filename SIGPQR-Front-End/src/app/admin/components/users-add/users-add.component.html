@@ -1,0 +1,92 @@
+<main>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10">
+        <div class="card card-stats">
+          <div class="card-header card-header-icon card-header-success">
+            <div class="card-icon">
+              <i class="fas fa-users"></i>
+            </div>
+            <h5 class="card-title center ">Registro de Nuevos Usuarios</h5>
+          </div>
+
+          <div class="card-body">
+            <!--Inicio FORM-->
+            <form [formGroup]="regForm" (ngSubmit)="createNewUser()">
+              <div class="row form-group">
+                <i class="material-icons prefix">face</i>
+                <div class="input-field col s10">
+                  <input id="first_name" type="text" formControlName="name" name="first_name" class="validate" required>
+                  <label for="first_name">Nombre</label>
+                  <span *ngIf="regForm.controls['name'].invalid" data-error="El campo nombres es requerido"
+                        class="helper-text"></span>
+
+                </div>
+                <i class="material-icons prefix">face</i>
+                <div class="input-field col s6">
+                  <input id="last_name" type="text" formControlName="lastName" name="last_name" class="validate"
+                         required>
+                  <label for="last_name">Apellidos</label>
+                  <span *ngIf="regForm.controls['lastName'].invalid" data-error="El campo Apellidos es requerido"
+                        class="helper-text"></span>
+                </div>
+              </div>
+              <div class="row form-group">
+                <i class="material-icons prefix">contact_mail</i>
+                <div class="input-field col s6">
+                  <input id="email" type="email" formControlName="email" class="validate" name="email">
+                  <label for="email">Email</label>
+                  <span *ngIf="regForm.controls['email'].errors?.required && regForm.controls['email'].touched"
+                        class="error">El campo Email no tiene un formato valido</span>
+                  <span *ngIf="regForm.controls['email'].errors?.notAvailable" class="error">Ya Existe una cuenta asociada a este correo</span>
+                </div>
+                <div class="input-field col s6">
+                  <mat-form-field style="width: 100%">
+                    <mat-label>Tipo de usuario</mat-label>
+                    <mat-select required formControlName="profile" name="profile_id">
+                      <mat-option value="" disabled selected>Seleccionar...</mat-option>
+                      <mat-option [value]="admin_profile">Administrador</mat-option>
+                      <mat-option [value]="teacher_profile">Docente</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="regForm.controls['profile'].invalid">Debe seleccinar una opcion valida</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row ml-4">
+                <mat-form-field style="margin-left:5px;width: 45%;">
+                  <mat-label for="id_type">Tipo de de documento</mat-label>
+                  <mat-select id="id_type" required formControlName="id_type" name="id_type">
+                    <mat-option value="" disabled selected>Seleccionar...</mat-option>
+                    <mat-option value="CC">Cedula</mat-option>
+                    <mat-option value="TI">Tarjeta de identidad</mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="regForm.controls['id_type'].invalid">Debe seleccinar una opcion valida</mat-error>
+                </mat-form-field>
+                <div class="input-field mt-0 ml-5" style="width: 45%">
+                  <input id="id_num" type="text" class="validate" required formControlName="id_num" name="id_num"
+                         minlength="5">
+                  <label for="id_num" class="">N° de Identificación</label>
+                  <span *ngIf="regForm.controls['id_num'].invalid" data-error="El campo Identificación es requerido"
+                        class="helper-text"></span>
+                </div>
+              </div>
+              <a [routerLink]="['../']" class="btn btn-danger center"> <i
+                class="fa fa-arrow-circle-left"></i>Cancelar</a>
+              <button [disabled]="regForm.invalid || regForm.pending" type="submit" class="btn btn-success center">
+                Guardar<i class="fa fa-arrow-circle-right"></i>
+              </button>
+
+            </form>
+            <!--Fin FORM-->
+          </div>
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+</main>
