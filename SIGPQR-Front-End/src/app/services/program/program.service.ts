@@ -6,6 +6,7 @@ import {map} from "rxjs/operators";
 import {Faculty} from "../../models/Faculty";
 import {AuthService} from "../authService/auth.service";
 import {Program} from "../../models/Program";
+import {Profile} from "../../models/Profile";
 
 @Injectable({
   providedIn: 'root'
@@ -88,6 +89,16 @@ export class ProgramService {
       let headers = new HttpHeaders().set('content-type', global.contentType)
         .set('Authorization', this.currentUser.token);
       return this.http.delete<any>(global.url + 'programs/' + id, {headers: headers}).pipe(map(response => {
+        return response;
+      }));
+    }
+    return null;
+  }
+  public restore(id:number):Observable<any>{
+    if (this.currentUser && this.currentUser.profile_id == Profile.admin){
+      let headers = new HttpHeaders().set('content-type',global.contentType)
+      return this.http.delete<any>(global.url+'restore-program/'+id,{headers:headers}).
+      pipe(map(response => {
         return response;
       }));
     }
