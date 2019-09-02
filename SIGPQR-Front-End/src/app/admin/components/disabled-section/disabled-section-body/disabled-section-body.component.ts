@@ -4,6 +4,7 @@ import {Subscription} from "rxjs";
 import {UserService} from "../../../../services/user/user.service";
 import {FacultyService} from "../../../../services/faculty/faculty.service";
 import {ProgramService} from "../../../../services/program/program.service";
+import {MatSnackBar} from "@angular/material";
 
 @Component({
   selector: 'disabled-section-body',
@@ -19,7 +20,8 @@ export class DisabledSectionBodyComponent implements OnInit, OnDestroy {
               private router: Router,
               private userService: UserService,
               private facultyService: FacultyService,
-              private programService: ProgramService) {
+              private programService: ProgramService,
+              private _snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -34,7 +36,6 @@ export class DisabledSectionBodyComponent implements OnInit, OnDestroy {
             break;
           case 'faculties':
             this.title = 'FACULTADES';
-            this.loadDisabledFaculties();
             this.currentEntityClass = 'faculty';
             break;
           case 'programs':
@@ -75,9 +76,42 @@ export class DisabledSectionBodyComponent implements OnInit, OnDestroy {
       console.log(error);
     });
   }
+  restore(entity){
+    switch (this.title) {
+      case 'USUARIOS':
+        this.userService.restore(entity.id).subscribe(response=>{
+          if (response.status='success'){
+            this._snackBar.open('Usuario Restaurado con exito','X', {
+              duration: 3000,
+            });
+            this.loadDisableUsers();
+          }
+        },error => {
+          console.log(error);
+          this._snackBar.open(error.error.message,'Error', {
+            duration: 2000,
+          });
+        });
+        break;
+      case 'PROGRAMAS':
+        this.programService.restore(entity.id).subscribe(response=>{
+          if (response.status='success'){
+            this._snackBar.open('Programa Restaurado con exito','X', {
+              duration: 3000,
+            });
+            this.loadDisabledPrograms();
+          }
+        },error => {
+          console.log(error);
+          this._snackBar.open(error.error.message,'Error', {
+            duration: 2000,
+          });
+        });
+        break;
 
-  loadDisabledFaculties() {
+    }
 
   }
+
 
 }

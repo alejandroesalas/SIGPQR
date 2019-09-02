@@ -13,8 +13,8 @@
         <td>{{entity.name}}</td>
         <td hidden>{{entity.id}}</td>
         <td class="td-actions right">
-          <button type="button" rel="tooltip" class="btn btn-danger btn-link  btn"
-                  data-position="bottom" title="Habilitar">
+          <button (click)="restore(entity)" type="button" rel="tooltip" class="btn btn-danger btn-link  btn"
+                  data-position="bottom" title="Restaurar">
             <i class="  fas fa-unlock-alt"></i>
             <div class="ripple-container"></div>
           </button>
