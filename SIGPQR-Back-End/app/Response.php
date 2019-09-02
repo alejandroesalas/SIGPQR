@@ -31,4 +31,7 @@ class Response extends Model
     public function request(){
         return $this->belongsTo(Request::class,'request_id');
     }
+    public function attachmentsResp(){
+        return $this->hasMany(AttachmentResponse::class);
+    }
 }

@@ -44,5 +44,8 @@ class Request extends Model
     {
         return $this->hasMany(Response::class);
     }
+    public function attachments(){
+        return $this->hasMany(AttachmentRequest::class);
+    }
 
 }
