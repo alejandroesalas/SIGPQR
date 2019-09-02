@@ -11,6 +11,7 @@ import {global} from "../../../global";
 import {AngularFileUploaderComponent} from "angular-file-uploader";
 import {_Request, STATUS_TYPE} from "../../../models/_Request";
 import {AttachmentRequest} from "../../../models/AttachmentRequest";
+import {MatSnackBar} from "@angular/material";
 
 @Component({
   selector: 'app-requests-add',
@@ -31,7 +32,8 @@ export class RequestsAddComponent implements OnInit {
   constructor(private authService: AuthService,
               private requestService: RequestsService,
               private coordinatorService: CoordinatorService,
-              private route: Router) {
+              private route: Router,
+              private _snackBar: MatSnackBar) {
     this.resetUploader = false;
     this.coordinator = new Coordinator();
     authService.currentUser.subscribe(user => this.student = user);
@@ -104,6 +106,17 @@ export class RequestsAddComponent implements OnInit {
   storeRequest(form){
     this.request.student_id = this.student.id;
     console.log(this.request);
+    this.requestService.storeRequest(this.request).subscribe(response=>{
+      if (response.status =='success'){
+        this._snackBar.open('Su solicitud ha sido enviada con exito','X', {
+          duration: 3000,
+        });
+        form.reset();
+        this.route.navigate(['../']);
+      }
+    },error => {
+      console.log(error)
+    });
 
   }
 

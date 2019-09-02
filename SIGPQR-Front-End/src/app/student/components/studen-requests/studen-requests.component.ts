@@ -15,10 +15,8 @@ export class StudenRequestsComponent implements OnInit {
   public mapComplaints:Map<string,Array<_Request>>;
   public mapClaims:Map<string,Array<_Request>>;
   public currentUser;
-  public onProcessRequests: Array<_Request>;
-  public closeRequests: Array<_Request>;
   public requests: Array<_Request>;
-
+  testhtml = "<p>Hello world</p>";
   constructor(private requestService: RequestsService,
               private authService:AuthService) {
     this.mapRequests = new Map<string, Array<_Request>>();
