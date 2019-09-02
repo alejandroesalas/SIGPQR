@@ -97,7 +97,7 @@ export class ProgramService {
   public restore(id:number):Observable<any>{
     if (this.currentUser && this.currentUser.profile_id == Profile.admin){
       let headers = new HttpHeaders().set('content-type',global.contentType)
-      return this.http.delete<any>(global.url+'restore-program/'+id,{headers:headers}).
+      return this.http.post<any>(global.url+'restore-program/'+id,{headers:headers}).
       pipe(map(response => {
         return response;
       }));

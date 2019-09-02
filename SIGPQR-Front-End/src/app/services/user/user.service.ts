@@ -76,23 +76,22 @@ export class UserService {
       return data;
     }));
   }
-  public delete(id:number):Observable<any>|boolean{
+  public delete(id:number):Observable<any>{
     if (this.currentUser && this.currentUser.profile_id == Profile.admin){
       let headers = new HttpHeaders().set('content-type',global.contentType)
         .set('Authorization',this.currentUser.token);
-      return this.http.delete<any>(global.url+'users'+id,{headers:headers}).
+      return this.http.delete<any>(global.url+'users/'+id,{headers:headers}).
       pipe(map(response => {
-        console.log(response);
         return response;
       }));
     }else {
-      return false;
+      return null;
     }
   }
   public restore(id:number):Observable<any>{
     if (this.currentUser && this.currentUser.profile_id == Profile.admin){
       let headers = new HttpHeaders().set('content-type',global.contentType)
-      return this.http.delete<any>(global.url+'restore-teacher/'+id,{headers:headers}).
+      return this.http.post<any>(global.url+'restore-teacher/'+id,{headers:headers}).
       pipe(map(response => {
         return response;
       }));

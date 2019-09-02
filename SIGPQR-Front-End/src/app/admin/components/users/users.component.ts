@@ -94,7 +94,21 @@ export class UsersComponent implements OnInit {
   }
 
   disableUser(docente) {
-    console.log(docente);
+    this.userService.delete(docente.id).subscribe(response=>{
+      if (response.status == 'success'){
+        this.loading = true;
+        this._snackBar.open('El usuario ha sido deshabilitado con exito', 'Exito', {
+          duration: 2000,
+        });
+        this.loadUsers();
+      }
+
+    },error => {
+      console.log(error)
+      this._snackBar.open(error.error.message, 'Error', {
+        duration: 2000,
+      });
+    });
   }
 
   promoverDocente(form) {
