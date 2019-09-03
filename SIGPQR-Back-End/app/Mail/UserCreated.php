@@ -22,7 +22,7 @@ class UserCreated extends Mailable
     public function __construct(User $user)
     {
         $this->user = $user;
-        $this->_route = "http://localhost:4200/verify/$this->user->verification_token";
+        $this->_route = "http://localhost:4200/verify/".$this->user->verification_token;
     }
 
     /**
@@ -32,6 +32,8 @@ class UserCreated extends Mailable
      */
     public function build()
     {
-        return $this->html('emails.emailValidation')->subject('Activación de Cuenta');
+        return $this->view('emails.emailValidation')
+            ->with(['route'=>$this->_route])
+            ->subject('Activación de Cuenta');
     }
 }
