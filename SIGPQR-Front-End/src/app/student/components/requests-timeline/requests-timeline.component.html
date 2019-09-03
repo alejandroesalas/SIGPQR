@@ -1,75 +1,80 @@
-<main><section id="cd-timeline" class="cd-container">
+<main>
+  <section id="cd-timeline" class="cd-container">
   <div style="width:70%;height:80px; left:39%;text-align:center; position: absolute;top: -20px;">
     <h1
       style="font-size:2vw;color:white;border-radius: 15px ;width: 30%;background: #8f6bde; border: 5px solid #7E57C2;">
       Historial
     </h1>
   </div>
-  <div class="cd-timeline-block">
-    <div class="cd-timeline-img cd-picture"></div>
-    <div class="cd-timeline-content">
-      <h2>ASUNTO</h2>
-      <div class="timeline-content-info">
-        <span class="timeline-content-info-title">De:REMITENTE</span>
-        <span class="timeline-content-info-date">
+    <div *ngIf="solicitud" class="cd-timeline-block">
+      <div class="cd-timeline-img cd-picture"></div>
+      <div class="cd-timeline-content">
+        <h2>ASUNTO</h2>
+        <div class="timeline-content-info">
+          <span class="timeline-content-info-title">De:{{currentUser.email}}</span>
+          <span class="timeline-content-info-date">
           <i class="fa fa-calendar-o" aria-hidden="true"></i>
 		    </span>
-      </div>
-      <p>
-        <details>
-          <summary>Contenido</summary>
-          <br>
-        </details>
-      </p>
-      <hr>
-      <p>Status solicitud</p>
+        </div>
+        <p>
+          <details>
+            <summary>Contenido</summary>
+            <br>
+            {{solicitud.description}}
+          </details>
+        </p>
+        <hr>
+        <p>{{solicitud.status}}</p>
 
-      <ul class="content-skills">
-        <li data-respuesta="'+obj[i][0]+'" data-tipo="btn-adj1" class="waves-effect waves-light btn-small">
-          <a>
-            <i class="material-icons left">attachment</i>
-            Adjuntos
-          </a>
-        </li>
-        <li data-remitente="'+obj[i][4]+'" data-solicitud="'+obj[i][1]+'" data-destinatoario="'+obj[i][5]+'"
-            data-estado="'+obj[i][7]+'" class="respuesta waves-effect waves-light btn-small modal-trigger">
-          <a><i class="material-icons left">reply</i>Responder</a>
-        </li>
-      </ul>
+        <ul class="content-skills">
+          <li data-respuesta="'+obj[i][0]+'" data-tipo="btn-adj1" class="waves-effect waves-light btn-small">
+            <a>
+              <i class="material-icons left">attachment</i>
+              Adjuntos
+            </a>
+          </li>
+          <li data-remitente="'+obj[i][4]+'" data-solicitud="'+obj[i][1]+'" data-destinatoario="'+obj[i][5]+'"
+              data-estado="'+obj[i][7]+'" class="respuesta waves-effect waves-light btn-small modal-trigger">
+            <a *ngIf="isRequestOpen()"><i class="material-icons left">reply</i>Responder</a>
+          </li>
+        </ul>
+      </div>
     </div>
-  </div>
-  <div class="cd-timeline-block">
-    <div class="cd-timeline-img cd-picture"></div>
-    <div class="cd-timeline-content">
-      <h2>ASUNTO</h2>
-      <div class="timeline-content-info">
-        <span class="timeline-content-info-title">De:REMITENTE</span>
-        <span class="timeline-content-info-date">
+    <div *ngIf="solicitud && solicitud.responses">
+      <div *ngFor="let response of solicitud.responses" class="cd-timeline-block">
+        <div class="cd-timeline-img cd-picture"></div>
+        <div class="cd-timeline-content">
+          <h2>{{response.title}}</h2>
+          <div class="timeline-content-info">
+            <span class="timeline-content-info-title">De:</span>
+            <span class="timeline-content-info-date">
           <i class="fa fa-calendar-o" aria-hidden="true"></i>
 		    </span>
-      </div>
-      <p>
-        <details>
-          <summary>Contenido</summary>
-          <br>
-        </details>
-      </p>
-      <hr>
-      <p>Status solicitud</p>
+          </div>
+          <p>
+            <details>
+              <summary>Contenido</summary>
+              {{response.description}}
+              <br>
+            </details>
+          </p>
+          <hr>
+          <!--<p>Status solicitud</p>-->
 
-      <ul class="content-skills">
-        <li data-respuesta="'+obj[i][0]+'" data-tipo="btn-adj1" class="waves-effect waves-light btn-small">
-          <a>
-            <i class="material-icons left">attachment</i>
-            Adjuntos
-          </a>
-        </li>
-        <li data-remitente="'+obj[i][4]+'" data-solicitud="'+obj[i][1]+'" data-destinatoario="'+obj[i][5]+'"
-            data-estado="'+obj[i][7]+'" class="respuesta waves-effect waves-light btn-small modal-trigger">
-          <a><i class="material-icons left">reply</i>Responder</a>
-        </li>
-      </ul>
+          <ul class="content-skills">
+            <li data-respuesta="'+obj[i][0]+'" data-tipo="btn-adj1" class="waves-effect waves-light btn-small">
+              <a>
+                <i class="material-icons left">attachment</i>
+                Adjuntos
+              </a>
+            </li>
+            <li data-remitente="'+obj[i][4]+'" data-solicitud="'+obj[i][1]+'" data-destinatoario="'+obj[i][5]+'"
+                data-estado="'+obj[i][7]+'" class="respuesta waves-effect waves-light btn-small modal-trigger">
+              <a><i class="material-icons left">reply</i>Responder</a>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
-  </div>
 </section>
 </main>

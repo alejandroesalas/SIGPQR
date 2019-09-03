@@ -21,7 +21,7 @@ const studentRoutes: Routes = [
         {path:'requests',children:[
             {path:'',component:StudenRequestsComponent},
             {path:'add',component:RequestsAddComponent},
-            {path:'timeline',component:RequestsTimelineComponent}
+            {path:':id/timeline',component:RequestsTimelineComponent}
           ]},
         {path:'profile',component:StudentProfileComponent}
       ]

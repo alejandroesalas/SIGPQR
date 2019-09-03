@@ -19,6 +19,10 @@ export class RequestsService {
     let headers = new HttpHeaders().set('content-type',global.contentType);
     return this.http.get<any>(global.url+'requests',{headers:headers});
   }
+  getRequest(id:number):Observable<any>{
+    let headers = new HttpHeaders().set('content-type',global.contentType);
+    return this.http.get<any>(global.url+'requests/'+id,{headers:headers});
+  }
   storeRequest(request:_Request):Observable<any>{
     let headers = new HttpHeaders().set('content-type',global.contentType);
     let params = 'json=' + JSON.stringify(request);

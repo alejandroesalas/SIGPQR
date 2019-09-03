@@ -80,7 +80,7 @@ Route::get('student-request-types/{request_type}/requests','RequestType\RequestT
 
 //Rutas para el requests
 Route::post('requests/uploadFiles','Request\RequestController@uploadFiles');
-Route::resource('requests','Request\RequestController',['only'=>['index','store', 'update']]);
+Route::resource('requests','Request\RequestController',['only'=>['index','show','store', 'update']]);
 Route::resource('request-types.requests','RequestType\RequestTypeRequestController', ['only' => ['index']]);
 Route::get('student-request-types/{request_type}/requests','RequestType\RequestTypeRequestController@showByStudent');
 Route::resource('responses','Response\ResponseController', ['only' => ['store', 'update']]);
