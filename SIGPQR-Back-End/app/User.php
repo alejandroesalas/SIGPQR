@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Notifications\CustomResetPassword;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -126,6 +127,10 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
       return [];
+    }
+
+    public function sendPasswordResetNotification($token){
+        $this->notify(new CustomResetPassword($token));
     }
 
 }

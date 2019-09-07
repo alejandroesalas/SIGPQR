@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,7 +26,9 @@ Route::group([
     Route::post('me', 'AuthController@me');
     Route::post('payload', 'AuthController@payload');
 });
-
+//rutas para restablecimiento de contraseñas
+Route::post('password/email','Auth\ForgotPasswordController@sendResetLinkEmail');
+Route::post('password/reset','Auth\ResetPasswordController@reset');
 //ruta del controlador de facultades
 Route::apiResource('faculties','Faculty\FacultyController');
 Route::resource('faculties.programs','Faculty\FacultyProgramController', ['only' => ['index', 'update']]);

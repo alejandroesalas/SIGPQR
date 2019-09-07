@@ -2,16 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\passwordReset;
 use App\User;
+use Illuminate\Auth\Passwords\TokenRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ApiController;
 use Tymon\JWTAuth\JWTAuth;
 
 class AuthController extends ApiController
 {
+    public $tokens;
 
-    public function __construct()
+    public function __construct(TokenRepositoryInterface $tokens)
     {
+        $this->tokens = $tokens;
         //$this->middleware('auth:api', ['except' => ['login']]);
         //$this->middleware('auth',['except'=>['auth/login']]);
     }
@@ -98,5 +102,20 @@ class AuthController extends ApiController
             'expires_in' => auth()->factory()->getTTL() * 60,
             'user' => auth()->user(),
         ]);
+    }
+    public function sendResetLinkEmail(Request $request)
+    {
+       $user = $this->validateEmail($request);
+        Mail::to($request->email)->send(new passwordReset($this->tokens->create($user)));
+        return $this->showMessage('Link enviado con exito');
+        //mandar correo  cambio de contraseña
+    }
+    protected function validateEmail(Request $request)
+    {
+        $request->validate(['email' => 'required|email']);
+        $email = $request->email;
+            //verificar que exista un usuario con el correo dado.
+        $user = User::where('email',$email)->firstOrFail();
+        return $user;
     }
 }
